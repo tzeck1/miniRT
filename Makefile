@@ -6,7 +6,7 @@
 #    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/02 15:22:46 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/02 15:32:18 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,10 +65,12 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 	@printf $(UP)$(CUT)
 
 $(NAME): $(OBJ)
+	@make -C MLX42
 	@$(CC) $(CFLAGS) $(OBJ) MLX42/libmlx42.a -lglfw -L ~/.brew/opt/glfw/lib/ -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
+	@make clean -C MLX42
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
 			echo $(R)Cleaning" "[$(OBJ) $(OBJ_PATH)]$(X); else \
@@ -76,6 +78,7 @@ clean:
 	fi;
 
 fclean: clean
+	@make fclean -C MLX42
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \
 			echo $(R)Cleaning" "[$(NAME)]$(X);else \
