@@ -6,15 +6,15 @@
 /*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:06:34 by tzeck             #+#    #+#             */
-/*   Updated: 2022/06/02 15:00:37 by tzeck            ###   ########.fr       */
+/*   Updated: 2022/06/02 15:24:51 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
 #include <memory.h>
-#define WIDTH 1000
-#define HEIGHT 1000
+#define WIDTH 1920
+#define HEIGHT 1080
 
 mlx_image_t	*g_img;
 

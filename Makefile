@@ -6,7 +6,7 @@
 #    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/02 15:00:00 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/02 15:26:14 by tzeck            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 	@printf $(UP)$(CUT)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) MLX42/libmlx42.a -lglfw -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) MLX42/libmlx42.a -lglfw -L ~/.brew/opt/glfw/lib/ -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
