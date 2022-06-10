@@ -6,7 +6,7 @@
 #    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/02 15:27:58 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/02 21:25:47 by tzeck            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = ./miniRT
 
 # FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 # COLORS
 Y = "\033[33m"
@@ -29,7 +29,8 @@ CUT = "\033[K"
 # PATHS
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
-UTILS_PATH = ./src/
+MLX_PATH = ./MLX42/
+GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
 SRC =	$(SRC_PATH)main.c
@@ -57,18 +58,18 @@ all: $(NAME)
 $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 	@echo $(Y)Compiling [$@]...$(X)
 	@mkdir -p $(dir $@)
-	@sleep 0.2
 	@printf $(UP)$(CUT)
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo $(G)Finished [$@]$(X)
-	@sleep 0.2
 	@printf $(UP)$(CUT)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) MLX42/libmlx42.a -lglfw -L ~/.brew/opt/glfw/lib/ -o $(NAME)
+	@make -C MLX42
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
+	@make clean -C MLX42
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
 			echo $(R)Cleaning" "[$(OBJ) $(OBJ_PATH)]$(X); else \
@@ -76,6 +77,7 @@ clean:
 	fi;
 
 fclean: clean
+	@make fclean -C MLX42
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \
 			echo $(R)Cleaning" "[$(NAME)]$(X);else \
