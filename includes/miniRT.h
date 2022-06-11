@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 /*	COLORS	*/
 # define RED	"\033[31m"
@@ -16,5 +17,8 @@
 
 /*	DEBUG	*/
 # define PRINT_HERE(){printf(YELLOW"In File: %s\nIn Line: %d\n"RESET, __FILE__, __LINE__);}
+
+/*	MACROS	*/
+# define schwifty 8
 
 #endif

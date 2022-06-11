@@ -46,6 +46,6 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	test_program();
+	// test_program();
 	return (EXIT_SUCCESS);
 }
