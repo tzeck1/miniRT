@@ -6,7 +6,7 @@
 #    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/11 17:43:57 by rsiebert         ###   ########.fr        #
+#    Updated: 2022/06/11 18:01:41 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = ./miniRT
 
 # FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -fsanitize=address #-Werror
 
 # COLORS
 Y = "\033[33m"
@@ -67,11 +67,13 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 
 $(NAME): $(OBJ)
 	@make -C MLX42
+	@make -C src/libft
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
 	@make clean -C MLX42
+	@make clean -C src/libft
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
 			echo $(R)Cleaning" "[$(OBJ) $(OBJ_PATH)]$(X); else \
@@ -80,6 +82,7 @@ clean:
 
 fclean: clean
 	@make fclean -C MLX42
+	@make fclean -C src/libft
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \
 			echo $(R)Cleaning" "[$(NAME)]$(X);else \

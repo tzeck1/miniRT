@@ -1,4 +1,4 @@
-#include "../includes/miniRT.h"
+#include "../../includes/miniRT.h"
 
 int	float_to_fix(float n)
 {
