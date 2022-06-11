@@ -12,3 +12,6 @@ float	fix_to_float(int raw)
 	tmp = raw / (float)256;
 	return (roundf(tmp * 100) / 100);
 }
+#include <ctype.h>
+
+
