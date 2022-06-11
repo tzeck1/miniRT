@@ -7,11 +7,9 @@ int	float_to_fix(float n)
 
 float	fix_to_float(int raw)
 {
-	float	tmp;
+	// float	tmp;
 
-	tmp = raw / (float)256;
-	return (roundf(tmp * 100) / 100);
+	// tmp = raw / (float)256;
+	// return (roundf(tmp * 100) / 100);
+	return (raw / (float)256);
 }
-#include <ctype.h>
-
-
