@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
+#    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/02 21:25:47 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/11 17:43:57 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,14 @@ CUT = "\033[K"
 
 # PATHS
 SRC_PATH = ./src/
+PARS_PATH = ./src/parser/
 OBJ_PATH = ./obj/
 MLX_PATH = ./MLX42/
 GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
-SRC =	$(SRC_PATH)main.c
+SRC =	$(SRC_PATH)main.c\
+		$(PARS_PATH)init_data.c	$(PARS_PATH)utils.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
