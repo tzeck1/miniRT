@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
+#    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/02 11:55:38 by rsiebert          #+#    #+#              #
-#    Updated: 2022/06/11 21:01:55 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/11 22:08:45 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,15 @@ SRC		=	ft_atoi.c		ft_isalnum.c	ft_isprint.c	ft_memcmp.c\
 			ft_tolower.c	ft_toupper.c	ft_atof.c
 NAME	=	libft.a
 OBJ		=	$(SRC:.c=.o)
+GNLSRC	=	get_next_line/get_next_line_bonus.c\
+			get_next_line/get_next_line_utils_bonus.c
+GNLOBJ	=	$(GNLSRC:.c=.o)
 CC		=	@gcc -Wall -Wextra -Werror
 
 all		:	$(NAME)
 
-$(NAME)	:	message $(OBJ)
-	@ar rs $(NAME) $(OBJ)
+$(NAME)	:	message $(OBJ) $(GNOBJ)
+	@ar rs $(NAME) $(OBJ) $(GNOBJ)
 	@echo "\033[92mDone!\033[0m"
 
 message	:
@@ -34,6 +37,7 @@ message	:
 
 clean	:
 	@rm -f *.o
+	@rm -f get_next_line/*.o
 	@echo "Object files be gone!"
 
 fclean	:	clean
