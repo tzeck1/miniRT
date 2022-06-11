@@ -2,9 +2,9 @@
 
 int	main(int argc, char **argv)
 {
+	t_data	data;
 	// parser(argc, argv);
-	//init_data(argv);
-	printf("hello world\n");
+	data = init_data(argv);
 	// test_program();
 	return (EXIT_SUCCESS);
 }
