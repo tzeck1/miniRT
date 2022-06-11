@@ -6,13 +6,17 @@
 /*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 21:00:44 by tzeck             #+#    #+#             */
-/*   Updated: 2022/06/11 21:01:24 by tzeck            ###   ########.fr       */
+/*   Updated: 2022/06/11 22:16:05 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <math.h>
 
+/**
+ * @brief  gets number after decimal point
+ * @retval fraction part of float
+ */
 static float	get_signifiand(float significand, char *str, int i, int power)
 {
 	if (str[i] == '.' && str[i])
@@ -27,6 +31,11 @@ static float	get_signifiand(float significand, char *str, int i, int power)
 	return (significand);
 }
 
+/**
+ * @brief  converts string to float
+ * @param  *str: incoming string (should contain only digits and a '.')
+ * @retval converted float
+ */
 float	ft_atof(char *str)
 {
 	float	exponent;
