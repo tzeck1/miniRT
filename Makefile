@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/11 18:01:41 by rsiebert         ###   ########.fr        #
+#    Updated: 2022/06/11 21:02:11 by tzeck            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,13 +67,13 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 
 $(NAME): $(OBJ)
 	@make -C MLX42
-	@make -C src/libft
+	@make -C libft
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
 	@make clean -C MLX42
-	@make clean -C src/libft
+	@make clean -C libft
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
 			echo $(R)Cleaning" "[$(OBJ) $(OBJ_PATH)]$(X); else \
@@ -82,7 +82,7 @@ clean:
 
 fclean: clean
 	@make fclean -C MLX42
-	@make fclean -C src/libft
+	@make fclean -C libft
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \
 			echo $(R)Cleaning" "[$(NAME)]$(X);else \
