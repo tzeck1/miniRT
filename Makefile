@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
+#    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/11 21:02:11 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/12 03:18:08 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,19 +42,12 @@ OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
 
 # RULES
 all: $(NAME)
-	@sleep 0.1
 	@echo $(B)"                                                           "$(X)
-	@sleep 0.1
 	@echo $(B)"           ,--.          ,--. ,------.  ,--------.         "$(X)
-	@sleep 0.1
 	@echo $(B)",--,--,--. \`--' ,--,--,  \`--' |  .--. ' '--.  .--'       "$(X)
-	@sleep 0.1
 	@echo $(B)"|        | ,--. |      \ ,--. |  '--'.'    |  |            "$(X)
-	@sleep 0.1
 	@echo $(B)"|  |  |  | |  | |  ||  | |  | |  |\  \     |  |            "$(X)
-	@sleep 0.1
 	@echo $(B)"\`--\`--\`--' \`--' \`--''--' \`--' \`--' '--'    \`--'    "$(X)
-	@sleep 0.1
 	@printf "\n\n"
 
 $(OBJ_PATH)%.o :$(SRC_PATH)%.c
@@ -68,7 +61,7 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 $(NAME): $(OBJ)
 	@make -C MLX42
 	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) libft/libft.a -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

@@ -9,6 +9,7 @@
 /*  DATA INITIALIZATION */
 
 /*  init_data.c */
+t_data	*init_data(char **argv);
 
 /*  utils.c */
 int     float_to_fix(float n);
