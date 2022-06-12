@@ -156,6 +156,7 @@ void		change_vector(t_vector *vec, int x, int y, int z);
 void		copy_vector(t_vector *vec_src, t_vector *vec_dst);
 
 /*	UTILS	*/
+char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int		float_to_fix(float n);
 float	fix_to_float(int raw);
 
