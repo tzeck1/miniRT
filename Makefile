@@ -6,7 +6,7 @@
 #    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/12 03:18:08 by rsiebert         ###   ########.fr        #
+#    Updated: 2022/06/12 04:14:54 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
 SRC =	$(SRC_PATH)main.c\
-		$(PARS_PATH)init_data.c	$(PARS_PATH)utils.c
+		$(PARS_PATH)init_objects.c	$(PARS_PATH)utils.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))

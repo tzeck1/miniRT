@@ -128,7 +128,7 @@ typedef struct s_objects
 
 typedef struct s_data
 {
-	struct s_objects	objs;
+	struct s_objects	*objs;
 }	t_data;
 
 #endif
