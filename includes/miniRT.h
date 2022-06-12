@@ -48,9 +48,9 @@ typedef enum e_identifier
 /*  STRUCTS */
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	int	x;
+	int	y;
+	int	z;
 }	t_vector;
 
 typedef struct s_color

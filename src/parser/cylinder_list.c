@@ -9,9 +9,9 @@ static int	cylinder_count(char **argv)
 	count = 0;
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
-	while (line)
+	while (line != NULL)
 	{
-		if (ft_strncmp(line, "cy", 2) == 0)
+		if (ft_strncmp(line, "cy", 2) == 0)	//change cy to cylinder macro
 			count++;
 		free(line);
 		line = get_next_line(fd);
@@ -32,19 +32,19 @@ static t_cylinder_list	*initialize_head(argv)
 	cy_head->identifier = CYLINDER;
 	cy_head->i = 0;
 	cy_head->center = ft_calloc(1, sizeof(t_vector));	//free
-	cy_head->center->x = ft_atof(data[1]);
-	cy_head->center->y = ft_atof(data[2]);
-	cy_head->center->z = ft_atof(data[3]);
+	cy_head->center->x = float_to_fix(ft_atof(data[1]));	//replace with vector_from_str function
+	cy_head->center->y = float_to_fix(ft_atof(data[2]));	//replace with vector_from_str function
+	cy_head->center->z = float_to_fix(ft_atof(data[3]));	//replace with vector_from_str function
 	cy_head->direction = ft_calloc(1, sizeof(t_vector));	//free
-	cy_head->direction->x = ft_atof(data[4]);
-	cy_head->direction->y = ft_atof(data[5]);
-	cy_head->direction->z = ft_atof(data[6]);
+	cy_head->direction->x = float_to_fix(ft_atof(data[4]));	//replace with vector_from_str function
+	cy_head->direction->y = float_to_fix(ft_atof(data[5]));	//replace with vector_from_str function
+	cy_head->direction->z = float_to_fix(ft_atof(data[6]));	//replace with vector_from_str function
 	cy_head->radius = ft_atof(data[7]) / 2;
 	cy_head->height = ft_atof(data[8]);
 	cy_head->rgb = ft_calloc(1, sizeof(t_color));	//free
-	cy_head->rgb->red = ft_atoi(data[9]);
-	cy_head->rgb->green = ft_atoi(data[10]);
-	cy_head->rgb->blue = ft_atoi(data[11]);
+	cy_head->rgb->red = ft_atoi(data[9]);	//replace with color_from_str function
+	cy_head->rgb->green = ft_atoi(data[10]);	//replace with color_from_str function
+	cy_head->rgb->blue = ft_atoi(data[11]);	//replace with color_from_str function
 	cy_head->next = cy_head;
 	cy_head->prev = cy_head;
 	// FREE 2D ARRAY HERE
@@ -59,12 +59,15 @@ t_cylinder_list	*creat_cylinder_list(char **argv)
 {
 	t_cylinder_list	*cy_head;
 	int				cy_count;
+	int				cy_index;
 
 	cy_count = cylinder_count(argv);
 	if (cy_count == 0)
 		return (NULL);
-	cy_head = initialize_head(argv);	//FIXE char *line not char **argv
+	cy_index = 0;
+	cy_head = initialize_head(get_obj_line(argv[1], "cy", cy_index));	//FIXE char *line not char **argv	//change cy to cylinder macro
+	cy_index++;
 	while (--cy_count)
-		add_node(argv, cy_head);	//FIXE char *line not char **argv
+		add_node(get_obj_line(argv[1], "cy", cy_index), cy_head);	//FIXE char *line not char **argv	//change cy to cylinder macro
 	return (cy_head);
 }

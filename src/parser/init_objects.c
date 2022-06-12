@@ -24,9 +24,9 @@ static t_ambient_light	*get_ambient_light_data(char **argv)
 	amb_l = ft_calloc(1, sizeof(t_ambient_light));	//free
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
-	while (line)
+	while (line != NULL)
 	{
-		if (ft_strncmp(line, "A", 1) == 0 && get_data(line, amb_l))
+		if (ft_strncmp(line, "A", 1) == 0 && get_data(line, amb_l))	//change A to ambient macro
 			break;
 		free(line);
 		line = get_next_line(fd);
