@@ -6,7 +6,7 @@
 #    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/02 11:55:38 by rsiebert          #+#    #+#              #
-#    Updated: 2022/06/12 06:44:43 by tzeck            ###   ########.fr        #
+#    Updated: 2022/06/12 14:42:34 by tzeck            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRC		=	ft_atoi.c		ft_isalnum.c	ft_isprint.c	ft_memcmp.c\
 			ft_strlcpy.c	ft_strlen.c		ft_strmapi.c	ft_strncmp.c\
 			ft_strnstr.c	ft_strrchr.c	ft_strtrim.c	ft_substr.c\
 			ft_tolower.c	ft_toupper.c	ft_atof.c		ft_free_split.c
-GNLSRC	=	get_next_line/get_next_line_bonus.c\
-			get_next_line/get_next_line_utils_bonus.c
+GNLSRC	=	get_next_line/get_next_line.c\
+			get_next_line/get_next_line_utils.c
 OBJ		=	$(SRC:.c=.o)
 GNLOBJ	=	$(GNLSRC:.c=.o)
 CC		=	@gcc -Wall -Wextra -Werror

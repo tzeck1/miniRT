@@ -25,6 +25,13 @@
 # define PRINT_HERE(){printf(YELLOW"In File: %s\nIn Line: %d\n"RESET, __FILE__, __LINE__);}
 
 /*	MACROS	*/
+# define LIGHT_ID		"L"
+# define AMB_LIGHT_ID	"A"
+# define CAMERA_ID		"C"
+# define SPHERE_ID		"sp"
+# define PLANE_ID		"pl"
+# define CYLINDER_ID	"cy"
+
 # define RGB_MIN	0		//colors
 # define RGB_MAX	255
 # define NO_VEC_MIN	-1.0	// normalised orientation vector
