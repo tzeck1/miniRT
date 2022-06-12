@@ -25,6 +25,13 @@
 # define PRINT_HERE(){printf(YELLOW"In File: %s\nIn Line: %d\n"RESET, __FILE__, __LINE__);}
 
 /*	MACROS	*/
+# define LIGHT_ID		"L"
+# define AMB_LIGHT_ID	"A"
+# define CAMERA_ID		"C"
+# define SPHERE_ID		"sp"
+# define PLANE_ID		"pl"
+# define CYLINDER_ID	"cy"
+
 # define RGB_MIN	0		//colors
 # define RGB_MAX	255
 # define NO_VEC_MIN	-1.0	// normalised orientation vector
@@ -135,5 +142,20 @@ typedef struct s_data
 
 /*	PARSER	*/
 t_objects	*init_objects(char **argv);
+
+/*  DATA INITIALIZATION */
+t_ambient_light	*get_ambient_light_data(char **argv);
+t_direct_light	*get_direct_light_data(char **argv);
+t_camera		*get_camera_data(char **argv);
+
+/*	VECTOR MANAGEMENT	*/
+t_vector	*vector_new(int x, int y, int z);
+t_vector	*vector_from_str(char *x, char *y, char *z);
+void		change_vector(t_vector *vec, int x, int y, int z);
+void		copy_vector(t_vector *vec_src, t_vector *vec_dst);
+
+/*	UTILS	*/
+int		float_to_fix(float n);
+float	fix_to_float(int raw);
 
 #endif
