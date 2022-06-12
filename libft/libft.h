@@ -6,7 +6,7 @@
 /*   By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:11:59 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/06/12 03:57:47 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/06/12 05:19:02 by rsiebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdio.h>
+# include "get_next_line/get_next_line_bonus.h"
 
 # define ERROR "\001\003[1;31m\002Error: \001\003[0m\002"
 

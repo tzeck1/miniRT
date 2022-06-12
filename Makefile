@@ -6,7 +6,7 @@
 #    By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/12 04:14:54 by rsiebert         ###   ########.fr        #
+#    Updated: 2022/06/12 05:33:08 by rsiebert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = ./miniRT
 
 # FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -fsanitize=address #-Werror
+CFLAGS = -Wall -Wextra -g #-Werror
 
 # COLORS
 Y = "\033[33m"
