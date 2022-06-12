@@ -8,7 +8,8 @@
 
 /*  DATA INITIALIZATION */
 
-/*  init_data.c */
+/*  init_objects.c */
+// t_objects	*init_objects(char **argv);
 
 /*  utils.c */
 int     float_to_fix(float n);

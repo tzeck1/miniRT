@@ -6,7 +6,7 @@
 /*   By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 10:16:08 by rsiebert          #+#    #+#             */
-/*   Updated: 2021/08/13 12:39:06 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/06/12 03:53:46 by rsiebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	if (p == NULL)
 		return (NULL);
 	ft_bzero(p, (nmemb * size));
+	if (p == NULL)
+	{
+		fprintf(stderr, ERROR"%s\n", strerror(errno));
+		ft_exit(EXIT_FAILURE);
+	}
 	return (p);
 }
