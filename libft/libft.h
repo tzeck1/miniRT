@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
+/*   By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:11:59 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/06/11 21:01:50 by tzeck            ###   ########.fr       */
+/*   Updated: 2022/06/12 03:57:47 by rsiebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <errno.h>
+# include <string.h>
+# include <stdio.h>
+
+# define ERROR "\001\003[1;31m\002Error: \001\003[0m\002"
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -51,5 +56,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+void	ft_exit(int status);
 
 #endif

@@ -32,10 +32,6 @@
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
 
-/*	MAIN FUNCTIONS	*/
-void	ft_alloc_error(char *error_message);
-void	ft_exit(int status);
-
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
 {
