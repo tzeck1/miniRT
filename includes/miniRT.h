@@ -12,13 +12,12 @@
 # include <string.h>
 
 /*	COLORS	*/
-# define RED	"\033[31m"
-# define GREEN	"\033[32m"
-# define BLUE	"\033[34m"
-# define YELLOW	"\033[33m"
-# define RESET	"\033[0m"
-# define ERROR	"\001\033[1;31m\002Error: \001\033[0m\002"
-# define ERROR_LIGHT	"\001\033[31m\002Error: \001\033[0m\002"
+# define RED		"\033[31m"
+# define RED_BOLD	"\033[1;31m"
+# define GREEN		"\033[32m"
+# define BLUE		"\033[34m"
+# define YELLOW		"\033[33m"
+# define RESET		"\033[0m"
 
 /*	DEBUG	*/
 # define PRINT_HERE(){printf(YELLOW"In File: %s\nIn Line: %d\n"RESET, __FILE__, __LINE__);}
@@ -34,7 +33,7 @@
 # define FOV_MAX	180
 
 /*	MAIN FUNCTIONS	*/
-void	ft_error(char *error_message, char *additional_message);
+void	ft_alloc_error(char *error_message);
 void	ft_exit(int status);
 
 /*	ENUMERATIONS	*/
