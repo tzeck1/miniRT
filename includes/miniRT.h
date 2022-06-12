@@ -164,6 +164,7 @@ int			vector_dot(t_vector *vec_a, t_vector *vec_b);
 
 /*	UTILS	*/
 
+char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int		float_to_fix(float n);
 float	fix_to_float(int raw);
 
