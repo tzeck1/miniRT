@@ -141,21 +141,29 @@ typedef struct s_data
 }	t_data;
 
 /*	PARSER	*/
+
 t_objects	*init_objects(char **argv);
 
 /*  DATA INITIALIZATION */
+
 t_ambient_light	*get_ambient_light_data(char **argv);
 t_direct_light	*get_direct_light_data(char **argv);
 t_camera		*get_camera_data(char **argv);
 t_cylinder_list	*creat_cylinder_list(char **argv);
 
 /*	VECTOR MANAGEMENT	*/
+
 t_vector	*vector_new(int x, int y, int z);
 t_vector	*vector_from_str(char *x, char *y, char *z);
-void		change_vector(t_vector *vec, int x, int y, int z);
-void		copy_vector(t_vector *vec_src, t_vector *vec_dst);
+void		vector_change(t_vector *vec, int x, int y, int z);
+void		vector_copy(t_vector *vec_src, t_vector *vec_dst);
+void		vector_add(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
+void		vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
+void		vector_scale(t_vector *vec_res, t_vector *vec_a, int n);
+int			vector_dot(t_vector *vec_a, t_vector *vec_b);
 
 /*	UTILS	*/
+
 char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int		float_to_fix(float n);
 float	fix_to_float(int raw);
