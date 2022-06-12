@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../../includes/miniRT.h"
 
 static bool	save_data(char *line, t_ambient_light *amb_l)
 {

@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../../includes/miniRT.h"
 
 static bool	save_data(char *line, t_camera *cam)
 {
@@ -6,14 +6,8 @@ static bool	save_data(char *line, t_camera *cam)
 
 	data = ft_split(line, ' ');
 	cam->identifier = CAMERA;
-	cam->position = ft_calloc(1, sizeof(t_vector));	//free
-	cam->position->x = ft_atof(data[1]);
-	cam->position->y = ft_atof(data[2]);
-	cam->position->z = ft_atof(data[3]);
-	cam->direction = ft_calloc(1, sizeof(t_vector));	//free
-	cam->direction->x = ft_atof(data[4]);
-	cam->direction->y = ft_atof(data[5]);
-	cam->direction->z = ft_atof(data[6]);
+	cam->position = vector_from_str(data[1], data[2], data[3]);
+	cam->direction = vector_from_str(data[1], data[2], data[3]);
 	cam->fov = ft_atoi(data[7]);
 	ft_free_split(data);
 	return (true);

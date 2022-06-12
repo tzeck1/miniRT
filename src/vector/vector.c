@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "../../includes/miniRT.h"
 
 t_vector	*vector_new(int x, int y, int z)
 {
@@ -8,6 +8,17 @@ t_vector	*vector_new(int x, int y, int z)
 	vec->x = x;
 	vec->y = y;
 	vec->z = z;
+	return (vec);
+}
+
+t_vector	*vector_from_str(char *x, char *y, char *z)
+{
+	t_vector	*vec;
+
+	vec = ft_calloc(1, sizeof(t_vector));
+	vec->x = float_to_fix(ft_atof(x));
+	vec->y = float_to_fix(ft_atof(y));
+	vec->z = float_to_fix(ft_atof(z));
 	return (vec);
 }
 

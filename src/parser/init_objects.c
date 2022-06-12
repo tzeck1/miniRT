@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "../../includes/miniRT.h"
 
 t_objects	*init_objects(char **argv)
 {
