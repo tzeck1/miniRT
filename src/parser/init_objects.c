@@ -1,6 +1,6 @@
 #include "parser.h"
 
-static void	get_data(char *line, t_ambient_light *amb_l)
+static bool	get_data(char *line, t_ambient_light *amb_l)
 {
 	char	**data;
 
@@ -11,6 +11,8 @@ static void	get_data(char *line, t_ambient_light *amb_l)
 	amb_l->rgb->red = ft_atoi(data[2]);
 	amb_l->rgb->green = ft_atoi(data[3]);
 	amb_l->rgb->blue = ft_atoi(data[4]);
+	// FREE 2D ARRAY FUNC
+	return (true);
 }
 
 static t_ambient_light	*get_ambient_light_data(char **argv)
@@ -24,18 +26,19 @@ static t_ambient_light	*get_ambient_light_data(char **argv)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (ft_strncmp(line, "A", 1) == 0)
-		{
-			get_data(line, amb_l);
+		if (ft_strncmp(line, "A", 1) == 0 && get_data(line, amb_l))
 			break;
-		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (line != NULL)
+	if (line == NULL)
+	{
+		free(amb_l);
+		amb_l = NULL;
+	}
+	else
 		free(line);
 	close(fd);
-	// return NULL if not existent and free struct
 	return (amb_l);
 }
 
