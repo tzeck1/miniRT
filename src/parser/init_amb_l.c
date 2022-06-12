@@ -4,9 +4,9 @@ static bool	save_data(char *line, t_ambient_light *amb_l)
 {
 	char	**data;
 
-	data = ft_split(line, ' ');	//free
+	data = ft_split(line, ' ');
 	amb_l->identifier = AMBIENT;
-	amb_l->ratio = ft_atof(data[1]);
+	amb_l->ratio = float_to_fix(ft_atof(data[1]));
 	amb_l->rgb = ft_calloc(1, sizeof(t_color));	//free
 	amb_l->rgb->red = ft_atoi(data[2]);
 	amb_l->rgb->green = ft_atoi(data[3]);

@@ -37,3 +37,18 @@ float	fix_to_float(int raw)
 	//return (roundf(tmp * 100) / 100);
 	return (raw / (float)256);
 }
+
+/**
+ * @brief  creates new color struct from string
+ * @retval t_color pointer
+ */
+t_color	*color_from_str(char *red, char *green, char *blue)
+{
+	t_color	*color;
+
+	color = ft_calloc(1, sizeof(t_color));
+	color->red = ft_atoi(red);
+	color->green = ft_atoi(green);
+	color->blue = ft_atoi(blue);
+	return (color);
+}

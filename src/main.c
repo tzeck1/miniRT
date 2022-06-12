@@ -3,6 +3,7 @@
 void	ft_exit(int status)
 {
 //	system("leaks miniRT");
+	printf("exited with exit status: %d\n", status);
 	exit(status);
 }
 

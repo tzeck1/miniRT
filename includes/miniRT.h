@@ -83,7 +83,7 @@ typedef struct s_sphere_list
 	int						identifier;
 	int						i;
 	t_vector				*center;
-	float					radius;
+	int						radius;
 	t_color					*rgb;
 	struct s_sphere_list	*next;
 	struct s_sphere_list	*prev;
@@ -95,8 +95,8 @@ typedef struct s_cylinder_list
 	int						i;
 	t_vector				*center;
 	t_vector				*direction;
-	float					radius;
-	float					height;
+	int						radius;
+	int						height;
 	t_color					*rgb;
 	struct s_cylinder_list	*next;
 	struct s_cylinder_list	*prev;
@@ -114,14 +114,14 @@ typedef struct s_direct_light
 {
 	int			identifier;
 	t_vector	*position;
-	float		ratio;
+	int			ratio;
 	t_color		*rgb;
 }	t_direct_light;
 
 typedef struct s_ambient_light
 {
 	int			identifier;
-	float		ratio;
+	int			ratio;
 	t_color		*rgb;
 }	t_ambient_light;
 
@@ -167,5 +167,6 @@ int			vector_dot(t_vector *vec_a, t_vector *vec_b);
 char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int		float_to_fix(float n);
 float	fix_to_float(int raw);
+t_color	*color_from_str(char *red, char *green, char *blue);
 
 #endif
