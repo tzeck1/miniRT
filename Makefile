@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/12 14:40:17 by tzeck            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # EXECUTABLE
 NAME = ./miniRT
 
@@ -29,6 +17,7 @@ CUT = "\033[K"
 # PATHS
 SRC_PATH = ./src/
 PARS_PATH = ./src/parser/
+VEC_PATH = ./src/vector/
 OBJ_PATH = ./obj/
 MLX_PATH = ./MLX42/
 GLFW_PATH = ~/.brew/opt/glfw/lib/
@@ -36,7 +25,8 @@ GLFW_PATH = ~/.brew/opt/glfw/lib/
 # SOURCES
 SRC =	$(SRC_PATH)main.c\
 		$(PARS_PATH)init_objects.c	$(PARS_PATH)utils.c \
-		$(PARS_PATH)init_amb_l.c	$(PARS_PATH)init_cam.c	$(PARS_PATH)init_dir_l.c
+		$(PARS_PATH)init_amb_l.c	$(PARS_PATH)init_cam.c	$(PARS_PATH)init_dir_l.c \
+		$(VEC_PATH)vector.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
