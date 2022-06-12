@@ -147,6 +147,7 @@ t_objects	*init_objects(char **argv);
 t_ambient_light	*get_ambient_light_data(char **argv);
 t_direct_light	*get_direct_light_data(char **argv);
 t_camera		*get_camera_data(char **argv);
+t_cylinder_list	*creat_cylinder_list(char **argv);
 
 /*	VECTOR MANAGEMENT	*/
 t_vector	*vector_new(int x, int y, int z);
