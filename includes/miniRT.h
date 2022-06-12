@@ -11,6 +11,7 @@
 # include <errno.h>
 # include <string.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 /*	COLORS	*/
 # define RED		"\033[31m"
