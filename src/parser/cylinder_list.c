@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval cylinder count
 **/
-static int	cylinder_count(char **argv)
+int	cylinder_count(char **argv)
 {
 	int		count;
 	int		fd;
@@ -30,7 +30,7 @@ static int	cylinder_count(char **argv)
  * @param  **data: rt file line
  * @param  *cy_node: current node in cylinder list
  */
-static void	fill_me_inside_daddy(char **data, t_cylinder_list *cy_node)
+void	cylinder_fill(char **data, t_cylinder_list *cy_node)
 {
 	cy_node->identifier = CYLINDER;
 	cy_node->center = vector_from_str(data[1], data[2], data[3]); //free
@@ -45,14 +45,14 @@ static void	fill_me_inside_daddy(char **data, t_cylinder_list *cy_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-static t_cylinder_list	*initialize_head(char *line)
+t_cylinder_list	*cylinder_initialize_head(char *line)
 {
 	t_cylinder_list	*cy_head;
 	char			**data;
 
 	data = ft_split(line, ' ');
 	cy_head = ft_calloc(1, sizeof(t_cylinder_list)); //free
-	fill_me_inside_daddy(data, cy_head);
+	cylinder_fill(data, cy_head);
 	cy_head->i = 0;
 	cy_head->next = cy_head;
 	cy_head->prev = cy_head;
@@ -65,7 +65,7 @@ static t_cylinder_list	*initialize_head(char *line)
  * @param  *head: head of list
  * @param  *node: node to add
  */
-static void	set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
+void	cylinder_set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
 {
 	node->prev = head->prev;
 	head->prev->next = node;
@@ -78,44 +78,15 @@ static void	set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
  * @param  *line: rt file line
  * @param  *cy_head: head of cylinder list
  */
-static void	add_node(char *line, t_cylinder_list *cy_head)
+void	cylinder_add_node(char *line, t_cylinder_list *cy_head)
 {
 	t_cylinder_list	*cy_node;
 	char			**data;
 
 	data = ft_split(line, ' ');
 	cy_node = ft_calloc(1, sizeof(t_cylinder_list));
-	fill_me_inside_daddy(data, cy_node);
+	cylinder_fill(data, cy_node);
 	cy_node->i = cy_head->prev->i + 1;
-	set_link_pointers(cy_head, cy_node);
+	cylinder_set_link_pointers(cy_head, cy_node);
 	ft_free_split(data);
-}
-
-/**
- * @brief  creates list of n cylinder
- * @param  **argv: rt file
- * @retval head of filled cylinder list or NULL if no cylinder objects in rt file
- */
-t_cylinder_list	*creat_cylinder_list(char **argv)
-{
-	t_cylinder_list	*cy_head;
-	int				cy_count;
-	int				cy_index;
-	char			*line;
-
-	cy_count = cylinder_count(argv);
-	if (cy_count == 0)
-		return (NULL);
-	cy_index = 0;
-	line = get_obj_line(argv[1], CYLINDER_ID, cy_index);
-	cy_head = initialize_head(line);
-	while (cy_index < cy_count - 1)
-	{
-		cy_index++;
-		free(line);
-		line = get_obj_line(argv[1], CYLINDER_ID, cy_index);
-		add_node(line, cy_head); //multiple free
-	}
-	free(line);
-	return (cy_head);
 }

@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval sphere count
 **/
-static int	sphere_count(char **argv)
+int	sphere_count(char **argv)
 {
 	int		count;
 	int		fd;
@@ -30,7 +30,7 @@ static int	sphere_count(char **argv)
  * @param  **data: rt file line
  * @param  *sp_node: current node in sphere list
  */
-static void	fill_me_inside_daddy(char **data, t_sphere_list *sp_node)
+void	sphere_fill(char **data, t_sphere_list *sp_node)
 {
 	sp_node->identifier = SPHERE;
 	sp_node->center = vector_from_str(data[1], data[2], data[3]); //free
@@ -43,14 +43,14 @@ static void	fill_me_inside_daddy(char **data, t_sphere_list *sp_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-static t_sphere_list	*initialize_head(char *line)
+t_sphere_list	*sphere_initialize_head(char *line)
 {
 	t_sphere_list	*sp_head;
 	char			**data;
 
 	data = ft_split(line, ' ');
 	sp_head = ft_calloc(1, sizeof(t_sphere_list)); //free
-	fill_me_inside_daddy(data, sp_head);
+	sphere_fill(data, sp_head);
 	sp_head->i = 0;
 	sp_head->next = sp_head;
 	sp_head->prev = sp_head;
@@ -63,7 +63,7 @@ static t_sphere_list	*initialize_head(char *line)
  * @param  *head: head of list
  * @param  *node: node to add
  */
-static void	set_link_pointers(t_sphere_list *head, t_sphere_list *node)
+void	sphere_set_link_pointers(t_sphere_list *head, t_sphere_list *node)
 {
 	node->prev = head->prev;
 	head->prev->next = node;
@@ -76,44 +76,15 @@ static void	set_link_pointers(t_sphere_list *head, t_sphere_list *node)
  * @param  *line: rt file line
  * @param  *sp_head: head of sphere list
  */
-static void	add_node(char *line, t_sphere_list *sp_head)
+void	sphere_add_node(char *line, t_sphere_list *sp_head)
 {
 	t_sphere_list	*sp_node;
 	char			**data;
 
 	data = ft_split(line, ' ');
 	sp_node = ft_calloc(1, sizeof(t_sphere_list));
-	fill_me_inside_daddy(data, sp_node);
+	sphere_fill(data, sp_node);
 	sp_node->i = sp_head->prev->i + 1;
-	set_link_pointers(sp_head, sp_node);
+	sphere_set_link_pointers(sp_head, sp_node);
 	ft_free_split(data);
-}
-
-/**
- * @brief  creates list of n spheres
- * @param  **argv: rt file
- * @retval head of filled sphere list or NULL if no sphere objects in rt file
- */
-t_sphere_list	*creat_sphere_list(char **argv)
-{
-	t_sphere_list	*sp_head;
-	int				sp_count;
-	int				sp_index;
-	char			*line;
-
-	sp_count = sphere_count(argv);
-	if (sp_count == 0)
-		return (NULL);
-	sp_index = 0;
-	line = get_obj_line(argv[1], SPHERE_ID, sp_index);
-	sp_head = initialize_head(line);
-	while (sp_index < sp_count - 1)
-	{
-		sp_index++;
-		free(line);
-		line = get_obj_line(argv[1], SPHERE_ID, sp_index);
-		add_node(line, sp_head); //multiple free
-	}
-	free(line);
-	return (sp_head);
 }

@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval plane count
 **/
-static int	plane_count(char **argv)
+int	plane_count(char **argv)
 {
 	int		count;
 	int		fd;
@@ -30,7 +30,7 @@ static int	plane_count(char **argv)
  * @param  **data: rt file line
  * @param  *pl_node: current node in plane list
  */
-static void	fill_me_inside_daddy(char **data, t_plane_list *pl_node)
+void	plane_fill(char **data, t_plane_list *pl_node)
 {
 	pl_node->identifier = PLANE;
 	pl_node->i_hat = vector_from_str(data[1], data[2], data[3]); //free
@@ -43,14 +43,14 @@ static void	fill_me_inside_daddy(char **data, t_plane_list *pl_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-static t_plane_list	*initialize_head(char *line)
+t_plane_list	*plane_initialize_head(char *line)
 {
 	t_plane_list	*pl_head;
 	char			**data;
 
 	data = ft_split(line, ' ');
 	pl_head = ft_calloc(1, sizeof(t_plane_list)); //free
-	fill_me_inside_daddy(data, pl_head);
+	plane_fill(data, pl_head);
 	pl_head->i = 0;
 	pl_head->next = pl_head;
 	pl_head->prev = pl_head;
@@ -63,7 +63,7 @@ static t_plane_list	*initialize_head(char *line)
  * @param  *head: head of list
  * @param  *node: node to add
  */
-static void	set_link_pointers(t_plane_list *head, t_plane_list *node)
+void	plane_set_link_pointers(t_plane_list *head, t_plane_list *node)
 {
 	node->prev = head->prev;
 	head->prev->next = node;
@@ -76,44 +76,15 @@ static void	set_link_pointers(t_plane_list *head, t_plane_list *node)
  * @param  *line: rt file line
  * @param  *pl_head: head of plane list
  */
-static void	add_node(char *line, t_plane_list *pl_head)
+void	plane_add_node(char *line, t_plane_list *pl_head)
 {
 	t_plane_list	*pl_node;
 	char			**data;
 
 	data = ft_split(line, ' ');
 	pl_node = ft_calloc(1, sizeof(t_plane_list));
-	fill_me_inside_daddy(data, pl_node);
+	plane_fill(data, pl_node);
 	pl_node->i = pl_head->prev->i + 1;
-	set_link_pointers(pl_head, pl_node);
+	plane_set_link_pointers(pl_head, pl_node);
 	ft_free_split(data);
-}
-
-/**
- * @brief  creates list of n planes
- * @param  **argv: rt file
- * @retval head of filled plane list or NULL if no plane objects in rt file
- */
-t_plane_list	*creat_plane_list(char **argv)
-{
-	t_plane_list	*pl_head;
-	int				pl_count;
-	int				pl_index;
-	char			*line;
-
-	pl_count = plane_count(argv);
-	if (pl_count == 0)
-		return (NULL);
-	pl_index = 0;
-	line = get_obj_line(argv[1], PLANE_ID, pl_index);
-	pl_head = initialize_head(line);
-	while (pl_index < pl_count - 1)
-	{
-		pl_index++;
-		free(line);
-		line = get_obj_line(argv[1], PLANE_ID, pl_index);
-		add_node(line, pl_head); //multiple free
-	}
-	free(line);
-	return (pl_head);
 }
