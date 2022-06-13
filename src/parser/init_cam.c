@@ -1,5 +1,11 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  saves data from rt file in camera struct
+ * @param  *line: 'C' line from rt file
+ * @param  *cam: camera struct
+ * @retval true
+ */
 static bool	save_data(char *line, t_camera *cam)
 {
 	char	**data;
@@ -13,6 +19,11 @@ static bool	save_data(char *line, t_camera *cam)
 	return (true);
 }
 
+/**
+ * @brief  looks for 'C' line in rt file and if true calls save_data
+ * @param  **argv: rt file
+ * @retval camera struct or NULL if not in file
+ */
 t_camera	*get_camera_data(char **argv)
 {
 	t_camera		*cam;

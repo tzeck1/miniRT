@@ -1,5 +1,11 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  saves data from rt file in ambient_light struct
+ * @param  *line: 'A' line from rt file
+ * @param  *amb_l: ambient light struct
+ * @retval true
+ */
 static bool	save_data(char *line, t_ambient_light *amb_l)
 {
 	char	**data;
@@ -15,6 +21,11 @@ static bool	save_data(char *line, t_ambient_light *amb_l)
 	return (true);
 }
 
+/**
+ * @brief  looks for 'A' line in rt file and if true calls save_data
+ * @param  **argv: rt file
+ * @retval ambient_light struct or NULL if not in file
+ */
 t_ambient_light	*get_ambient_light_data(char **argv)
 {
 	t_ambient_light	*amb_l;

@@ -1,5 +1,11 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  saves data from rt file in direct light struct
+ * @param  *line: 'L' line from rt file
+ * @param  *dir_l: direct light struct
+ * @retval true
+ */
 static bool	save_data(char *line, t_direct_light *dir_l)
 {
 	char	**data;
@@ -16,6 +22,11 @@ static bool	save_data(char *line, t_direct_light *dir_l)
 	return (true);
 }
 
+/**
+ * @brief  looks for 'L' line in rt file and if true calls save_data
+ * @param  **argv: rt file
+ * @retval direct light struct or NULL if not in file
+ */
 t_direct_light	*get_direct_light_data(char **argv)
 {
 	t_direct_light	*dir_l;

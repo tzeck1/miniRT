@@ -1,5 +1,10 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  counts how many plane objects in rt file
+ * @param  **argv:  rt file
+ * @retval plane count
+**/
 static int	plane_count(char **argv)
 {
 	int		count;
@@ -20,6 +25,11 @@ static int	plane_count(char **argv)
 	return (count);
 }
 
+/**
+ * @brief  fills node with rt file data for current plane line
+ * @param  **data: rt file line
+ * @param  *pl_node: current node in plane list
+ */
 static void	fill_me_inside_daddy(char **data, t_plane_list *pl_node)
 {
 	pl_node->identifier = PLANE;
@@ -28,6 +38,11 @@ static void	fill_me_inside_daddy(char **data, t_plane_list *pl_node)
 	pl_node->rgb = color_from_str(data[7], data[8], data[9]);	//free
 }
 
+/**
+ * @brief  create list and init head data
+ * @param  *line: rt file line
+ * @retval head of created list
+ */
 static t_plane_list	*initialize_head(char *line)
 {
 	t_plane_list	*pl_head;
@@ -43,18 +58,11 @@ static t_plane_list	*initialize_head(char *line)
 	return (pl_head);
 }
 
-static int	get_list_index(t_plane_list *head)
-{
-	t_plane_list	*current;
-	int				i;
-
-	current = head;
-	while (current->next->i != 0)
-		current = current->next;
-	i = current->i + 1;	
-	return (i);
-}
-
+/**
+ * @brief  adds new node to the end of circular linked list
+ * @param  *head: head of list
+ * @param  *node: node to add
+ */
 static void	set_link_pointers(t_plane_list *head, t_plane_list *node)
 {
 	node->prev = head->prev;
@@ -63,6 +71,11 @@ static void	set_link_pointers(t_plane_list *head, t_plane_list *node)
 	head->prev = node;
 }
 
+/**
+ * @brief  creates new node, calls fill and add to list functions
+ * @param  *line: rt file line
+ * @param  *pl_head: head of plane list
+ */
 static void	add_node(char *line, t_plane_list *pl_head)
 {
 	t_plane_list	*pl_node;
@@ -71,11 +84,16 @@ static void	add_node(char *line, t_plane_list *pl_head)
 	data = ft_split(line, ' ');
 	pl_node = ft_calloc(1, sizeof(t_plane_list));
 	fill_me_inside_daddy(data, pl_node);
-	pl_node->i = get_list_index(pl_head);
+	pl_node->i = pl_head->prev->i + 1;
 	set_link_pointers(pl_head, pl_node);
 	ft_free_split(data);
 }
 
+/**
+ * @brief  creates list of n planes
+ * @param  **argv: rt file
+ * @retval head of filled plane list or NULL if no plane objects in rt file
+ */
 t_plane_list	*creat_plane_list(char **argv)
 {
 	t_plane_list	*pl_head;

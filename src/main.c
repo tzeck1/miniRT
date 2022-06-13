@@ -1,5 +1,10 @@
 #include "../includes/miniRT.h"
 
+/**
+ * @brief  always call when using exit
+ * @note   leaks check, free, ...
+ * @param  status: exit status
+ */
 void	ft_exit(int status)
 {
 //	system("leaks miniRT");
@@ -19,6 +24,5 @@ int	main(int argc, char **argv)
 	data = ft_calloc(1, sizeof(t_data));	//free
 	data->objs = init_objects(argv);
 	debug_print_cylinder_list(data->objs->cy_head);
-	// test_program();
 	ft_exit(EXIT_SUCCESS);
 }

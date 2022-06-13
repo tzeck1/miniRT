@@ -1,5 +1,12 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  get obj line from rt file
+ * @param  *rt_file_path: file path for open()
+ * @param  *obj_id: object identifier e.G sp
+ * @param  obj_index: occourence of line e.G 1(first sp line)
+ * @retval obj line or NULL if not in file
+ */
 char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index)
 {
 	char	*line;
@@ -23,20 +30,6 @@ char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index)
 	}
 	close(fd);
 	return (NULL);
-}
-
-int	float_to_fix(float n)
-{
-	return (n * 256);
-}
-
-float	fix_to_float(int raw)
-{
-	//float	tmp;
-
-	//tmp = raw / (float)256;
-	//return (roundf(tmp * 100) / 100);
-	return (raw / (float)256);
 }
 
 /**

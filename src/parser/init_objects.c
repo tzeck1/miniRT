@@ -1,5 +1,10 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  init object struct
+ * @param  **argv: rt file
+ * @retval filled object struct (contains a list of each object type)
+ */
 t_objects	*init_objects(char **argv)
 {
 	t_objects	*objs;
