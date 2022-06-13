@@ -21,6 +21,7 @@ char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	return (NULL);
 }
 

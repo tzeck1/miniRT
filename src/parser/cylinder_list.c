@@ -52,7 +52,7 @@ static int	get_list_index(t_cylinder_list *head)
 	int				i;
 
 	current = head;
-	while (current->next->i == 0)
+	while (current->next->i != 0)
 		current = current->next;
 	i = current->i + 1;	
 	return (i);
@@ -60,16 +60,26 @@ static int	get_list_index(t_cylinder_list *head)
 
 static void	set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
 {
+	node->prev = head->prev;
+	head->prev->next = node;
+	node->next = head;
+	head->prev = node;
+}
+
+/*
+static void	set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
+{
 	t_cylinder_list	*current;
 
 	current = head;
-	while (current->next->i == 0)
+	while (current->next->i != 0)
 		current = current->next;
 	current->next = node;
 	head->prev = node;
 	node->next = head;
 	node->prev = current;
 }
+*/
 
 static void	add_node(char *line, t_cylinder_list *cy_head)
 {
@@ -97,7 +107,7 @@ t_cylinder_list	*creat_cylinder_list(char **argv)
 	cy_index = 0;
 	line = get_obj_line(argv[1], CYLINDER_ID, cy_index);
 	cy_head = initialize_head(line);
-	while (--cy_count > 0)	//or >= 0?
+	while (cy_index < cy_count - 1)
 	{
 		cy_index++;
 		free(line);

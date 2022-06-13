@@ -18,8 +18,7 @@ int	main(int argc, char **argv)
 	}
 	data = ft_calloc(1, sizeof(t_data));	//free
 	data->objs = init_objects(argv);
-	
-
+	debug_print_cylinder_list(data->objs->cy_head);
 	// test_program();
 	ft_exit(EXIT_SUCCESS);
 }

@@ -27,7 +27,8 @@ SRC =	$(SRC_PATH)main.c\
 		$(PARS_PATH)init_objects.c	$(PARS_PATH)utils.c \
 		$(PARS_PATH)init_amb_l.c	$(PARS_PATH)init_cam.c	$(PARS_PATH)init_dir_l.c \
 		$(PARS_PATH)cylinder_list.c\
-		$(VEC_PATH)vector.c
+		$(VEC_PATH)vector.c\
+		$(SRC_PATH)debug.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
