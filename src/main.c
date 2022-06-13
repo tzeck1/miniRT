@@ -1,6 +1,15 @@
 #include "../includes/miniRT.h"
 
 /**
+ * @brief  frees all dynamic allocated memory in and including data
+ * @param  *data: data struct
+ */
+void	free_data(t_data *data)
+{
+	free_objects(data->objs);
+}
+
+/**
  * @brief  always call when using exit
  * @note   leaks check, free, ...
  * @param  status: exit status
@@ -24,5 +33,6 @@ int	main(int argc, char **argv)
 	data = ft_calloc(1, sizeof(t_data)); //free
 	data->objs = init_objects(argv);
 	debug_print_cylinder_list(data->objs->cy_head);
+	free_data(data);
 	ft_exit(EXIT_SUCCESS);
 }
