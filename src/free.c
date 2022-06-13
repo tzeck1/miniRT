@@ -1,31 +1,70 @@
 #include "../includes/miniRT.h"
 
+/**
+ * @brief  frees the plane linked list
+ * @param  *head: head of plane linked list
+ */
+static void	free_plane_list(t_plane_list *head)
+{
+	t_plane_list	*end_node;
+	
+	end_node = head->prev;
+	while (head != end_node)
+	{
+		free(head->i_hat);
+		free(head->j_hat);
+		free(head->rgb);
+		head = head->next;
+		free(head->prev);
+	}
+	free(head->i_hat);
+	free(head->j_hat);
+	free(head->rgb);
+	free(head);
+}
+
+/**
+ * @brief  frees the sphere linked list
+ * @param  *head: head of sphere linked list
+ */
+static void	free_sphere_list(t_sphere_list *head)
+{
+	t_sphere_list	*end_node;
+	
+	end_node = head->prev;
+	while (head != end_node)
+	{
+		free(head->center);
+		free(head->rgb);
+		head = head->next;
+		free(head->prev);
+	}
+	free(head->center);
+	free(head->rgb);
+	free(head);
+}
+
+/**
+ * @brief  frees the cylinder linked list
+ * @param  *head: head of cylinder linked list
+ */
 static void	free_cylinder_list(t_cylinder_list *head)
 {
-	t_cylinder_list	*current;
-
-	if (head != NULL)
+	t_cylinder_list	*end_node;
+	
+	end_node = head->prev;
+	while (head != end_node)
 	{
-		while (head->i != 0)
-			head = head->next;
-		current = head->prev;
-		while (head != NULL)
-		{
-			free(current->center);
-			free(current->direction);
-			free(current->rgb);
-			if (current->prev != NULL)
-			{
-				current = current->prev;
-				free(current->next);
-			}
-			else
-			{
-				free(current);
-				current = NULL;
-			}
-		}
+		free(head->center);
+		free(head->direction);
+		free(head->rgb);
+		head = head->next;
+		free(head->prev);
 	}
+	free(head->center);
+	free(head->direction);
+	free(head->rgb);
+	free(head);
 }
 
 /**
@@ -52,10 +91,10 @@ void	free_objects(t_objects *objs)
 	}
 	free_cylinder_list(objs->cy_head);
 	objs->cy_head = NULL;
-	// objs->sp_head = free_sphere_list(objs->sp_head);
-	// objs->sp_head = NULL;
-	// objs->pl_head = free_plane_list(objs->pl_head);
-	// objs->pl_head = NULL;
+	free_sphere_list(objs->sp_head);
+	objs->sp_head = NULL;
+	free_plane_list(objs->pl_head);
+	objs->pl_head = NULL;
 	free(objs);
 	objs = NULL;
 }
