@@ -13,7 +13,7 @@ int	main(int argc, char **argv)
 	// parser(argc, argv);
 	if (argc != 2)
 	{
-		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!"RESET);
+		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);
 		ft_exit(EXIT_FAILURE);
 	}
 	data = ft_calloc(1, sizeof(t_data));	//free

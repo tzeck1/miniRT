@@ -173,11 +173,10 @@ t_color	*color_from_str(char *red, char *green, char *blue);
 
 /*	DEBUG	*/
 
-void	debug_print_vector(t_vector *v);
+void	debug_print_vector(t_vector *vec);
 void	debug_print_rgb(t_color *rgb);
 void	debug_print_cylinder_list(t_cylinder_list *head);
 void	debug_print_cylinder_node(t_cylinder_list *node);
-/*
 void	debug_print_ambient_light(t_ambient_light *obj);
 void	debug_print_direct_light(t_direct_light *obj);
 void	debug_print_camera(t_camera *obj);
@@ -185,6 +184,5 @@ void	debug_print_sphere_list(t_sphere_list *head);
 void	debug_print_sphere_node(t_sphere_list *node);
 void	debug_print_plane_list(t_plane_list *head);
 void	debug_print_plane_node(t_plane_list *node);
-*/
 
 #endif
