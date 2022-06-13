@@ -15,14 +15,14 @@ char	*get_type(int type)
 	return (NULL);
 }
 
-void	debug_print_vector(t_vector *v)
+void	debug_print_vector(t_vector *vec)
 {
-	printf("x-raw:\t\t\t%i\n", v->x);
-	printf("x-float:\t\t%f\n", fix_to_float(v->x));
-	printf("y-raw:\t\t\t%i\n", v->y);
-	printf("y-float:\t\t%f\n", fix_to_float(v->y));
-	printf("z-raw:\t\t\t%i\n", v->z);
-	printf("z-float:\t\t%f\n", fix_to_float(v->z));
+	// printf("x-raw:\t\t\t%i\n", v->x);
+	printf("x-float:\t\t%f\n", fix_to_float(vec->x));
+	// printf("y-raw:\t\t\t%i\n", v->y);
+	printf("y-float:\t\t%f\n", fix_to_float(vec->y));
+	// printf("z-raw:\t\t\t%i\n", v->z);
+	printf("z-float:\t\t%f\n", fix_to_float(vec->z));
 }
 
 void	debug_print_rgb(t_color *rgb)
@@ -32,22 +32,33 @@ void	debug_print_rgb(t_color *rgb)
 	printf("blue:\t\t\t%i\n", rgb->blue);
 }
 
-/*
 void	debug_print_ambient_light(t_ambient_light *obj)
 {
-
+	printf("identifier:\t\t%s\n", get_type(obj->identifier));
+	// printf("ratio-raw:\t\t%i\n", obj->radius);
+	printf("ratio-float:\t\t%f\n", fix_to_float(obj->ratio));
+	debug_print_rgb(obj->rgb);
+	printf("\n");
 }
 
 void	debug_print_direct_light(t_direct_light *obj)
 {
-
+	printf("identifier:\t\t%s\n", get_type(obj->identifier));
+	debug_print_vector(obj->position);
+	// printf("ratio-raw:\t\t%i\n", obj->radius);
+	printf("ratio-float:\t\t%f\n", fix_to_float(obj->ratio));
+	debug_print_rgb(obj->rgb);
+	printf("\n");
 }
 
 void	debug_print_camera(t_camera *obj)
 {
-
+	printf("identifier:\t\t%s\n", get_type(obj->identifier));
+	debug_print_vector(obj->position);
+	debug_print_vector(obj->direction);
+	// printf("FOV-raw:\t\t%i\n", obj->fov);
+	printf("FOV-float:\t\t%f\n", fix_to_float(obj->fov));
 }
-*/
 
 void	debug_print_cylinder_list(t_cylinder_list *head)
 {
@@ -70,9 +81,9 @@ void	debug_print_cylinder_node(t_cylinder_list *node)
 	printf("index:\t\t\t%i\n", node->i);
 	debug_print_vector(node->center);
 	debug_print_vector(node->direction);
-	printf("radius-raw:\t\t%i\n", node->radius);
+	// printf("radius-raw:\t\t%i\n", node->radius);
 	printf("radius-float:\t\t%f\n", fix_to_float(node->radius));
-	printf("height-raw:\t\t%i\n", node->height);
+	// printf("height-raw:\t\t%i\n", node->height);
 	printf("height-float:\t\t%f\n", fix_to_float(node->height));
 	debug_print_rgb(node->rgb);
 	printf("address:\t\t%p\n", node);
@@ -81,24 +92,59 @@ void	debug_print_cylinder_node(t_cylinder_list *node)
 	printf("\n");
 }
 
-/*
 void	debug_print_sphere_list(t_sphere_list *head)
 {
+	int	i;
 
+	while (head->i != 0)
+		head = head->next;
+	i = head->prev->i;
+	while (i >= 0)
+	{
+		debug_print_sphere_node(head);
+		head = head->next;
+		i--;
+	}
 }
 
 void	debug_print_sphere_node(t_sphere_list *node)
 {
-
+	printf("identifier:\t\t%s\n", get_type(node->identifier));
+	printf("index:\t\t\t%i\n", node->i);
+	debug_print_vector(node->center);
+	// printf("radius-raw:\t\t%i\n", node->radius);
+	printf("radius-float:\t\t%f\n", fix_to_float(node->radius));
+	debug_print_rgb(node->rgb);
+	printf("address:\t\t%p\n", node);
+	printf("next:\t\t\t%p\n", node->next);
+	printf("prev:\t\t\t%p\n", node->prev);
+	printf("\n");
 }
 
 void	debug_print_plane_list(t_plane_list *head)
 {
+	int	i;
 
+	while (head->i != 0)
+		head = head->next;
+	i = head->prev->i;
+	while (i >= 0)
+	{
+		debug_print_plane_node(head);
+		head = head->next;
+		i--;
+	}
 }
 
 void	debug_print_plane_node(t_plane_list *node)
 {
-
+	printf("identifier:\t\t%s\n", get_type(node->identifier));
+	printf("index:\t\t\t%i\n", node->i);
+	debug_print_vector(node->i_hat);
+	debug_print_vector(node->j_hat);
+	debug_print_rgb(node->rgb);
+	printf("address:\t\t%p\n", node);
+	printf("next:\t\t\t%p\n", node->next);
+	printf("prev:\t\t\t%p\n", node->prev);
+	printf("\n");
 }
-*/
