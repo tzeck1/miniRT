@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);
 		ft_exit(EXIT_FAILURE);
 	}
-	data = ft_calloc(1, sizeof(t_data));	//free
+	data = ft_calloc(1, sizeof(t_data)); //free
 	data->objs = init_objects(argv);
 	debug_print_cylinder_list(data->objs->cy_head);
 	ft_exit(EXIT_SUCCESS);

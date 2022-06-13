@@ -33,11 +33,11 @@ static int	cylinder_count(char **argv)
 static void	fill_me_inside_daddy(char **data, t_cylinder_list *cy_node)
 {
 	cy_node->identifier = CYLINDER;
-	cy_node->center = vector_from_str(data[1], data[2], data[3]);	//free
-	cy_node->direction = vector_from_str(data[4], data[5], data[6]);	//free
+	cy_node->center = vector_from_str(data[1], data[2], data[3]); //free
+	cy_node->direction = vector_from_str(data[4], data[5], data[6]); //free
 	cy_node->radius = float_to_fix(ft_atof(data[7]) / 2);
 	cy_node->height = float_to_fix(ft_atof(data[8]));
-	cy_node->rgb = color_from_str(data[9], data[10], data[11]);	//free
+	cy_node->rgb = color_from_str(data[9], data[10], data[11]); //free
 }
 
 /**
@@ -51,7 +51,7 @@ static t_cylinder_list	*initialize_head(char *line)
 	char			**data;
 
 	data = ft_split(line, ' ');
-	cy_head = ft_calloc(1, sizeof(t_cylinder_list));	//free
+	cy_head = ft_calloc(1, sizeof(t_cylinder_list)); //free
 	fill_me_inside_daddy(data, cy_head);
 	cy_head->i = 0;
 	cy_head->next = cy_head;
