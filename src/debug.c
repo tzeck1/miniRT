@@ -59,6 +59,7 @@ void	debug_print_cylinder_list(t_cylinder_list *head)
 	while (i >= 0)
 	{
 		debug_print_cylinder_node(head);
+		head = head->next;
 		i--;
 	}
 }

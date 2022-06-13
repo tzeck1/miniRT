@@ -66,21 +66,6 @@ static void	set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
 	head->prev = node;
 }
 
-/*
-static void	set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
-{
-	t_cylinder_list	*current;
-
-	current = head;
-	while (current->next->i != 0)
-		current = current->next;
-	current->next = node;
-	head->prev = node;
-	node->next = head;
-	node->prev = current;
-}
-*/
-
 static void	add_node(char *line, t_cylinder_list *cy_head)
 {
 	t_cylinder_list	*cy_node;
