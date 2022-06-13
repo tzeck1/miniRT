@@ -150,6 +150,10 @@ t_ambient_light	*get_ambient_light_data(char **argv);
 t_direct_light	*get_direct_light_data(char **argv);
 t_camera		*get_camera_data(char **argv);
 
+/*	DATA FREE	*/
+
+void			free_objects(t_objects *objs);
+
 /*	VECTOR MANAGEMENT	*/
 
 t_vector		*vector_new(int x, int y, int z);
