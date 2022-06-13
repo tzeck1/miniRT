@@ -150,6 +150,8 @@ t_ambient_light	*get_ambient_light_data(char **argv);
 t_direct_light	*get_direct_light_data(char **argv);
 t_camera		*get_camera_data(char **argv);
 t_cylinder_list	*creat_cylinder_list(char **argv);
+t_sphere_list	*creat_sphere_list(char **argv);
+t_plane_list	*creat_plane_list(char **argv);
 
 /*	VECTOR MANAGEMENT	*/
 

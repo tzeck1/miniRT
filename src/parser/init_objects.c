@@ -9,7 +9,7 @@ t_objects	*init_objects(char **argv)
 	objs->dir_l = get_direct_light_data(argv);
 	objs->cam = get_camera_data(argv);
 	objs->cy_head = creat_cylinder_list(argv);
-	// objs->sp_head = creat_sphere_list(argv);
-	// objs->pl_head = creat_plane_list(argv);
+	objs->sp_head = creat_sphere_list(argv);
+	objs->pl_head = creat_plane_list(argv);
 	return (objs);
 }

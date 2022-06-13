@@ -25,8 +25,8 @@ GLFW_PATH = ~/.brew/opt/glfw/lib/
 # SOURCES
 SRC =	$(SRC_PATH)main.c\
 		$(PARS_PATH)init_objects.c	$(PARS_PATH)utils.c \
-		$(PARS_PATH)init_amb_l.c	$(PARS_PATH)init_cam.c	$(PARS_PATH)init_dir_l.c \
-		$(PARS_PATH)cylinder_list.c\
+		$(PARS_PATH)init_amb_l.c	$(PARS_PATH)init_cam.c		$(PARS_PATH)init_dir_l.c \
+		$(PARS_PATH)cylinder_list.c	$(PARS_PATH)sphere_list.c	$(PARS_PATH)plane_list.c\
 		$(VEC_PATH)vector.c\
 		$(SRC_PATH)debug.c
 
