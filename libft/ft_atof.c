@@ -39,7 +39,7 @@ float	ft_atof(char *str)
 	i = 0;
 	if (str[i] == '-')
 	{
-		sign = -1.0;
+		sign *= -1.0;
 		i++;
 	}
 	while (ft_isdigit(str[i]))

@@ -13,7 +13,7 @@ static bool	save_data(char *line, t_direct_light *dir_l)
 	data = ft_split(line, ' ');
 	dir_l->identifier = LIGHT;
 	dir_l->position = vector_from_str(data[1], data[2], data[3]);
-	dir_l->ratio = float_to_fix(ft_atof(data[4]));
+	dir_l->ratio = ft_atof(data[4]);
 	dir_l->rgb = ft_calloc(1, sizeof(t_color));
 	dir_l->rgb->red = ft_atoi(data[5]);
 	dir_l->rgb->green = ft_atoi(data[6]);
