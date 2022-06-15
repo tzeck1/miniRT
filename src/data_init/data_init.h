@@ -1,5 +1,5 @@
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef DATA_INIT_H
+# define DATA_INIT_H
 
 # include "../../includes/miniRT.h"
 
