@@ -33,9 +33,9 @@ int	plane_count(char **argv)
 void	plane_fill(char **data, t_plane_list *pl_node)
 {
 	pl_node->identifier = PLANE;
-	pl_node->i_hat = vector_from_str(data[1], data[2], data[3]); //free
-	pl_node->j_hat = vector_from_str(data[4], data[5], data[6]); //free
-	pl_node->rgb = color_from_str(data[7], data[8], data[9]); //free
+	pl_node->i_hat = vector_from_str(data[1], data[2], data[3]);
+	pl_node->j_hat = vector_from_str(data[4], data[5], data[6]);
+	pl_node->rgb = color_from_str(data[7], data[8], data[9]);
 }
 
 /**
@@ -49,7 +49,7 @@ t_plane_list	*plane_initialize_head(char *line)
 	char			**data;
 
 	data = ft_split(line, ' ');
-	pl_head = ft_calloc(1, sizeof(t_plane_list)); //free
+	pl_head = ft_calloc(1, sizeof(t_plane_list));
 	plane_fill(data, pl_head);
 	pl_head->i = 0;
 	pl_head->next = pl_head;

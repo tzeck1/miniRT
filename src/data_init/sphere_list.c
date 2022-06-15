@@ -33,9 +33,9 @@ int	sphere_count(char **argv)
 void	sphere_fill(char **data, t_sphere_list *sp_node)
 {
 	sp_node->identifier = SPHERE;
-	sp_node->center = vector_from_str(data[1], data[2], data[3]); //free
+	sp_node->center = vector_from_str(data[1], data[2], data[3]);
 	sp_node->radius = float_to_fix(ft_atof(data[4]) / 2);
-	sp_node->rgb = color_from_str(data[5], data[6], data[7]); //free
+	sp_node->rgb = color_from_str(data[5], data[6], data[7]);
 }
 
 /**
@@ -49,7 +49,7 @@ t_sphere_list	*sphere_initialize_head(char *line)
 	char			**data;
 
 	data = ft_split(line, ' ');
-	sp_head = ft_calloc(1, sizeof(t_sphere_list)); //free
+	sp_head = ft_calloc(1, sizeof(t_sphere_list));
 	sphere_fill(data, sp_head);
 	sp_head->i = 0;
 	sp_head->next = sp_head;

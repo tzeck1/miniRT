@@ -1,5 +1,5 @@
 #include "../../includes/miniRT.h"
-#include "parser.h"
+#include "data_init.h"
 
 /**
  * @brief  creates list of n cylinder
@@ -24,7 +24,7 @@ static t_cylinder_list	*creat_cylinder_list(char **argv)
 		cy_index++;
 		free(line);
 		line = get_obj_line(argv[1], CYLINDER_ID, cy_index);
-		cylinder_add_node(line, cy_head); //multiple free
+		cylinder_add_node(line, cy_head);
 	}
 	free(line);
 	return (cy_head);
@@ -53,7 +53,7 @@ static t_plane_list	*creat_plane_list(char **argv)
 		pl_index++;
 		free(line);
 		line = get_obj_line(argv[1], PLANE_ID, pl_index);
-		plane_add_node(line, pl_head); //multiple free
+		plane_add_node(line, pl_head);
 	}
 	free(line);
 	return (pl_head);
@@ -82,7 +82,7 @@ static t_sphere_list	*creat_sphere_list(char **argv)
 		sp_index++;
 		free(line);
 		line = get_obj_line(argv[1], SPHERE_ID, sp_index);
-		sphere_add_node(line, sp_head); //multiple free
+		sphere_add_node(line, sp_head);
 	}
 	free(line);
 	return (sp_head);
@@ -97,7 +97,7 @@ t_objects	*init_objects(char **argv)
 {
 	t_objects	*objs;
 
-	objs = ft_calloc(1, sizeof(t_objects)); //free
+	objs = ft_calloc(1, sizeof(t_objects));
 	objs->amb_l = get_ambient_light_data(argv);
 	objs->dir_l = get_direct_light_data(argv);
 	objs->cam = get_camera_data(argv);
