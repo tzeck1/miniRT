@@ -13,7 +13,7 @@ static bool	save_data(char *line, t_ambient_light *amb_l)
 	data = ft_split(line, ' ');
 	amb_l->identifier = AMBIENT;
 	amb_l->ratio = float_to_fix(ft_atof(data[1]));
-	amb_l->rgb = ft_calloc(1, sizeof(t_color)); //free
+	amb_l->rgb = ft_calloc(1, sizeof(t_color));
 	amb_l->rgb->red = ft_atoi(data[2]);
 	amb_l->rgb->green = ft_atoi(data[3]);
 	amb_l->rgb->blue = ft_atoi(data[4]);
@@ -32,7 +32,7 @@ t_ambient_light	*get_ambient_light_data(char **argv)
 	char			*line;
 	int				fd;
 
-	amb_l = ft_calloc(1, sizeof(t_ambient_light)); //free
+	amb_l = ft_calloc(1, sizeof(t_ambient_light));
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
