@@ -4,7 +4,7 @@
  * @brief  creates new vector
  * @retval t_vector pointer
  */
-t_vector	*vector_new(int x, int y, int z)
+t_vector	*vector_new(float x, float y, float z)
 {
 	t_vector	*vec;
 
@@ -25,9 +25,9 @@ t_vector	*vector_from_str(char *x, char *y, char *z)
 	t_vector	*vec;
 
 	vec = ft_calloc(1, sizeof(t_vector));
-	vec->x = float_to_fix(ft_atof(x));
-	vec->y = float_to_fix(ft_atof(y));
-	vec->z = float_to_fix(ft_atof(z));
+	vec->x = ft_atof(x);
+	vec->y = ft_atof(y);
+	vec->z = ft_atof(z);
 	return (vec);
 }
 
@@ -38,7 +38,7 @@ t_vector	*vector_from_str(char *x, char *y, char *z)
  * @param  y: new y value
  * @param  z: new z value
  */
-void	vector_change(t_vector *vec, int x, int y, int z)
+void	vector_change(t_vector *vec, float x, float y, float z)
 {
 	if (vec == NULL)
 		return ;
@@ -88,7 +88,7 @@ void	vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b)
  * @param  *vec_res: product of vec_a multiplied with n
  * @param  n: scaler
  */
-void	vector_scale(t_vector *vec_res, t_vector *vec_a, int n)
+void	vector_scale(t_vector *vec_res, t_vector *vec_a, float n)
 {
 	vec_res->x = vec_a->x * n;
 	vec_res->y = vec_a->y * n;
