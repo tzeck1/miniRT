@@ -25,7 +25,9 @@ void	ft_exit(int status)
 
 int	main(int argc, char **argv)
 {
+	/*	RUNTIME DISPLAY	*/
 	clock_t begin = clock();
+	/*	RUNTIME DISPLAY	*/
 	t_data	*data;
 	// parser(argc, argv);
 	if (argc != 2)
@@ -41,7 +43,9 @@ int	main(int argc, char **argv)
 	// debug_print_sphere_list(data->objs->sp_head);
 	// debug_print_plane_list(data->objs->pl_head);
 	free_data(data);
+	/*	RUNTIME DISPLAY	*/
 	clock_t end = clock();
 	printf(BLUE"\nRUNTIME: %.4f sec\n\n"RESET, (double)(end - begin) / CLOCKS_PER_SEC);
+	/*	RUNTIME DISPLAY	*/
 	ft_exit(EXIT_SUCCESS);
 }
