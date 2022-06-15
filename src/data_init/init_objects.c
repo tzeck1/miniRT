@@ -1,5 +1,5 @@
 #include "../../includes/miniRT.h"
-#include "parser.h"
+#include "data_init.h"
 
 /**
  * @brief  creates list of n cylinder
