@@ -34,7 +34,7 @@ void	sphere_fill(char **data, t_sphere_list *sp_node)
 {
 	sp_node->identifier = SPHERE;
 	sp_node->center = vector_from_str(data[1], data[2], data[3]);
-	sp_node->radius = float_to_fix(ft_atof(data[4]) / 2);
+	sp_node->radius = ft_atof(data[4]) / 2;
 	sp_node->rgb = color_from_str(data[5], data[6], data[7]);
 }
 

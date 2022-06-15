@@ -12,6 +12,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <time.h> //for runtime tests -!- DELETE BEFORE SUBMIT -!-
 
 /*	COLORS	*/
 # define RED		"\033[31m"
@@ -55,9 +56,9 @@ typedef enum e_identifier
 /*  STRUCTS */
 typedef struct s_vector
 {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_vector;
 
 typedef struct s_color
@@ -83,7 +84,7 @@ typedef struct s_sphere_list
 	int						identifier;
 	int						i;
 	t_vector				*center;
-	int						radius;
+	float					radius;
 	t_color					*rgb;
 	struct s_sphere_list	*next;
 	struct s_sphere_list	*prev;
@@ -95,8 +96,8 @@ typedef struct s_cylinder_list
 	int						i;
 	t_vector				*center;
 	t_vector				*direction;
-	int						radius;
-	int						height;
+	float					radius;
+	float					height;
 	t_color					*rgb;
 	struct s_cylinder_list	*next;
 	struct s_cylinder_list	*prev;
@@ -107,21 +108,21 @@ typedef struct s_camera
 	int			identifier;
 	t_vector	*position;
 	t_vector	*direction;
-	int			fov;
+	float		fov;
 }	t_camera;
 
 typedef struct s_direct_light
 {
 	int			identifier;
 	t_vector	*position;
-	int			ratio;
+	float		ratio;
 	t_color		*rgb;
 }	t_direct_light;
 
 typedef struct s_ambient_light
 {
 	int			identifier;
-	int			ratio;
+	float		ratio;
 	t_color		*rgb;
 }	t_ambient_light;
 
@@ -156,13 +157,13 @@ void			free_objects(t_objects *objs);
 
 /*	VECTOR MANAGEMENT	*/
 
-t_vector		*vector_new(int x, int y, int z);
+t_vector		*vector_new(float x, float y, float z);
 t_vector		*vector_from_str(char *x, char *y, char *z);
-void			vector_change(t_vector *vec, int x, int y, int z);
+void			vector_change(t_vector *vec, float x, float y, float z);
 void			vector_copy(t_vector *vec_src, t_vector *vec_dst);
 void			vector_add(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
 void			vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
-void			vector_scale(t_vector *vec_res, t_vector *vec_a, int n);
+void			vector_scale(t_vector *vec_res, t_vector *vec_a, float n);
 int				vector_dot(t_vector *vec_a, t_vector *vec_b);
 
 /*	UTILS	*/
