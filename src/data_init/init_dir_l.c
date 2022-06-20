@@ -6,7 +6,7 @@
  * @param  *dir_l: direct light struct
  * @retval true
  */
-static void	save_data(char *line, t_direct_light *dir_l)
+static void	save_data(char *line, t_dir_light *dir_l)
 {
 	char	**data;
 
@@ -26,13 +26,13 @@ static void	save_data(char *line, t_direct_light *dir_l)
  * @param  **argv: rt file
  * @retval direct light struct or NULL if not in file
  */
-t_direct_light	*get_direct_light_data(char *rt_file_path)
+t_dir_light	*get_dir_light_data(char *rt_file_path)
 {
-	t_direct_light	*dir_l;
-	char			*line;
-	int				fd;
+	t_dir_light	*dir_l;
+	char		*line;
+	int			fd;
 
-	dir_l = ft_calloc(1, sizeof(t_ambient_light));
+	dir_l = ft_calloc(1, sizeof(t_dir_light));
 	fd = open(rt_file_path, O_RDONLY);
 	line = get_obj_line(rt_file_path, LIGHT_ID, 0);
 	if (line == NULL)

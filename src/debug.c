@@ -15,7 +15,6 @@ char	*get_type(int type)
 	return (NULL);
 }
 
-// https://projects.intra.42.fr/projects/germany-basecamp-exam-00/projects_users/2612863
 void	debug_print_vector(t_vector *vec)
 {
 	printf("x-raw:\t\t\t%f\n", vec->x);
@@ -33,7 +32,7 @@ void	debug_print_rgb(t_color *rgb)
 	printf("blue:\t\t\t%i\n", rgb->blue);
 }
 
-void	debug_print_ambient_light(t_ambient_light *obj)
+void	debug_print_ambient_light(t_amb_light *obj)
 {
 	printf("identifier:\t\t%s\n", get_type(obj->identifier));
 	printf("ratio-raw:\t\t%f\n", obj->ratio);
@@ -42,7 +41,7 @@ void	debug_print_ambient_light(t_ambient_light *obj)
 	printf("\n");
 }
 
-void	debug_print_direct_light(t_direct_light *obj)
+void	debug_print_direct_light(t_dir_light *obj)
 {
 	printf("identifier:\t\t%s\n", get_type(obj->identifier));
 	debug_print_vector(obj->position);
@@ -62,7 +61,7 @@ void	debug_print_camera(t_camera *obj)
 	printf("\n");
 }
 
-void	debug_print_cylinder_list(t_cylinder_list *head)
+void	debug_print_cylinder_list(t_cy_list *head)
 {
 	int	i;
 
@@ -77,7 +76,7 @@ void	debug_print_cylinder_list(t_cylinder_list *head)
 	}
 }
 
-void	debug_print_cylinder_node(t_cylinder_list *node)
+void	debug_print_cylinder_node(t_cy_list *node)
 {
 	printf("identifier:\t\t%s\n", get_type(node->identifier));
 	printf("index:\t\t\t%i\n", node->i);
@@ -94,7 +93,7 @@ void	debug_print_cylinder_node(t_cylinder_list *node)
 	printf("\n");
 }
 
-void	debug_print_sphere_list(t_sphere_list *head)
+void	debug_print_sphere_list(t_sp_list *head)
 {
 	int	i;
 
@@ -109,7 +108,7 @@ void	debug_print_sphere_list(t_sphere_list *head)
 	}
 }
 
-void	debug_print_sphere_node(t_sphere_list *node)
+void	debug_print_sphere_node(t_sp_list *node)
 {
 	printf("identifier:\t\t%s\n", get_type(node->identifier));
 	printf("index:\t\t\t%i\n", node->i);
@@ -123,7 +122,7 @@ void	debug_print_sphere_node(t_sphere_list *node)
 	printf("\n");
 }
 
-void	debug_print_plane_list(t_plane_list *head)
+void	debug_print_plane_list(t_pl_list *head)
 {
 	int	i;
 
@@ -138,7 +137,7 @@ void	debug_print_plane_list(t_plane_list *head)
 	}
 }
 
-void	debug_print_plane_node(t_plane_list *node)
+void	debug_print_plane_node(t_pl_list *node)
 {
 	printf("identifier:\t\t%s\n", get_type(node->identifier));
 	printf("index:\t\t\t%i\n", node->i);

@@ -6,25 +6,25 @@
  * @param  **argv: rt file
  * @retval head of filled cylinder list or NULL if no cylinder objects in rt file
  */
-static t_cylinder_list	*creat_cylinder_list(char *rt_file_path)
+static t_cy_list	*creat_cy_list(char *rt_file_path)
 {
-	t_cylinder_list	*cy_head;
-	int				cy_count;
-	int				cy_index;
-	char			*line;
+	t_cy_list	*cy_head;
+	int			cy_count;
+	int			cy_index;
+	char		*line;
 
-	cy_count = cylinder_count(rt_file_path);
+	cy_count = cy_counter(rt_file_path);
 	if (cy_count == 0)
 		return (NULL);
 	cy_index = 0;
 	line = get_obj_line(rt_file_path, CYLINDER_ID, cy_index);
-	cy_head = cylinder_initialize_head(line);
+	cy_head = cy_init_head(line);
 	while (cy_index < cy_count - 1)
 	{
 		cy_index++;
 		free(line);
 		line = get_obj_line(rt_file_path, CYLINDER_ID, cy_index);
-		cylinder_add_node(line, cy_head);
+		cy_add_node(line, cy_head);
 	}
 	free(line);
 	return (cy_head);
@@ -35,25 +35,25 @@ static t_cylinder_list	*creat_cylinder_list(char *rt_file_path)
  * @param  **argv: rt file
  * @retval head of filled plane list or NULL if no plane objects in rt file
  */
-static t_plane_list	*creat_plane_list(char *rt_file_path)
+static t_pl_list	*creat_pl_list(char *rt_file_path)
 {
-	t_plane_list	*pl_head;
-	int				pl_count;
-	int				pl_index;
-	char			*line;
+	t_pl_list	*pl_head;
+	int			pl_count;
+	int			pl_index;
+	char		*line;
 
-	pl_count = plane_count(rt_file_path);
+	pl_count = pl_counter(rt_file_path);
 	if (pl_count == 0)
 		return (NULL);
 	pl_index = 0;
 	line = get_obj_line(rt_file_path, PLANE_ID, pl_index);
-	pl_head = plane_initialize_head(line);
+	pl_head = pl_init_head(line);
 	while (pl_index < pl_count - 1)
 	{
 		pl_index++;
 		free(line);
 		line = get_obj_line(rt_file_path, PLANE_ID, pl_index);
-		plane_add_node(line, pl_head);
+		pl_add_node(line, pl_head);
 	}
 	free(line);
 	return (pl_head);
@@ -64,25 +64,25 @@ static t_plane_list	*creat_plane_list(char *rt_file_path)
  * @param  **argv: rt file
  * @retval head of filled sphere list or NULL if no sphere objects in rt file
  */
-static t_sphere_list	*creat_sphere_list(char *rt_file_path)
+static t_sp_list	*creat_sp_list(char *rt_file_path)
 {
-	t_sphere_list	*sp_head;
-	int				sp_count;
-	int				sp_index;
-	char			*line;
+	t_sp_list	*sp_head;
+	int			sp_count;
+	int			sp_index;
+	char		*line;
 
-	sp_count = sphere_count(rt_file_path);
+	sp_count = sp_counter(rt_file_path);
 	if (sp_count == 0)
 		return (NULL);
 	sp_index = 0;
 	line = get_obj_line(rt_file_path, SPHERE_ID, sp_index);
-	sp_head = sphere_initialize_head(line);
+	sp_head = sp_init_head(line);
 	while (sp_index < sp_count - 1)
 	{
 		sp_index++;
 		free(line);
 		line = get_obj_line(rt_file_path, SPHERE_ID, sp_index);
-		sphere_add_node(line, sp_head);
+		sp_add_node(line, sp_head);
 	}
 	free(line);
 	return (sp_head);
@@ -98,11 +98,11 @@ t_objects	*init_objects(char *rt_file_path)
 	t_objects	*objs;
 
 	objs = ft_calloc(1, sizeof(t_objects));
-	objs->amb_l = get_ambient_light_data(rt_file_path);
-	objs->dir_l = get_direct_light_data(rt_file_path);
+	objs->amb_l = get_amb_light_data(rt_file_path);
+	objs->dir_l = get_dir_light_data(rt_file_path);
 	objs->cam = get_camera_data(rt_file_path);
-	objs->cy_head = creat_cylinder_list(rt_file_path);
-	objs->sp_head = creat_sphere_list(rt_file_path);
-	objs->pl_head = creat_plane_list(rt_file_path);
+	objs->cy_head = creat_cy_list(rt_file_path);
+	objs->sp_head = creat_sp_list(rt_file_path);
+	objs->pl_head = creat_pl_list(rt_file_path);
 	return (objs);
 }

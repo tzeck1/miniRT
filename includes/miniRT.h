@@ -68,40 +68,40 @@ typedef struct s_color
 	int	blue;
 }	t_color;
 
-typedef struct s_plane_list
+typedef struct s_pl_list
 {
 	int					identifier;
 	int					i;
 	t_vector			*i_hat;
 	t_vector			*j_hat;
 	t_color				*rgb;
-	struct s_plane_list	*next;
-	struct s_plane_list	*prev;
-}	t_plane_list;
+	struct s_pl_list	*next;
+	struct s_pl_list	*prev;
+}	t_pl_list;
 
-typedef struct s_sphere_list
+typedef struct s_sp_list
 {
-	int						identifier;
-	int						i;
-	t_vector				*center;
-	float					radius;
-	t_color					*rgb;
-	struct s_sphere_list	*next;
-	struct s_sphere_list	*prev;
-}	t_sphere_list;
+	int					identifier;
+	int					i;
+	t_vector			*center;
+	float				radius;
+	t_color				*rgb;
+	struct s_sp_list	*next;
+	struct s_sp_list	*prev;
+}	t_sp_list;
 
-typedef struct s_cylinder_list
+typedef struct s_cy_list
 {
-	int						identifier;
-	int						i;
-	t_vector				*center;
-	t_vector				*direction;
-	float					radius;
-	float					height;
-	t_color					*rgb;
-	struct s_cylinder_list	*next;
-	struct s_cylinder_list	*prev;
-}	t_cylinder_list;
+	int					identifier;
+	int					i;
+	t_vector			*center;
+	t_vector			*direction;
+	float				radius;
+	float				height;
+	t_color				*rgb;
+	struct s_cy_list	*next;
+	struct s_cy_list	*prev;
+}	t_cy_list;
 
 typedef struct s_camera
 {
@@ -111,29 +111,29 @@ typedef struct s_camera
 	float		fov;
 }	t_camera;
 
-typedef struct s_direct_light
+typedef struct s_dir_light
 {
 	int			identifier;
 	t_vector	*position;
 	float		ratio;
 	t_color		*rgb;
-}	t_direct_light;
+}	t_dir_light;
 
-typedef struct s_ambient_light
+typedef struct s_amb_light
 {
 	int			identifier;
 	float		ratio;
 	t_color		*rgb;
-}	t_ambient_light;
+}	t_amb_light;
 
 typedef struct s_objects
 {
-	struct s_ambient_light	*amb_l;
-	struct s_direct_light	*dir_l;
-	struct s_camera			*cam;
-	struct s_cylinder_list	*cy_head;
-	struct s_sphere_list	*sp_head;
-	struct s_plane_list		*pl_head;
+	struct s_amb_light	*amb_l;
+	struct s_dir_light	*dir_l;
+	struct s_camera		*cam;
+	struct s_cy_list	*cy_head;
+	struct s_sp_list	*sp_head;
+	struct s_pl_list	*pl_head;
 }	t_objects;
 
 typedef struct s_data
@@ -143,48 +143,48 @@ typedef struct s_data
 
 /*	PARSER	*/
 
-t_objects		*init_objects(char *rt_file_path);
+t_objects	*init_objects(char *rt_file_path);
 
 /*  DATA INITIALIZATION */
 
-t_ambient_light	*get_ambient_light_data(char *rt_file_path);
-t_direct_light	*get_direct_light_data(char *rt_file_path);
-t_camera		*get_camera_data(char *rt_file_path);
+t_amb_light	*get_amb_light_data(char *rt_file_path);
+t_dir_light	*get_dir_light_data(char *rt_file_path);
+t_camera	*get_camera_data(char *rt_file_path);
 
 /*	DATA FREE	*/
 
-void			free_objects(t_objects *objs);
+void		free_objects(t_objects *objs);
 
 /*	VECTOR MANAGEMENT	*/
 
-t_vector		*vector_new(float x, float y, float z);
-t_vector		*vector_from_str(char *x, char *y, char *z);
-void			vector_change(t_vector *vec, float x, float y, float z);
-void			vector_copy(t_vector *vec_src, t_vector *vec_dst);
-void			vector_add(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
-void			vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
-void			vector_scale(t_vector *vec_res, t_vector *vec_a, float n);
-int				vector_dot(t_vector *vec_a, t_vector *vec_b);
+t_vector	*vector_new(float x, float y, float z);
+t_vector	*vector_from_str(char *x, char *y, char *z);
+void		vector_change(t_vector *vec, float x, float y, float z);
+void		vector_copy(t_vector *vec_src, t_vector *vec_dst);
+void		vector_add(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
+void		vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
+void		vector_scale(t_vector *vec_res, t_vector *vec_a, float n);
+int			vector_dot(t_vector *vec_a, t_vector *vec_b);
 
 /*	UTILS	*/
 
-char			*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
-int				float_to_fix(float n);
-float			fix_to_float(int raw);
-t_color			*color_from_str(char *red, char *green, char *blue);
+char		*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
+int			float_to_fix(float n);
+float		fix_to_float(int raw);
+t_color		*color_from_str(char *red, char *green, char *blue);
 
 /*	DEBUG	*/
 
-void			debug_print_vector(t_vector *vec);
-void			debug_print_rgb(t_color *rgb);
-void			debug_print_cylinder_list(t_cylinder_list *head);
-void			debug_print_cylinder_node(t_cylinder_list *node);
-void			debug_print_ambient_light(t_ambient_light *obj);
-void			debug_print_direct_light(t_direct_light *obj);
-void			debug_print_camera(t_camera *obj);
-void			debug_print_sphere_list(t_sphere_list *head);
-void			debug_print_sphere_node(t_sphere_list *node);
-void			debug_print_plane_list(t_plane_list *head);
-void			debug_print_plane_node(t_plane_list *node);
+void		debug_print_vector(t_vector *vec);
+void		debug_print_rgb(t_color *rgb);
+void		debug_print_cylinder_list(t_cy_list *head);
+void		debug_print_cylinder_node(t_cy_list *node);
+void		debug_print_ambient_light(t_amb_light *obj);
+void		debug_print_direct_light(t_dir_light *obj);
+void		debug_print_camera(t_camera *obj);
+void		debug_print_sphere_list(t_sp_list *head);
+void		debug_print_sphere_node(t_sp_list *node);
+void		debug_print_plane_list(t_pl_list *head);
+void		debug_print_plane_node(t_pl_list *node);
 
 #endif

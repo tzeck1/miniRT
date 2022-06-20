@@ -6,7 +6,7 @@
  * @param  *amb_l: ambient light struct
  * @retval true
  */
-static void	save_data(char *line, t_ambient_light *amb_l)
+static void	save_data(char *line, t_amb_light *amb_l)
 {
 	char	**data;
 
@@ -26,13 +26,13 @@ static void	save_data(char *line, t_ambient_light *amb_l)
  * @param  **argv: rt file
  * @retval ambient_light struct or NULL if not in file
  */
-t_ambient_light	*get_ambient_light_data(char *rt_file_path)
+t_amb_light	*get_amb_light_data(char *rt_file_path)
 {
-	t_ambient_light	*amb_l;
-	char			*line;
-	int				fd;
+	t_amb_light	*amb_l;
+	char		*line;
+	int			fd;
 
-	amb_l = ft_calloc(1, sizeof(t_ambient_light));
+	amb_l = ft_calloc(1, sizeof(t_amb_light));
 	fd = open(rt_file_path, O_RDONLY);
 	line = get_obj_line(rt_file_path, AMB_LIGHT_ID, 0);
 	if (line == NULL)

@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval plane count
 **/
-int	plane_count(char *rt_file_path)
+int	pl_count(char *rt_file_path)
 {
 	int		count;
 	int		fd;
@@ -30,7 +30,7 @@ int	plane_count(char *rt_file_path)
  * @param  **data: rt file line
  * @param  *pl_node: current node in plane list
  */
-void	plane_fill(char **data, t_plane_list *pl_node)
+void	pl_fill(char **data, t_pl_list *pl_node)
 {
 	pl_node->identifier = PLANE;
 	pl_node->i_hat = vector_from_str(data[1], data[2], data[3]);
@@ -43,14 +43,14 @@ void	plane_fill(char **data, t_plane_list *pl_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-t_plane_list	*plane_initialize_head(char *line)
+t_pl_list	*pl_init_head(char *line)
 {
-	t_plane_list	*pl_head;
-	char			**data;
+	t_pl_list	*pl_head;
+	char		**data;
 
 	data = ft_split(line, ' ');
-	pl_head = ft_calloc(1, sizeof(t_plane_list));
-	plane_fill(data, pl_head);
+	pl_head = ft_calloc(1, sizeof(t_pl_list));
+	pl_fill(data, pl_head);
 	pl_head->i = 0;
 	pl_head->next = pl_head;
 	pl_head->prev = pl_head;
@@ -63,7 +63,7 @@ t_plane_list	*plane_initialize_head(char *line)
  * @param  *head: head of list
  * @param  *node: node to add
  */
-void	plane_set_link_pointers(t_plane_list *head, t_plane_list *node)
+void	pl_set_link_ptr(t_pl_list *head, t_pl_list *node)
 {
 	node->prev = head->prev;
 	head->prev->next = node;
@@ -76,15 +76,15 @@ void	plane_set_link_pointers(t_plane_list *head, t_plane_list *node)
  * @param  *line: rt file line
  * @param  *pl_head: head of plane list
  */
-void	plane_add_node(char *line, t_plane_list *pl_head)
+void	pl_add_node(char *line, t_pl_list *pl_head)
 {
-	t_plane_list	*pl_node;
-	char			**data;
+	t_pl_list	*pl_node;
+	char		**data;
 
 	data = ft_split(line, ' ');
-	pl_node = ft_calloc(1, sizeof(t_plane_list));
-	plane_fill(data, pl_node);
+	pl_node = ft_calloc(1, sizeof(t_pl_list));
+	pl_fill(data, pl_node);
 	pl_node->i = pl_head->prev->i + 1;
-	plane_set_link_pointers(pl_head, pl_node);
+	pl_set_link_ptr(pl_head, pl_node);
 	ft_free_split(data);
 }

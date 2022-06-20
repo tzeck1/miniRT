@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval sphere count
 **/
-int	sphere_count(char *rt_file_path)
+int	sp_count(char *rt_file_path)
 {
 	int		count;
 	int		fd;
@@ -30,7 +30,7 @@ int	sphere_count(char *rt_file_path)
  * @param  **data: rt file line
  * @param  *sp_node: current node in sphere list
  */
-void	sphere_fill(char **data, t_sphere_list *sp_node)
+void	sp_fill(char **data, t_sp_list *sp_node)
 {
 	sp_node->identifier = SPHERE;
 	sp_node->center = vector_from_str(data[1], data[2], data[3]);
@@ -43,14 +43,14 @@ void	sphere_fill(char **data, t_sphere_list *sp_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-t_sphere_list	*sphere_initialize_head(char *line)
+t_sp_list	*sphere_init_head(char *line)
 {
-	t_sphere_list	*sp_head;
-	char			**data;
+	t_sp_list	*sp_head;
+	char		**data;
 
 	data = ft_split(line, ' ');
-	sp_head = ft_calloc(1, sizeof(t_sphere_list));
-	sphere_fill(data, sp_head);
+	sp_head = ft_calloc(1, sizeof(t_sp_list));
+	sp_fill(data, sp_head);
 	sp_head->i = 0;
 	sp_head->next = sp_head;
 	sp_head->prev = sp_head;
@@ -63,7 +63,7 @@ t_sphere_list	*sphere_initialize_head(char *line)
  * @param  *head: head of list
  * @param  *node: node to add
  */
-void	sphere_set_link_pointers(t_sphere_list *head, t_sphere_list *node)
+void	sp_set_link_ptr(t_sp_list *head, t_sp_list *node)
 {
 	node->prev = head->prev;
 	head->prev->next = node;
@@ -76,15 +76,15 @@ void	sphere_set_link_pointers(t_sphere_list *head, t_sphere_list *node)
  * @param  *line: rt file line
  * @param  *sp_head: head of sphere list
  */
-void	sphere_add_node(char *line, t_sphere_list *sp_head)
+void	sp_add_node(char *line, t_sp_list *sp_head)
 {
-	t_sphere_list	*sp_node;
-	char			**data;
+	t_sp_list	*sp_node;
+	char		**data;
 
 	data = ft_split(line, ' ');
-	sp_node = ft_calloc(1, sizeof(t_sphere_list));
-	sphere_fill(data, sp_node);
+	sp_node = ft_calloc(1, sizeof(t_sp_list));
+	sp_fill(data, sp_node);
 	sp_node->i = sp_head->prev->i + 1;
-	sphere_set_link_pointers(sp_head, sp_node);
+	sp_set_link_ptr(sp_head, sp_node);
 	ft_free_split(data);
 }

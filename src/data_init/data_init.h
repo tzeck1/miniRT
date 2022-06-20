@@ -5,27 +5,26 @@
 
 /*	SPHERE	*/
 
-int				sphere_count(char *rt_file_path);
-void			sphere_fill(char **data, t_sphere_list *sp_node);
-t_sphere_list	*sphere_initialize_head(char *line);
-void			sphere_set_link_pointers(t_sphere_list *head, t_sphere_list *node);
-void			sphere_add_node(char *line, t_sphere_list *sp_head);
+int			sp_counter(char *rt_file_path);
+void		sp_fill(char **data, t_sp_list *sp_node);
+t_sp_list	*sp_init_head(char *line);
+void		sp_set_link_ptr(t_sp_list *head, t_sp_list *node);
+void		sp_add_node(char *line, t_sp_list *sp_head);
 
 /*	PLANE	*/
 
-int				plane_count(char *rt_file_path);
-void			plane_fill(char **data, t_plane_list *pl_node);
-t_plane_list	*plane_initialize_head(char *line);
-void			plane_set_link_pointers(t_plane_list *head, t_plane_list *node);
-void			plane_add_node(char *line, t_plane_list *pl_head);
+int			pl_counter(char *rt_file_path);
+void		pl_fill(char **data, t_pl_list *pl_node);
+t_pl_list	*pl_init_head(char *line);
+void		pl_set_link_ptr(t_pl_list *head, t_pl_list *node);
+void		pl_add_node(char *line, t_pl_list *pl_head);
 
 /*	SPHERE	*/
 
-int				cylinder_count(char *rt_file_path);
-void			cylinder_fill(char **data, t_cylinder_list *cy_node);
-t_cylinder_list	*cylinder_initialize_head(char *line);
-void			cylinder_set_link_pointers(t_cylinder_list *head, t_cylinder_list *node);
-void			cylinder_add_node(char *line, t_cylinder_list *cy_head);
-
+int			cy_counter(char *rt_file_path);
+void		cy_fill(char **data, t_cy_list *cy_node);
+t_cy_list	*cy_init_head(char *line);
+void		cy_set_link_ptr(t_cy_list *head, t_cy_list *node);
+void		cy_add_node(char *line, t_cy_list *cy_head);
 
 #endif

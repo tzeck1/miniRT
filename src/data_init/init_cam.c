@@ -29,7 +29,7 @@ t_camera	*get_camera_data(char *rt_file_path)
 	char		*line;
 	int			fd;
 
-	cam = ft_calloc(1, sizeof(t_ambient_light));
+	cam = ft_calloc(1, sizeof(t_camera));
 	fd = open(rt_file_path, O_RDONLY);
 	line = get_obj_line(rt_file_path, CAMERA_ID, 0);
 	if (line == NULL)

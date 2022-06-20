@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval cylinder count
 **/
-int	cylinder_count(char *rt_file_path)
+int	cy_count(char *rt_file_path)
 {
 	int		count;
 	int		fd;
@@ -30,7 +30,7 @@ int	cylinder_count(char *rt_file_path)
  * @param  **data: rt file line
  * @param  *cy_node: current node in cylinder list
  */
-void	cylinder_fill(char **data, t_cylinder_list *cy_node)
+void	cy_fill(char **data, t_cy_list *cy_node)
 {
 	cy_node->identifier = CYLINDER;
 	cy_node->center = vector_from_str(data[1], data[2], data[3]);
@@ -45,14 +45,14 @@ void	cylinder_fill(char **data, t_cylinder_list *cy_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-t_cylinder_list	*cylinder_initialize_head(char *line)
+t_cy_list	*cy_init_head(char *line)
 {
-	t_cylinder_list	*cy_head;
-	char			**data;
+	t_cy_list	*cy_head;
+	char		**data;
 
 	data = ft_split(line, ' ');
-	cy_head = ft_calloc(1, sizeof(t_cylinder_list));
-	cylinder_fill(data, cy_head);
+	cy_head = ft_calloc(1, sizeof(t_cy_list));
+	cy_fill(data, cy_head);
 	cy_head->i = 0;
 	cy_head->next = cy_head;
 	cy_head->prev = cy_head;
@@ -65,7 +65,7 @@ t_cylinder_list	*cylinder_initialize_head(char *line)
  * @param  *head: head of list
  * @param  *node: node to add
  */
-void	cylinder_set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
+void	cy_set_link_ptr(t_cy_list *head, t_cy_list *node)
 {
 	node->prev = head->prev;
 	head->prev->next = node;
@@ -78,15 +78,15 @@ void	cylinder_set_link_pointers(t_cylinder_list *head, t_cylinder_list *node)
  * @param  *line: rt file line
  * @param  *cy_head: head of cylinder list
  */
-void	cylinder_add_node(char *line, t_cylinder_list *cy_head)
+void	cy_add_node(char *line, t_cy_list *cy_head)
 {
-	t_cylinder_list	*cy_node;
-	char			**data;
+	t_cy_list	*cy_node;
+	char		**data;
 
 	data = ft_split(line, ' ');
-	cy_node = ft_calloc(1, sizeof(t_cylinder_list));
-	cylinder_fill(data, cy_node);
+	cy_node = ft_calloc(1, sizeof(t_cy_list));
+	cy_fill(data, cy_node);
 	cy_node->i = cy_head->prev->i + 1;
-	cylinder_set_link_pointers(cy_head, cy_node);
+	cy_set_link_ptr(cy_head, cy_node);
 	ft_free_split(data);
 }

@@ -59,7 +59,7 @@ $(NAME): $(OBJ)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
-	@make clean -C MLX42
+	# @make clean -C MLX42
 	@make clean -C libft
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
@@ -68,7 +68,7 @@ clean:
 	fi;
 
 fclean: clean
-	@make fclean -C MLX42
+	# @make fclean -C MLX42
 	@make fclean -C libft
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \
