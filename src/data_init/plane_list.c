@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval plane count
 **/
-int	pl_count(char *rt_file_path)
+int	pl_counter(char *rt_file_path)
 {
 	int		count;
 	int		fd;

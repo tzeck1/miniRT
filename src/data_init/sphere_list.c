@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval sphere count
 **/
-int	sp_count(char *rt_file_path)
+int	sp_counter(char *rt_file_path)
 {
 	int		count;
 	int		fd;
@@ -43,7 +43,7 @@ void	sp_fill(char **data, t_sp_list *sp_node)
  * @param  *line: rt file line
  * @retval head of created list
  */
-t_sp_list	*sphere_init_head(char *line)
+t_sp_list	*sp_init_head(char *line)
 {
 	t_sp_list	*sp_head;
 	char		**data;

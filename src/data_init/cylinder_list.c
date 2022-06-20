@@ -5,7 +5,7 @@
  * @param  **argv:  rt file
  * @retval cylinder count
 **/
-int	cy_count(char *rt_file_path)
+int	cy_counter(char *rt_file_path)
 {
 	int		count;
 	int		fd;
