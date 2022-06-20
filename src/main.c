@@ -19,7 +19,10 @@ void	free_data(t_data *data)
 void	ft_exit(int status)
 {
 	// system("leaks miniRT");
-	printf("exited with exit status: %d\n", status);
+	if (status == 0)
+		printf(GREEN"exited with exit status: %d\n"RESET, status);
+	else
+		printf(RED"exited with exit status: %d\n"RESET, status);
 	exit(status);
 }
 
