@@ -6,7 +6,7 @@
  * @param  *dir_l: direct light struct
  * @retval true
  */
-static bool	save_data(char *line, t_direct_light *dir_l)
+static void	save_data(char *line, t_direct_light *dir_l)
 {
 	char	**data;
 
@@ -19,7 +19,6 @@ static bool	save_data(char *line, t_direct_light *dir_l)
 	dir_l->rgb->green = ft_atoi(data[6]);
 	dir_l->rgb->blue = ft_atoi(data[7]);
 	ft_free_split(data);
-	return (true);
 }
 
 /**
@@ -27,29 +26,22 @@ static bool	save_data(char *line, t_direct_light *dir_l)
  * @param  **argv: rt file
  * @retval direct light struct or NULL if not in file
  */
-t_direct_light	*get_direct_light_data(char **argv)
+t_direct_light	*get_direct_light_data(char *rt_file_path)
 {
 	t_direct_light	*dir_l;
 	char			*line;
 	int				fd;
 
-	dir_l = ft_calloc(1, sizeof(t_direct_light));
-	fd = open(argv[1], O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (ft_strncmp(line, LIGHT_ID, 1) == 0 && save_data(line, dir_l))
-			break ;
-		free(line);
-		line = get_next_line(fd);
-	}
+	dir_l = ft_calloc(1, sizeof(t_ambient_light));
+	fd = open(rt_file_path, O_RDONLY);
+	line = get_obj_line(rt_file_path, LIGHT_ID, 0);
 	if (line == NULL)
-	{
-		free(dir_l);
 		dir_l = NULL;
-	}
 	else
+	{
+		save_data(line, dir_l);
 		free(line);
+	}
 	close(fd);
 	return (dir_l);
 }

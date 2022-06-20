@@ -6,7 +6,7 @@
  * @param  *cam: camera struct
  * @retval true
  */
-static bool	save_data(char *line, t_camera *cam)
+static void	save_data(char *line, t_camera *cam)
 {
 	char	**data;
 
@@ -16,7 +16,6 @@ static bool	save_data(char *line, t_camera *cam)
 	cam->direction = vector_from_str(data[4], data[5], data[6]);
 	cam->fov = ft_atof(data[7]);
 	ft_free_split(data);
-	return (true);
 }
 
 /**
@@ -24,29 +23,22 @@ static bool	save_data(char *line, t_camera *cam)
  * @param  **argv: rt file
  * @retval camera struct or NULL if not in file
  */
-t_camera	*get_camera_data(char **argv)
+t_camera	*get_camera_data(char *rt_file_path)
 {
-	t_camera		*cam;
-	char			*line;
-	int				fd;
+	t_camera	*cam;
+	char		*line;
+	int			fd;
 
-	cam = ft_calloc(1, sizeof(t_camera));
-	fd = open(argv[1], O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (ft_strncmp(line, CAMERA_ID, 1) == 0 && save_data(line, cam))
-			break ;
-		free(line);
-		line = get_next_line(fd);
-	}
+	cam = ft_calloc(1, sizeof(t_ambient_light));
+	fd = open(rt_file_path, O_RDONLY);
+	line = get_obj_line(rt_file_path, CAMERA_ID, 0);
 	if (line == NULL)
-	{
-		free(cam);
 		cam = NULL;
-	}
 	else
+	{
+		save_data(line, cam);
 		free(line);
+	}
 	close(fd);
 	return (cam);
 }

@@ -17,6 +17,7 @@ CUT = "\033[K"
 # PATHS
 SRC_PATH = ./src/
 PARS_PATH = ./src/parser/
+INIT_PATH = ./src/data_init/
 VEC_PATH = ./src/vector/
 OBJ_PATH = ./obj/
 MLX_PATH = ./MLX42/
@@ -24,9 +25,9 @@ GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
 SRC =	$(SRC_PATH)main.c			$(SRC_PATH)utils.c\
-		$(PARS_PATH)init_objects.c	$(PARS_PATH)utils.c\
-		$(PARS_PATH)init_amb_l.c	$(PARS_PATH)init_cam.c		$(PARS_PATH)init_dir_l.c\
-		$(PARS_PATH)cylinder_list.c	$(PARS_PATH)sphere_list.c	$(PARS_PATH)plane_list.c\
+		$(INIT_PATH)init_objects.c	$(INIT_PATH)utils.c\
+		$(INIT_PATH)init_amb_l.c	$(INIT_PATH)init_cam.c		$(INIT_PATH)init_dir_l.c\
+		$(INIT_PATH)cylinder_list.c	$(INIT_PATH)sphere_list.c	$(INIT_PATH)plane_list.c\
 		$(VEC_PATH)vector.c			$(SRC_PATH)free.c\
 		$(SRC_PATH)debug.c
 

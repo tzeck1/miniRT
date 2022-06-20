@@ -5,14 +5,14 @@
  * @param  **argv:  rt file
  * @retval sphere count
 **/
-int	sphere_count(char **argv)
+int	sphere_count(char *rt_file_path)
 {
 	int		count;
 	int		fd;
 	char	*line;
 
 	count = 0;
-	fd = open(argv[1], O_RDONLY);
+	fd = open(rt_file_path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{

@@ -143,13 +143,13 @@ typedef struct s_data
 
 /*	PARSER	*/
 
-t_objects		*init_objects(char **argv);
+t_objects		*init_objects(char *rt_file_path);
 
 /*  DATA INITIALIZATION */
 
-t_ambient_light	*get_ambient_light_data(char **argv);
-t_direct_light	*get_direct_light_data(char **argv);
-t_camera		*get_camera_data(char **argv);
+t_ambient_light	*get_ambient_light_data(char *rt_file_path);
+t_direct_light	*get_direct_light_data(char *rt_file_path);
+t_camera		*get_camera_data(char *rt_file_path);
 
 /*	DATA FREE	*/
 

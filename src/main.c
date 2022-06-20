@@ -35,11 +35,11 @@ int	main(int argc, char **argv)
 		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);
 		ft_exit(EXIT_FAILURE);
 	}
-	data = ft_calloc(1, sizeof(t_data)); //free
-	data->objs = init_objects(argv);
+	data = ft_calloc(1, sizeof(t_data));
+	data->objs = init_objects(argv[1]);
 	// debug_print_ambient_light(data->objs->amb_l);
 	// debug_print_camera(data->objs->cam);
-	// debug_print_cylinder_list(data->objs->cy_head);
+	debug_print_cylinder_list(data->objs->cy_head);
 	// debug_print_sphere_list(data->objs->sp_head);
 	// debug_print_plane_list(data->objs->pl_head);
 	free_data(data);
