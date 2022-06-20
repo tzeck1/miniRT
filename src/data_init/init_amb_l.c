@@ -15,7 +15,6 @@ static void	save_data(char *line, t_amb_light *amb_l)
 	amb_l->ratio = ft_atof(data[1]);
 	amb_l->rgb = ft_calloc(1, sizeof(t_color));
 	amb_l->rgb->red = ft_atoi(data[2]);
-	printf("RED:\t%i\n", amb_l->rgb->red);
 	amb_l->rgb->green = ft_atoi(data[3]);
 	amb_l->rgb->blue = ft_atoi(data[4]);
 	ft_free_split(data);
@@ -31,10 +30,12 @@ t_amb_light	*get_amb_light_data(char *rt_file_path)
 	t_amb_light	*amb_l;
 	char		*line;
 	int			fd;
+	int			obj_index;
 
 	amb_l = ft_calloc(1, sizeof(t_amb_light));
 	fd = open(rt_file_path, O_RDONLY);
-	line = get_obj_line(rt_file_path, AMB_LIGHT_ID, 0);
+	obj_index = 0;
+	line = get_obj_line(rt_file_path, AMB_LIGHT_ID, obj_index);
 	if (line == NULL)
 		amb_l = NULL;
 	else

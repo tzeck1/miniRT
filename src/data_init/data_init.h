@@ -19,7 +19,7 @@ t_pl_list	*pl_init_head(char *line);
 void		pl_set_link_ptr(t_pl_list *head, t_pl_list *node);
 void		pl_add_node(char *line, t_pl_list *pl_head);
 
-/*	SPHERE	*/
+/*	CYLINDER	*/
 
 int			cy_counter(char *rt_file_path);
 void		cy_fill(char **data, t_cy_list *cy_node);

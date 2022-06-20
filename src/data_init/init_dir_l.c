@@ -31,10 +31,12 @@ t_dir_light	*get_dir_light_data(char *rt_file_path)
 	t_dir_light	*dir_l;
 	char		*line;
 	int			fd;
+	int			obj_index;
 
 	dir_l = ft_calloc(1, sizeof(t_dir_light));
 	fd = open(rt_file_path, O_RDONLY);
-	line = get_obj_line(rt_file_path, LIGHT_ID, 0);
+	obj_index = 0;
+	line = get_obj_line(rt_file_path, LIGHT_ID, obj_index);
 	if (line == NULL)
 		dir_l = NULL;
 	else

@@ -149,3 +149,41 @@ void	debug_print_plane_node(t_pl_list *node)
 	printf("prev:\t\t\t%p\n", node->prev);
 	printf("\n");
 }
+
+/*	stuff we maybe need later */
+
+/**
+ * @brief  tracks and prints out program runtime
+ */
+void	track_time(void)
+{
+	/*	RUNTIME DISPLAY	*/
+	clock_t begin = clock();
+	/*	RUNTIME DISPLAY	*/
+
+	/*	RUNTIME DISPLAY	*/
+	clock_t end = clock();
+	printf(BLUE"\nRUNTIME: %.4f sec\n\n"RESET, (double)(end - begin) / CLOCKS_PER_SEC);
+	/*	RUNTIME DISPLAY	*/
+}
+
+/**
+ * @brief  converts float to raw fixed point value (int)
+ * @param  n: incoming float
+ * @retval raw fixed point value
+ */
+int	float_to_fix(float n)
+{
+	return (n * 256);
+}
+
+/**
+ * @brief  converts raw fixed point value back to float
+ * @note   (rounding error, not our fault, check if its a problem)
+ * @param  raw: raw fixed point value (int)
+ * @retval converted float
+ */
+float	fix_to_float(int raw)
+{
+	return (raw / (float)256);
+}

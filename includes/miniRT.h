@@ -68,6 +68,13 @@ typedef struct s_color
 	int	blue;
 }	t_color;
 
+/**
+ * @param identifier: pl in rt file
+ * @param i: index for node in pl_list
+ * @param i_hat: position of plane
+ * @param j_hat: normalized oriantation vector
+ * @param rgb: color struct
+ */
 typedef struct s_pl_list
 {
 	int					identifier;
@@ -79,6 +86,13 @@ typedef struct s_pl_list
 	struct s_pl_list	*prev;
 }	t_pl_list;
 
+/**
+ * @param identifier: sp in rt file
+ * @param i: index for node in sp_list
+ * @param center: position of sphere
+ * @param radius: sphere diameter / 2
+ * @param rgb: color struct
+ */
 typedef struct s_sp_list
 {
 	int					identifier;
@@ -90,6 +104,15 @@ typedef struct s_sp_list
 	struct s_sp_list	*prev;
 }	t_sp_list;
 
+/**
+ * @param identifier: cy in rt file
+ * @param i: index for node in cy_list
+ * @param center: position of cylinder
+ * @param direction: normalized oriantation vector
+ * @param radius: cylinder diameter / 2
+ * @param height: cylinder height
+ * @param rgb: color struct
+ */
 typedef struct s_cy_list
 {
 	int					identifier;
@@ -103,6 +126,12 @@ typedef struct s_cy_list
 	struct s_cy_list	*prev;
 }	t_cy_list;
 
+/**
+ * @param identifier: C in rt file
+ * @param position: position of camera
+ * @param direction: normalized oriantation vector
+ * @param fov: horizontal field of view in degrees
+ */
 typedef struct s_camera
 {
 	int			identifier;
@@ -111,6 +140,12 @@ typedef struct s_camera
 	float		fov;
 }	t_camera;
 
+/**
+ * @param identifier: L in rt file
+ * @param position: position of direct light
+ * @param ratio: light brightness ratio
+ * @param rgb: color struct
+ */
 typedef struct s_dir_light
 {
 	int			identifier;
@@ -119,6 +154,11 @@ typedef struct s_dir_light
 	t_color		*rgb;
 }	t_dir_light;
 
+/**
+ * @param identifier: A in rt file
+ * @param ratio: light brightness ratio
+ * @param rgb: color struct
+ */
 typedef struct s_amb_light
 {
 	int			identifier;

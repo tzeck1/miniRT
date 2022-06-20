@@ -102,8 +102,8 @@ void	vector_scale(t_vector *vec_res, t_vector *vec_a, float n)
 int	vector_dot(t_vector *vec_a, t_vector *vec_b)
 {
 	int	product_x;
-	int product_y;
-	int product_z;
+	int	product_y;
+	int	product_z;
 
 	product_x = vec_a->x * vec_b->x;
 	product_y = vec_a->y * vec_b->y;

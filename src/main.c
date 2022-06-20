@@ -25,11 +25,8 @@ void	ft_exit(int status)
 
 int	main(int argc, char **argv)
 {
-	/*	RUNTIME DISPLAY	*/
-	clock_t begin = clock();
-	/*	RUNTIME DISPLAY	*/
 	t_data	*data;
-	// parser(argc, argv);
+
 	if (argc != 2)
 	{
 		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);
@@ -37,15 +34,6 @@ int	main(int argc, char **argv)
 	}
 	data = ft_calloc(1, sizeof(t_data));
 	data->objs = init_objects(argv[1]);
-	// debug_print_ambient_light(data->objs->amb_l);
-	// debug_print_camera(data->objs->cam);
-	debug_print_cylinder_list(data->objs->cy_head);
-	// debug_print_sphere_list(data->objs->sp_head);
-	// debug_print_plane_list(data->objs->pl_head);
 	free_data(data);
-	/*	RUNTIME DISPLAY	*/
-	clock_t end = clock();
-	printf(BLUE"\nRUNTIME: %.4f sec\n\n"RESET, (double)(end - begin) / CLOCKS_PER_SEC);
-	/*	RUNTIME DISPLAY	*/
 	ft_exit(EXIT_SUCCESS);
 }

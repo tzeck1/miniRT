@@ -28,10 +28,12 @@ t_camera	*get_camera_data(char *rt_file_path)
 	t_camera	*cam;
 	char		*line;
 	int			fd;
+	int			obj_index;
 
 	cam = ft_calloc(1, sizeof(t_camera));
 	fd = open(rt_file_path, O_RDONLY);
-	line = get_obj_line(rt_file_path, CAMERA_ID, 0);
+	obj_index = 0;
+	line = get_obj_line(rt_file_path, CAMERA_ID, obj_index);
 	if (line == NULL)
 		cam = NULL;
 	else
