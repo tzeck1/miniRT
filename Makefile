@@ -1,21 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/01 00:09:38 by tom               #+#    #+#              #
-#    Updated: 2022/06/02 21:25:47 by tzeck            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # EXECUTABLE
 NAME = ./miniRT
 
 # FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -g #-Werror
 
 # COLORS
 Y = "\033[33m"
@@ -28,31 +16,32 @@ CUT = "\033[K"
 
 # PATHS
 SRC_PATH = ./src/
+PARS_PATH = ./src/parser/
+INIT_PATH = ./src/data_init/
+VEC_PATH = ./src/vector/
 OBJ_PATH = ./obj/
 MLX_PATH = ./MLX42/
 GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
-SRC =	$(SRC_PATH)main.c
+SRC =	$(SRC_PATH)main.c			$(SRC_PATH)utils.c\
+		$(INIT_PATH)init_objects.c	$(INIT_PATH)utils.c\
+		$(INIT_PATH)init_amb_l.c	$(INIT_PATH)init_cam.c		$(INIT_PATH)init_dir_l.c\
+		$(INIT_PATH)cylinder_list.c	$(INIT_PATH)sphere_list.c	$(INIT_PATH)plane_list.c\
+		$(VEC_PATH)vector.c			$(SRC_PATH)free.c\
+		$(SRC_PATH)debug.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
 
 # RULES
 all: $(NAME)
-	@sleep 0.1
 	@echo $(B)"                                                           "$(X)
-	@sleep 0.1
 	@echo $(B)"           ,--.          ,--. ,------.  ,--------.         "$(X)
-	@sleep 0.1
 	@echo $(B)",--,--,--. \`--' ,--,--,  \`--' |  .--. ' '--.  .--'       "$(X)
-	@sleep 0.1
 	@echo $(B)"|        | ,--. |      \ ,--. |  '--'.'    |  |            "$(X)
-	@sleep 0.1
 	@echo $(B)"|  |  |  | |  | |  ||  | |  | |  |\  \     |  |            "$(X)
-	@sleep 0.1
 	@echo $(B)"\`--\`--\`--' \`--' \`--''--' \`--' \`--' '--'    \`--'    "$(X)
-	@sleep 0.1
 	@printf "\n\n"
 
 $(OBJ_PATH)%.o :$(SRC_PATH)%.c
@@ -65,11 +54,13 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 
 $(NAME): $(OBJ)
 	@make -C MLX42
-	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) -o $(NAME)
+	@make -C libft
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) libft/libft.a -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
 	@make clean -C MLX42
+	@make clean -C libft
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
 			echo $(R)Cleaning" "[$(OBJ) $(OBJ_PATH)]$(X); else \
@@ -78,6 +69,7 @@ clean:
 
 fclean: clean
 	@make fclean -C MLX42
+	@make fclean -C libft
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \
 			echo $(R)Cleaning" "[$(NAME)]$(X);else \
