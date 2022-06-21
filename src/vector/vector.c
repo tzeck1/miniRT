@@ -113,16 +113,18 @@ float	vector_dot(t_vector *vec_a, t_vector *vec_b)
 
 float	vector_length(t_vector *vec)
 {
-	return (sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z));
+	return (sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z));
 }
 
 void	vector_normalize(t_vector *vec)
 {
+	float	length;
 	float	inv_length;
 
-	if (vector_length(vec) > 0)
+	length = vector_length(vec);
+	if (length > 0)
 	{
-		inv_length = 1 / vector_length(vec);
+		inv_length = 1 / length;
 		vec->x *= inv_length;
 		vec->y *= inv_length;
 		vec->z *= inv_length;
