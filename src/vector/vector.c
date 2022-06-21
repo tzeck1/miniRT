@@ -115,3 +115,16 @@ float	vector_length(t_vector *vec)
 {
 	return (sqrt(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z));
 }
+
+void	vector_normalize(t_vector *vec)
+{
+	float	inv_length;
+
+	if (vector_length(vec) > 0)
+	{
+		inv_length = 1 / vector_length(vec);
+		vec->x *= inv_length;
+		vec->y *= inv_length;
+		vec->z *= inv_length;
+	}
+}
