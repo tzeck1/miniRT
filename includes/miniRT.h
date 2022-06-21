@@ -204,7 +204,8 @@ void		vector_copy(t_vector *vec_src, t_vector *vec_dst);
 void		vector_add(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
 void		vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
 void		vector_scale(t_vector *vec_res, t_vector *vec_a, float n);
-int			vector_dot(t_vector *vec_a, t_vector *vec_b);
+float		vector_dot(t_vector *vec_a, t_vector *vec_b);
+float		vector_length(t_vector *vec);
 
 /*	UTILS	*/
 
