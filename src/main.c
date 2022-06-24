@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	parsing(argc, argv);
 	if (argc != 2)
 	{
 		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);

@@ -183,10 +183,11 @@ typedef struct s_data
 
 /*	PARSER	*/
 
-t_objects	*init_objects(char *rt_file_path);
+void		parser(int argc, char **argv);
 
 /*  DATA INITIALIZATION */
 
+t_objects	*init_objects(char *rt_file_path);
 t_amb_light	*get_amb_light_data(char *rt_file_path);
 t_dir_light	*get_dir_light_data(char *rt_file_path);
 t_camera	*get_camera_data(char *rt_file_path);
