@@ -7,7 +7,10 @@ typedef enum	e_rror
 {
 	ARG_COUNT,
 	OPEN_ERR,
-	EMPTY_MAP
+	EMPTY_MAP,
+	UNKNOWN_ID
 }	t_rror;
+
+void	ft_pars_error(int error);
 
 #endif
