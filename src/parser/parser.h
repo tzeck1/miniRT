@@ -3,14 +3,14 @@
 
 # include "../../includes/miniRT.h"
 
-typedef enum	e_rror
+typedef enum	e_error
 {
 	ARG_COUNT,
 	OPEN_ERR,
 	EMPTY_MAP,
 	UNKNOWN_ID
-}	t_rror;
+}	t_error;
 
-void	ft_pars_error(int error);
+// void	ft_pars_error(int error);
 
 #endif

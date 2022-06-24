@@ -183,7 +183,7 @@ typedef struct s_data
 
 /*	PARSER	*/
 
-void		parser(int argc, char **argv);
+bool	parser(int argc, char **argv);
 
 /*  DATA INITIALIZATION */
 

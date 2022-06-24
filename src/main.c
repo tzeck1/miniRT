@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (parsing(argc, argv) > 0)
-		ft_exit(EXIT_FAILURE);
+	if (parser(argc, argv) == true)
+		// ft_exit(EXIT_FAILURE);
 	if (argc != 2)
 	{
 		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);
