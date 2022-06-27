@@ -30,13 +30,8 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (parser(argc, argv) == true)
-		// ft_exit(EXIT_FAILURE);
-	if (argc != 2)
-	{
-		printf(RED_BOLD"PLESE JUST REMEMBER ONE FUCKING PARAMETER!\n"RESET);
+	if (parser(argc, argv) == false)
 		ft_exit(EXIT_FAILURE);
-	}
 	data = ft_calloc(1, sizeof(t_data));
 	data->objs = init_objects(argv[1]);
 	free_data(data);
