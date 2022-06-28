@@ -12,6 +12,8 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <limits.h>
+# include <float.h>
 # include <time.h> //for runtime tests -!- DELETE BEFORE SUBMIT -!-
 
 /*	COLORS	*/

@@ -14,8 +14,59 @@ typedef enum	e_error
 	MULT_DIR,
 	NO_CAM,
 	NO_LIGHT,
-	UNKNOWN_ID
+	UNKNOWN_ID,
+	BAD_ARG,
+	NO_FLOAT
 }	t_error;
+
+typedef enum	e_cam_index
+{
+	CAM_ID,
+	CAM_XYZ,
+	CAM_NO_VEC,
+	CAM_FOV
+}	t_cam_index;
+
+typedef enum	e_amb_index
+{
+	AMB_ID,
+	AMB_RATIO,
+	AMB_RGB
+}	t_amb_index;
+
+typedef enum	e_dir_index
+{
+	DIR_ID,
+	DIR_XYZ,
+	DIR_RATIO,
+	DIR_RGB
+}	t_dir_index;
+
+typedef enum	e_sp_index
+{
+	SP_ID,
+	SP_XYZ,
+	SP_DIA,
+	SP_RGB
+}	t_sp_index;
+
+typedef enum	e_cy_index
+{
+	CY_ID,
+	CY_XYZ,
+	CY_NO_VEC,
+	CY_DIA,
+	CY_HEIGHT,
+	CY_RGB,
+}	t_cy_index;
+
+typedef enum	e_pl_index
+{
+	PL_ID,
+	PL_XYZ,
+	PL_NO_VEC,
+	PL_RGB
+}	t_pl_index;
 
 typedef struct s_parse_errors
 {
@@ -34,6 +85,13 @@ int		file_check(int argc, char **argv);
 
 /*	LINE_CHECK	*/
 bool	line_check(int fd);
+void	ft_parse_error(int error, int line);
+bool	xyz_check(char *line, t_parse_errors *parse_errors);
+bool	orientation_check(char *line, t_parse_errors *parse_errors);
+bool	fov_check(char *line, t_parse_errors *parser_error);
+bool	rgb_check(char *line, t_parse_errors *parse_errors);
+bool	ratio_check(char *ratio, t_parse_errors *parse_errors);
+bool	diameter_height_check(char *diameter, t_parse_errors *parse_errors);
 
 
 #endif
