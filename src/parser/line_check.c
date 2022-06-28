@@ -167,6 +167,7 @@ static void	line_content_check(char *line, t_parse_errors *parse_errors)
 		ft_free_split(split_line);
 		return ;
 	}
+	// couldn't we merge the following if statement into the upper one (with != instead of ==)?
 	if (valid_line(split_line, parse_errors) == false)
 	{
 		parse_errors->error = true;
@@ -183,7 +184,7 @@ static bool	line_empty(char *line)
 	i = 0;
 	while (line[i + 1] != '\0')
 	{
-		if (line[i] != ' ')
+		if (line[i] != ' ')	// (line[i] != ' ' && line[i] != '\n')?
 			return (false);
 		i++;
 	}
@@ -200,12 +201,14 @@ bool	line_check(int fd)
 	line = get_next_line(fd);
 	if (line == NULL)
 		ft_file_error(EMPTY_MAP, fd);
-	parse_errors = ft_calloc(1, sizeof(t_parse_errors));
+	parse_errors = ft_calloc(1, sizeof(t_parse_errors));	// freed?
 	while (line != NULL)
 	{
-		parse_errors->line++;
+		parse_errors->line++;	// the name 'line' is extremly confusing in the functions context
 		if (line_empty(line) == false)
 			line_content_check(line, parse_errors);
+		//	if first (or more) line is only with spaces but then nothing thereafter
+		// (next_line == NULL) then we dont detect an error
 		free(line);
 		line = get_next_line(fd);
 	}

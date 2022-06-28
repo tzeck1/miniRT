@@ -7,7 +7,7 @@
  */
 void	ft_file_error(int error, int fd)
 {
-	close(fd);
+	close(fd);	// what happens if close(-1), is that fine?
 	if (error == ARG_COUNT)
 		fprintf(stderr, "Error: Program requires exactly one argument!\n");
 	else if (error == WRONG_TYPE)
