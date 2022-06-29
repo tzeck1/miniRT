@@ -12,7 +12,7 @@ bool	line_empty(char *line)
 		i++;
 	}
 	if (line[i] != '\n')
-		return (false); 
+		return (false);
 	return (true);
 }
 

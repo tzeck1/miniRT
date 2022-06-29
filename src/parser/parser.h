@@ -15,7 +15,7 @@
 # define BAD_ARG_MSG "Bad object info!\n"
 # define NO_FLOAT_MSG "Invalid number!\n"
 
-typedef enum	e_error
+typedef enum e_error
 {
 	ARG_COUNT,
 	OPEN_ERR,
@@ -30,7 +30,7 @@ typedef enum	e_error
 	NO_FLOAT
 }	t_error;
 
-typedef enum	e_cam_index
+typedef enum e_cam_index
 {
 	CAM_ID,
 	CAM_XYZ,
@@ -38,14 +38,14 @@ typedef enum	e_cam_index
 	CAM_FOV
 }	t_cam_index;
 
-typedef enum	e_amb_index
+typedef enum e_amb_index
 {
 	AMB_ID,
 	AMB_RATIO,
 	AMB_RGB
 }	t_amb_index;
 
-typedef enum	e_dir_index
+typedef enum e_dir_index
 {
 	DIR_ID,
 	DIR_XYZ,
@@ -53,7 +53,7 @@ typedef enum	e_dir_index
 	DIR_RGB
 }	t_dir_index;
 
-typedef enum	e_sp_index
+typedef enum e_sp_index
 {
 	SP_ID,
 	SP_XYZ,
@@ -61,7 +61,7 @@ typedef enum	e_sp_index
 	SP_RGB
 }	t_sp_index;
 
-typedef enum	e_cy_index
+typedef enum e_cy_index
 {
 	CY_ID,
 	CY_XYZ,
@@ -71,7 +71,7 @@ typedef enum	e_cy_index
 	CY_RGB,
 }	t_cy_index;
 
-typedef enum	e_pl_index
+typedef enum e_pl_index
 {
 	PL_ID,
 	PL_XYZ,

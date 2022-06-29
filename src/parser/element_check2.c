@@ -35,7 +35,7 @@ bool	fov_check(char *line, t_parse_errors *parse_error)
 
 bool	orientation_check(char *line, t_parse_errors *parse_errors)
 {
-	char **vec_block;
+	char	**vec_block;
 
 	vec_block = ft_split(line, ',');
 	if (ft_count_array(vec_block) != 3)
@@ -43,14 +43,14 @@ bool	orientation_check(char *line, t_parse_errors *parse_errors)
 		ft_parse_error(BAD_ARG, parse_errors->line);
 		parse_errors->error = true;
 	}
-	else if (float_check(vec_block[0]) == false 
-			|| float_check(vec_block[1]) == false
-			|| float_check(vec_block[2]) == false)
+	else if (float_check(vec_block[0]) == false
+		|| float_check(vec_block[1]) == false
+		|| float_check(vec_block[2]) == false)
 	{
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;
 	}
-	else if (normalized_check(vec_block[0], vec_block[1], vec_block[2]) == false)
+	else if (!normalized_check(vec_block[0], vec_block[1], vec_block[2]))
 	{
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;
@@ -64,7 +64,7 @@ bool	orientation_check(char *line, t_parse_errors *parse_errors)
 
 bool	xyz_check(char *line, t_parse_errors *parse_errors)
 {
-	char **xyz_block;
+	char	**xyz_block;
 
 	xyz_block = ft_split(line, ',');
 	if (ft_count_array(xyz_block) != 3)
@@ -73,8 +73,8 @@ bool	xyz_check(char *line, t_parse_errors *parse_errors)
 		parse_errors->error = true;
 	}
 	else if (float_check(xyz_block[0]) == false
-			|| float_check(xyz_block[1]) == false
-			|| float_check(xyz_block[2]) == false)
+		|| float_check(xyz_block[1]) == false
+		|| float_check(xyz_block[2]) == false)
 	{
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;

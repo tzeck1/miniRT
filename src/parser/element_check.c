@@ -48,7 +48,7 @@ bool	ratio_check(char *ratio, t_parse_errors *parse_errors)
 
 bool	rgb_check(char *line, t_parse_errors *parse_errors)
 {
-	char **rgb_block;
+	char	**rgb_block;
 
 	rgb_block = ft_split(line, ',');
 	if (ft_count_array(rgb_block) != 3)
@@ -56,9 +56,9 @@ bool	rgb_check(char *line, t_parse_errors *parse_errors)
 		ft_parse_error(BAD_ARG, parse_errors->line);
 		parse_errors->error = true;
 	}
-	else if (rgb_range_check(rgb_block[0]) == false 
-			|| rgb_range_check(rgb_block[1]) == false 
-			||rgb_range_check(rgb_block[2]) == false )
+	else if (rgb_range_check(rgb_block[0]) == false
+		|| rgb_range_check(rgb_block[1]) == false
+		|| rgb_range_check(rgb_block[2]) == false)
 	{
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;

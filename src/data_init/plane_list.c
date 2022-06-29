@@ -48,7 +48,6 @@ t_pl_list	*pl_init_head(char *line)
 	t_pl_list	*pl_head;
 	char		**data;
 
-	// FIXME change commas to spaces in line -> then needs to be tested
 	data = ft_split(line, ' ');
 	pl_head = ft_calloc(1, sizeof(t_pl_list));
 	pl_fill(data, pl_head);
