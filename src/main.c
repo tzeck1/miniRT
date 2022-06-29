@@ -26,10 +26,6 @@ void	ft_exit(int status)
 	exit(status);
 }
 
-bool	ft_isfloat(char *block);	// remove, is already in libft.h
-
-#include <float.h>	// remove, is already in miniRT.h
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -38,7 +34,6 @@ int	main(int argc, char **argv)
 		ft_exit(EXIT_FAILURE);
 	data = ft_calloc(1, sizeof(t_data));
 	// data->objs = init_objects(argv[1]);
-	// BTW is free.c norm obedient?
-	// free_data(data);
+	free_data(data);
 	ft_exit(EXIT_SUCCESS);
 }
