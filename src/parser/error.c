@@ -1,5 +1,11 @@
 #include "parser.h"
 
+/**
+ * @brief  prints error messages but without calling ft_exit()
+ * @param  error: error code
+ * @param  line: line number of an error in the rt file
+ * @retval None
+ */
 void	ft_parse_error(int error, int line)
 {
 	if (error == WRONG_TYPE)
