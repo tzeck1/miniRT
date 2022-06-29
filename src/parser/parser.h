@@ -13,7 +13,7 @@
 # define NO_CAM_MSG "Program requires exactly one camera!\n"
 # define NO_LIGHT_MSG "Program requires at least one light source!\n"
 # define BAD_ARG_MSG "Bad object info!\n"
-# define NO_FLOAT_MSG "Unvalid number!\n"
+# define NO_FLOAT_MSG "Invalid number!\n"
 
 typedef enum	e_error
 {
