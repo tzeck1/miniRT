@@ -15,6 +15,13 @@
 # define BAD_ARG_MSG "Bad object info!\n"
 # define NO_FLOAT_MSG "Invalid number!\n"
 
+# define CAM_LINE_SIZE 4
+# define AMB_LINE_SIZE 3
+# define DIR_LINE_SIZE 4
+# define SP_LINE_SIZE 4
+# define CY_LINE_SIZE 6
+# define PL_LINE_SIZE 4
+
 typedef enum e_error
 {
 	ARG_COUNT,

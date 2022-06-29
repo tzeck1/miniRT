@@ -231,5 +231,6 @@ void		debug_print_sphere_list(t_sp_list *head);
 void		debug_print_sphere_node(t_sp_list *node);
 void		debug_print_plane_list(t_pl_list *head);
 void		debug_print_plane_node(t_pl_list *node);
+void		print_2d_array(char **array);
 
 #endif
