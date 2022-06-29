@@ -16,6 +16,10 @@ float	vector_dot(t_vector *vec_a, t_vector *vec_b)
 	return (product_x + product_y + product_z);
 }
 
+/**
+ * @brief  computes cross product of two vectors
+ * @retval cross product (as a pseudo vector)
+ */
 t_vector	*vector_cross(t_vector *vec_a, t_vector *vec_b)
 {
 	t_vector	*result;
