@@ -20,7 +20,6 @@ static bool	min_objects(t_parse_errors *parse_errors)
 		ft_parse_error(NO_LIGHT, parse_errors->line);
 		flag = false;
 	}
-	free(parse_errors);
 	if (flag == false)
 		return (false);
 	else
@@ -66,10 +65,18 @@ static bool	line_check(int fd)
 bool	parser(int argc, char **argv)
 {
 	int		fd;
+	t_parse_errors	*parse_errors;
 
 	fd = file_check(argc, argv);
+	parse_errors = ft_calloc(1, sizeof(t_parse_errors));
 	if (line_check(fd) == true)
+	{
+		free(parse_errors);
 		return (true);
+	}
 	else
+	{
+		free(parse_errors);
 		return (false);
+	}
 }
