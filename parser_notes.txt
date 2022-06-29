@@ -7,3 +7,5 @@
 	--> split line ' ' count elements (macros)
 	--> float overflow
 	--> multiple commas
+./miniRT rt/empty.c
+	--> wrong error msg
