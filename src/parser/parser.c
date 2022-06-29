@@ -1,5 +1,10 @@
 #include "parser.h"
 
+/**
+ * @brief  prints error message if to few capital letter objects in rt file
+ * @param  *parse_errors: parse error bool struct
+ * @retval false if no camera and/or no light sources, true otherwise
+ */
 static bool	min_objects(t_parse_errors *parse_errors)
 {
 	bool	flag;
@@ -22,6 +27,11 @@ static bool	min_objects(t_parse_errors *parse_errors)
 		return (true);
 }
 
+/**
+ * @brief  check the rt file line by line
+ * @param  fd: file descriptor of rt file
+ * @retval false if any misconfiguration occurs, true otherwise
+ */
 static bool	line_check(int fd)
 {
 	char			*line;
@@ -47,6 +57,12 @@ static bool	line_check(int fd)
 	return (true);
 }
 
+/**
+ * @brief  checks for any misconfigurations and ensures a secure run of miniRT
+ * @param  argc: argument count
+ * @param  **argv: argv[1] relative path to rt file
+ * @retval false if any misconfiguration occurs, true otherwise
+ */
 bool	parser(int argc, char **argv)
 {
 	int		fd;
