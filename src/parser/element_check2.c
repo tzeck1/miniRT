@@ -1,5 +1,11 @@
 #include "parser.h"
 
+/**
+ * @brief  checks if vector is normalized
+ * @param  *line: vector array [x, y, z]
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	normalized_check(char *x_value, char *y_value, char *z_value)
 {
 	float	x;
@@ -17,6 +23,12 @@ bool	normalized_check(char *x_value, char *y_value, char *z_value)
 		return (true);
 }
 
+/**
+ * @brief  checks fov for cam object
+ * @param  *line: fov value as string
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	fov_check(char *line, t_parse_errors *parse_error)
 {
 	float	fov;
@@ -33,6 +45,12 @@ bool	fov_check(char *line, t_parse_errors *parse_error)
 		return (true);
 }
 
+/**
+ * @brief  checks oriantation vector for object
+ * @param  *line: vector array [x, y, z]
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	orientation_check(char *line, t_parse_errors *parse_errors)
 {
 	char	**vec_block;
@@ -62,6 +80,12 @@ bool	orientation_check(char *line, t_parse_errors *parse_errors)
 		return (true);
 }
 
+/**
+ * @brief  checks coordinate vector for object
+ * @param  *line: vector array [x, y, z]
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	xyz_check(char *line, t_parse_errors *parse_errors)
 {
 	char	**xyz_block;

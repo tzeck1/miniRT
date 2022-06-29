@@ -1,5 +1,11 @@
 #include "parser.h"
 
+/**
+ * @brief  checks plane line for errors (calls sub functions)
+ * @param  **line: plane object line
+ * @param  *parse_errors: parser struct
+ * @retval bool if aight, false if error in block
+ */
 bool	check_pl_line(char **line, t_parse_errors *parse_errors)
 {
 	if (ft_count_array(line) != PL_LINE_SIZE)
@@ -17,6 +23,12 @@ bool	check_pl_line(char **line, t_parse_errors *parse_errors)
 		return (true);
 }
 
+/**
+ * @brief  checks cylinder line for errors (calls sub functions)
+ * @param  **line: cylinder object line
+ * @param  *parse_errors: parser struct
+ * @retval bool if aight, false if error in block
+ */
 bool	check_cy_line(char **line, t_parse_errors *parse_errors)
 {
 	if (ft_count_array(line) != CY_LINE_SIZE)
@@ -38,6 +50,12 @@ bool	check_cy_line(char **line, t_parse_errors *parse_errors)
 		return (true);
 }
 
+/**
+ * @brief  checks sphere line for errors (calls sub functions)
+ * @param  **line: sphere object line
+ * @param  *parse_errors: parser struct
+ * @retval bool if aight, false if error in block
+ */
 bool	check_sp_line(char **line, t_parse_errors *parse_errors)
 {
 	if (ft_count_array(line) != SP_LINE_SIZE)

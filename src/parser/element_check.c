@@ -1,5 +1,11 @@
 #include "parser.h"
 
+/**
+ * @brief  checks ifrgb value is in range [0-255]
+ * @param  *value: rgb value (r, g or b)
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in value
+ */
 bool	rgb_range_check(char *value)
 {
 	int	n;
@@ -13,6 +19,12 @@ bool	rgb_range_check(char *value)
 		return (true);
 }
 
+/**
+ * @brief  checks diemeter or height for sphere / cylinder object
+ * @param  *line: diameter / height as string
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	diameter_height_check(char *diameter, t_parse_errors *parse_errors)
 {
 	if (float_check(diameter) == false)
@@ -24,6 +36,12 @@ bool	diameter_height_check(char *diameter, t_parse_errors *parse_errors)
 	return (true);
 }
 
+/**
+ * @brief  checks ratio for light objects
+ * @param  *line: ratio value as string
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	ratio_check(char *ratio, t_parse_errors *parse_errors)
 {
 	float	n;
@@ -46,6 +64,12 @@ bool	ratio_check(char *ratio, t_parse_errors *parse_errors)
 		return (true);
 }
 
+/**
+ * @brief  checks rgb values for object
+ * @param  *line: rgb array [r, g, b]
+ * @param  *parse_errors: parser struct
+ * @retval true if aight, false if error in block
+ */
 bool	rgb_check(char *line, t_parse_errors *parse_errors)
 {
 	char	**rgb_block;

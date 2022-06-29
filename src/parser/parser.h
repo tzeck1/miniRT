@@ -115,9 +115,10 @@ typedef enum e_pl_index
  * @brief  variables for error handeling
  * @param line: current line
  * @param error: true if error in current line
- * @param cam: true cam object in file
- * @param cam: true cam object in file
- * @param cam: true cam object in file
+ * @param exit: true if error in file -> exit status 1
+ * @param cam: true if cam object in file
+ * @param amb_light: true if ambient light object in file
+ * @param dir_light: true if direct light object in file
  */
 typedef struct s_parse_errors
 {
