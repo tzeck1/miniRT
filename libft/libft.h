@@ -6,7 +6,7 @@
 /*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:11:59 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/06/12 14:39:23 by tzeck            ###   ########.fr       */
+/*   Updated: 2022/06/27 18:08:48 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 
 # define ERROR "\001\003[1;31m\002Error: \001\003[0m\002"
@@ -58,6 +59,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_free_split(char **str);
+bool	ft_isfloat(char *block);
 
 void	ft_exit(int status);
 
