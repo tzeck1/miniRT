@@ -44,7 +44,9 @@ static bool	check_obj(char *id, t_parse_errors *parse_errors)
 		return (true);
 	else if (ft_strncmp(id, "pl", 3) == 0)
 		return (true);
-	else
+	else if (ft_strncmp(id, "C", 2) == false
+		&& ft_strncmp(id, "A", 2) == false
+		&& ft_strncmp(id, "L", 2) == false)
 	{
 		ft_parse_error(WRONG_TYPE, parse_errors->line);
 		return (false);
@@ -61,19 +63,23 @@ static bool	check_capital(char *id, t_parse_errors *parse_errors)
 {
 	if (ft_strncmp(id, "C", 2) == 0 && parse_errors->cam == true)
 		ft_parse_error(MULT_CAM, parse_errors->line);
-	else if (ft_strncmp(id, "C", 2) == 0)
-		parse_errors->cam = true;
 	else if (ft_strncmp(id, "A", 2) == 0 && parse_errors->amb_light == true)
 		ft_parse_error(MULT_AMB, parse_errors->line);
-	else if (ft_strncmp(id, "A", 2) == 0)
-		parse_errors->amb_light = true;
 	else if (ft_strncmp(id, "L", 2) == 0 && parse_errors->dir_light == true)
 		ft_parse_error(MULT_DIR, parse_errors->line);
-	else if (ft_strncmp(id, "L", 2) == 0)
-		parse_errors->dir_light = true;
 	else
-		return (false);
-	return (true);
+	{
+		if (ft_strncmp(id, "C", 2) == 0)
+			parse_errors->cam = true;
+		else if (ft_strncmp(id, "A", 2) == 0)
+			parse_errors->amb_light = true;
+		else if (ft_strncmp(id, "L", 2) == 0)
+			parse_errors->dir_light = true;
+		else
+			return (false);
+		return (true);
+	}
+	return (false);
 }
 
 /**
@@ -108,12 +114,14 @@ void	line_content_check(char *line, t_parse_errors *parse_errors)
 	if (id_check(split_line[0], parse_errors) == false)
 	{
 		parse_errors->error = true;
+		parse_errors->exit = true;
 		ft_free_split(split_line);
 		return ;
 	}
 	if (valid_line(split_line, parse_errors) == false)
 	{
 		parse_errors->error = true;
+		parse_errors->exit = true;
 		ft_free_split(split_line);
 		return ;
 	}

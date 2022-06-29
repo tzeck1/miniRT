@@ -3,6 +3,8 @@
 
 # include "../../includes/miniRT.h"
 
+/*	ERROR MESSAGES	*/
+
 # define ARG_COUNT_MSG "Program requires exactly one argument!\n"
 # define OPEN_ERR_MSG "Cannot open file!\n"
 # define WRONG_TYPE_MSG "Wrong or unknown identifier!\n"
@@ -15,6 +17,8 @@
 # define BAD_ARG_MSG "Bad object info!\n"
 # define NO_FLOAT_MSG "Invalid number!\n"
 
+/*	ARGUMENT COUNT FOR EACH OBEJCT	*/
+
 # define CAM_LINE_SIZE 4
 # define AMB_LINE_SIZE 3
 # define DIR_LINE_SIZE 4
@@ -22,6 +26,9 @@
 # define CY_LINE_SIZE 6
 # define PL_LINE_SIZE 4
 
+/**
+ * @brief  code for printing error message
+ */
 typedef enum e_error
 {
 	ARG_COUNT,
@@ -37,6 +44,9 @@ typedef enum e_error
 	NO_FLOAT
 }	t_error;
 
+/**
+ * @brief  argument index and order for cam
+ */
 typedef enum e_cam_index
 {
 	CAM_ID,
@@ -45,6 +55,9 @@ typedef enum e_cam_index
 	CAM_FOV
 }	t_cam_index;
 
+/**
+ * @brief  argument index and order for ambient light
+ */
 typedef enum e_amb_index
 {
 	AMB_ID,
@@ -52,6 +65,9 @@ typedef enum e_amb_index
 	AMB_RGB
 }	t_amb_index;
 
+/**
+ * @brief  argument index and order for direct light
+ */
 typedef enum e_dir_index
 {
 	DIR_ID,
@@ -60,6 +76,9 @@ typedef enum e_dir_index
 	DIR_RGB
 }	t_dir_index;
 
+/**
+ * @brief  argument index and order for sphere
+ */
 typedef enum e_sp_index
 {
 	SP_ID,
@@ -68,6 +87,9 @@ typedef enum e_sp_index
 	SP_RGB
 }	t_sp_index;
 
+/**
+ * @brief  argument index and order for cylinder
+ */
 typedef enum e_cy_index
 {
 	CY_ID,
@@ -78,6 +100,9 @@ typedef enum e_cy_index
 	CY_RGB,
 }	t_cy_index;
 
+/**
+ * @brief  argument index and order for plane
+ */
 typedef enum e_pl_index
 {
 	PL_ID,
@@ -86,10 +111,19 @@ typedef enum e_pl_index
 	PL_RGB
 }	t_pl_index;
 
+/**
+ * @brief  variables for error handeling
+ * @param line: current line
+ * @param error: true if error in current line
+ * @param cam: true cam object in file
+ * @param cam: true cam object in file
+ * @param cam: true cam object in file
+ */
 typedef struct s_parse_errors
 {
 	int		line;
 	bool	error;
+	bool	exit;
 	bool	cam;
 	bool	amb_light;
 	bool	dir_light;

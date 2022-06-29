@@ -51,7 +51,7 @@ static bool	line_check(int fd)
 	}
 	if (min_objects(parse_errors) == false)
 		return (false);
-	if (parse_errors->error == true)
+	if (parse_errors->exit == true)
 		return (false);
 	return (true);
 }
