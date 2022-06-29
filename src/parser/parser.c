@@ -64,7 +64,7 @@ static bool	line_check(int fd)
  */
 bool	parser(int argc, char **argv)
 {
-	int		fd;
+	int				fd;
 	t_parse_errors	*parse_errors;
 
 	fd = file_check(argc, argv);
