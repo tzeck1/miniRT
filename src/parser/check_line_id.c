@@ -1,5 +1,12 @@
 #include "parser.h"
 
+/**
+ * @brief  checks for each identifier the corresponding argument structur
+ * @note   sets flag to false if a misconfiguration occurs, parsing continues
+ * @param  **line: splited current line into blocks
+ * @param  *parse_errors: parse error bool struct
+ * @retval false if a misconfiguration in any of the objs occured, true otherwise
+ */
 static bool	valid_line(char **line, t_parse_errors *parse_errors)
 {
 	bool	flag;
@@ -23,6 +30,12 @@ static bool	valid_line(char **line, t_parse_errors *parse_errors)
 		return (true);
 }
 
+/**
+ * @brief  checks for valid object identifiers
+ * @param  *id: identifier of current line
+ * @param  *parse_errors: parse error bool struct
+ * @retval false if no valid object identifier occurs, true otherwise
+ */
 static bool	check_obj(char *id, t_parse_errors *parse_errors)
 {
 	if (ft_strncmp(id, "sp", 3) == 0)
@@ -42,7 +55,7 @@ static bool	check_obj(char *id, t_parse_errors *parse_errors)
  * @brief  checks for valid capital letter identifiers and sets multiples
  * @param  *id: identifier of current line
  * @param  *parse_errors: parse error bool struct
- * @retval MISSING
+ * @retval false if no valid capital identifier occurs, true otherwise
  */
 static bool	check_capital(char *id, t_parse_errors *parse_errors)
 {
@@ -67,7 +80,7 @@ static bool	check_capital(char *id, t_parse_errors *parse_errors)
  * @brief  checks for valid identifiers
  * @param  *id: identifier of current line
  * @param  *parse_errors: parse error bool struct
- * @retval MISSING
+ * @retval false if an invalid identifier occurs, true otherwise
  */
 static bool	id_check(char *id, t_parse_errors *parse_errors)
 {
