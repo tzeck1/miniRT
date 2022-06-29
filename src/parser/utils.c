@@ -17,8 +17,6 @@ bool	line_empty(char *line)
 			return (false);
 		i++;
 	}
-	// if (line[i] != '\n')
-	// 	return (false);
 	return (true);
 }
 
