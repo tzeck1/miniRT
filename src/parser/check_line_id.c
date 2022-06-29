@@ -51,6 +51,7 @@ static bool	check_obj(char *id, t_parse_errors *parse_errors)
 		ft_parse_error(WRONG_TYPE, parse_errors->line);
 		return (false);
 	}
+	return (false);
 }
 
 /**
