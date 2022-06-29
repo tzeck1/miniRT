@@ -187,3 +187,18 @@ float	fix_to_float(int raw)
 {
 	return (raw / (float)256);
 }
+
+void	print_2d_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		printf("Array empty.\n");
+	i = 0;
+	while (array[i])
+	{
+		printf("%s ", array[i]);
+		i++;
+	}
+	printf("\n");
+}
