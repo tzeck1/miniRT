@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzeck <tzeck@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 10:04:46 by tzeck             #+#    #+#             */
-/*   Updated: 2021/09/14 14:02:33 by tzeck            ###   ########.fr       */
+/*   Updated: 2022/06/29 15:49:01 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 	buf = NULL;
 	while (i == -1)
 	{
-		buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		buf = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 		if (buf == NULL)
 			return (NULL);
 		byte_read = read(fd, buf, BUFFER_SIZE);
