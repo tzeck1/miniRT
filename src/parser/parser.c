@@ -1,5 +1,26 @@
 #include "parser.h"
 
+static bool	min_objects(t_parse_errors *parse_errors)
+{
+	bool	flag;
+
+	flag = true;
+	if (parse_errors->cam == false)
+	{
+		ft_parse_error(NO_CAM, parse_errors->line);
+		flag = false;
+	}
+	if (parse_errors->dir_light == false && parse_errors->amb_light == false)
+	{
+		ft_parse_error(NO_LIGHT, parse_errors->line);
+		flag = false;
+	}
+	if (flag == false)
+		return (false);
+	else
+		return (true);
+}
+
 static bool	line_check(int fd)
 {
 	char			*line;
@@ -19,6 +40,8 @@ static bool	line_check(int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (min_objects(parse_errors) == false)
+		return (false);
 	if (parse_errors->error == true)
 		return (false);
 	return (true);
