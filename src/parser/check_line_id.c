@@ -38,6 +38,12 @@ static bool	check_obj(char *id, t_parse_errors *parse_errors)
 	}
 }
 
+/**
+ * @brief  checks for valid capital letter identifiers and sets multiples
+ * @param  *id: identifier of current line
+ * @param  *parse_errors: parse error bool struct
+ * @retval MISSING
+ */
 static bool	check_capital(char *id, t_parse_errors *parse_errors)
 {
 	if (ft_strncmp(id, "C", 2) == 0 && parse_errors->cam == true)
@@ -57,6 +63,12 @@ static bool	check_capital(char *id, t_parse_errors *parse_errors)
 	return (true);
 }
 
+/**
+ * @brief  checks for valid identifiers
+ * @param  *id: identifier of current line
+ * @param  *parse_errors: parse error bool struct
+ * @retval MISSING
+ */
 static bool	id_check(char *id, t_parse_errors *parse_errors)
 {
 	if (check_capital(id, parse_errors) == false)
@@ -65,6 +77,12 @@ static bool	id_check(char *id, t_parse_errors *parse_errors)
 	return (true);
 }
 
+/**
+ * @brief  checks the line indepth
+ * @param  *line: a line from the rt file
+ * @param  *parse_errors: parse error bool struct
+ * @retval None
+ */
 void	line_content_check(char *line, t_parse_errors *parse_errors)
 {
 	char	**split_line;
