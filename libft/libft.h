@@ -6,7 +6,7 @@
 /*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:11:59 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/06/27 18:08:48 by tzeck            ###   ########.fr       */
+/*   Updated: 2022/06/29 17:44:48 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <limits.h>
 # include "get_next_line/get_next_line.h"
 
 # define ERROR "\001\003[1;31m\002Error: \001\003[0m\002"
@@ -43,7 +44,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t n);
-int		ft_atoi(const char *nptr);
+long	ft_atoi(const char *nptr);
 float	ft_atof(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
@@ -60,6 +61,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_free_split(char **str);
 bool	ft_isfloat(char *block);
+bool	ft_isint(char *str);
 
 void	ft_exit(int status);
 

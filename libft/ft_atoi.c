@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 19:24:01 by rsiebert          #+#    #+#             */
-/*   Updated: 2021/08/23 19:26:14 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:43:11 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	count(const char *str, int *i, int *neg)
+static void	count(const char *str, long *i, long *neg)
 {
 	*i = 0;
 	*neg = 1;
@@ -28,12 +28,12 @@ static void	count(const char *str, int *i, int *neg)
 		*i += 1;
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	res;
-	int	neg;
-	int	factor;
+	long	i;
+	long	res;
+	long	neg;
+	long	factor;
 
 	res = 0;
 	factor = 1;

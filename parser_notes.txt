@@ -1,7 +1,7 @@
 ./miniRT file_that_does_not_exist
 	--> wrong error msg
 ./miniRT examples/basic_shapes.rt
-	--> crazy line number
+	--> crazy line number [fixed with using libft ft_calloc]
 ./miniRT examples/spheres.rt
 	--> rgb is integer check (no float and no alpha)
 	--> split line ' ' count elements (macros)

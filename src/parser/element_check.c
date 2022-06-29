@@ -4,6 +4,8 @@ bool	rgb_range_check(char *value)
 {
 	int	n;
 
+	if (ft_isint(value) == false)
+		return (false);
 	n = ft_atoi(value);
 	if (n < RGB_MIN || n > RGB_MAX)
 		return (false);
