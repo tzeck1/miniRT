@@ -29,8 +29,9 @@ SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
 		$(INIT_PATH)init_amb_l.c		$(INIT_PATH)init_cam.c		$(INIT_PATH)init_dir_l.c\
 		$(INIT_PATH)cylinder_list.c		$(INIT_PATH)sphere_list.c	$(INIT_PATH)plane_list.c\
 		$(VEC_PATH)vector_arithmetics.c	$(VEC_PATH)vector_basics.c	$(VEC_PATH)vector_utils.c\
-		$(PARS_PATH)parser.c			$(PARS_PATH)error.c			$(PARS_PATH)file_check.c\
-		$(PARS_PATH)line_check.c		$(PARS_PATH)things_check.c
+		$(PARS_PATH)parser.c			$(PARS_PATH)error.c			$(PARS_PATH)utils.c\
+		$(PARS_PATH)check_file.c		$(PARS_PATH)check_line_id.c	$(PARS_PATH)check_obj_line.c\
+		$(PARS_PATH)check_caps_line.c	$(PARS_PATH)element_check.c	$(PARS_PATH)element_check2.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
