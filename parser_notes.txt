@@ -1,0 +1,9 @@
+./miniRT file_that_does_not_exist
+	--> wrong error msg
+./miniRT examples/basic_shapes.rt
+	--> crazy line number
+./miniRT examples/spheres.rt
+	--> rgb is integer check (no float and no alpha)
+	--> split line ' ' count elements (macros)
+	--> float overflow
+	--> multiple commas
