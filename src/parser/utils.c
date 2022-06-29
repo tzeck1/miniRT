@@ -1,6 +1,6 @@
 #include "parser.h"
 
-static bool	line_empty(char *line)
+bool	line_empty(char *line)
 {
 	int	i;
 

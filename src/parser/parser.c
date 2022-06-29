@@ -1,17 +1,6 @@
 #include "parser.h"
 
-bool	parser(int argc, char **argv)
-{
-	int		fd;
-
-	fd = file_check(argc, argv);
-	if (line_check(fd) == true)
-		return (true);
-	else
-		return (false);
-}
-
-bool	line_check(int fd)
+static bool	line_check(int fd)
 {
 	char			*line;
 	t_parse_errors	*parse_errors;
@@ -33,4 +22,15 @@ bool	line_check(int fd)
 	if (parse_errors->error == true)
 		return (false);
 	return (true);
+}
+
+bool	parser(int argc, char **argv)
+{
+	int		fd;
+
+	fd = file_check(argc, argv);
+	if (line_check(fd) == true)
+		return (true);
+	else
+		return (false);
 }

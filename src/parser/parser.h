@@ -79,19 +79,38 @@ typedef struct s_parse_errors
 
 /*	FILE_CHECK	*/
 
-void	ft_file_error(int error, int fd);
-bool	check_for_rt(char *file);
 int		file_check(int argc, char **argv);
 
 /*	LINE_CHECK	*/
-bool	line_check(int fd);
-void	ft_parse_error(int error, int line);
-bool	xyz_check(char *line, t_parse_errors *parse_errors);
-bool	orientation_check(char *line, t_parse_errors *parse_errors);
-bool	fov_check(char *line, t_parse_errors *parser_error);
-bool	rgb_check(char *line, t_parse_errors *parse_errors);
-bool	ratio_check(char *ratio, t_parse_errors *parse_errors);
-bool	diameter_height_check(char *diameter, t_parse_errors *parse_errors);
 
+void	line_content_check(char *line, t_parse_errors *parse_errors);
+bool	check_pl_line(char **line, t_parse_errors *parse_errors);
+bool	check_cy_line(char **line, t_parse_errors *parse_errors);
+bool	check_sp_line(char **line, t_parse_errors *parse_errors);
+bool	check_dir_line(char **line, t_parse_errors *parse_errors);
+bool	check_amb_line(char **line, t_parse_errors *parse_errors);
+bool	check_cam_line(char **line, t_parse_errors *parse_errors);
+
+/*	ELEMENT_CHECK	*/
+
+bool	rgb_range_check(char *value);
+bool	diameter_height_check(char *diameter, t_parse_errors *parse_errors);
+bool	ratio_check(char *ratio, t_parse_errors *parse_errors);
+bool	rgb_check(char *line, t_parse_errors *parse_errors);
+bool	normalized_check(char *x_value, char *y_value, char *z_value);
+bool	fov_check(char *line, t_parse_errors *parse_error);
+bool	orientation_check(char *line, t_parse_errors *parse_errors);
+bool	xyz_check(char *line, t_parse_errors *parse_errors);
+
+/*	ERROR	*/
+
+void	ft_parse_error(int error, int line);
+void	ft_file_error(int error, int fd);
+
+/*	UTILS	*/
+
+bool	line_empty(char *line);
+int		ft_count_array(char **xyz_block);
+bool	float_check(char *block);
 
 #endif

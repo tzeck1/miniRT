@@ -66,7 +66,7 @@ static bool	id_check(char *id, t_parse_errors *parse_errors)
 	return (true);
 }
 
-static void	line_content_check(char *line, t_parse_errors *parse_errors)
+void	line_content_check(char *line, t_parse_errors *parse_errors)
 {
 	char	**split_line;
 

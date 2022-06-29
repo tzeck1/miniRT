@@ -1,30 +1,11 @@
 #include "parser.h"
 
 /**
- * @brief  prints error message and calls ft_exit()
- * @param  error: error code 
- * @param  fd: close file when an error happens
- */
-void	ft_file_error(int error, int fd)
-{
-	close(fd);	// what happens if close(-1), is that fine?
-	if (error == ARG_COUNT)
-		fprintf(stderr, "Error: Program requires exactly one argument!\n");
-	else if (error == WRONG_TYPE)
-		fprintf(stderr, "Error: File requires .rt extension!\n");
-	else if (error == OPEN_ERR)
-		fprintf(stderr, "Error: Cannot open file!\n");
-	else if (error == EMPTY_MAP)
-		fprintf(stderr, "Error: File feels empty (me too)!\n");
-	ft_exit(EXIT_FAILURE);
-}
-
-/**
  * @brief  confirms that file ends with .rt
  * @param  *file: file to be checked
  * @retval true if it has .rt, false if not
  */
-bool	check_for_rt(char *file)
+static bool	check_for_rt(char *file)
 {
 	int	end;
 
