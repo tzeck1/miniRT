@@ -10,6 +10,7 @@ static void	save_data(char *line, t_amb_light *amb_l)
 {
 	char	**data;
 
+	// FIXME split nach comma here
 	data = ft_split(line, ' ');
 	amb_l->identifier = AMBIENT;
 	amb_l->ratio = ft_atof(data[1]);

@@ -81,6 +81,7 @@ void	sp_add_node(char *line, t_sp_list *sp_head)
 	t_sp_list	*sp_node;
 	char		**data;
 
+	// FIXME split nach comma here
 	data = ft_split(line, ' ');
 	sp_node = ft_calloc(1, sizeof(t_sp_list));
 	sp_fill(data, sp_node);

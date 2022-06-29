@@ -10,6 +10,7 @@ static void	save_data(char *line, t_camera *cam)
 {
 	char	**data;
 
+	// FIXME split nach comma here
 	data = ft_split(line, ' ');
 	cam->identifier = CAMERA;
 	cam->position = vector_from_str(data[1], data[2], data[3]);

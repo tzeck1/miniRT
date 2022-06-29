@@ -83,6 +83,7 @@ void	cy_add_node(char *line, t_cy_list *cy_head)
 	t_cy_list	*cy_node;
 	char		**data;
 
+	// FIXME split nach comma here
 	data = ft_split(line, ' ');
 	cy_node = ft_calloc(1, sizeof(t_cy_list));
 	cy_fill(data, cy_node);

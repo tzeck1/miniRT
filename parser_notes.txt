@@ -9,3 +9,12 @@
 	--> multiple commas
 ./miniRT rt/empty.c
 	--> wrong error msg
+
+---------------------------------------------------------------------------------
+
+./miniRT rt/empty.c
+{
+	--> wrong error msg
+}
+	--> minimum error msg dont need a line number
+	--> multiple commas
