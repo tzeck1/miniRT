@@ -6,7 +6,7 @@
 /*   By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 19:24:21 by rsiebert          #+#    #+#             */
-/*   Updated: 2021/08/23 19:29:36 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:03:29 by rsiebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*strings(char const *s, char c, int n)
 	while (i >= 0 && s[i] != c)
 		i--;
 	j = n - i;
-	str = (char *)malloc(sizeof(char) * (j + 1));
+	str = (char *)ft_calloc(j + 1, sizeof(char));
 	i = n;
 	while (i > 0 && s[i - 1] != c)
 		i--;
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	char	**res;
 
-	res = (char **)malloc(sizeof(char *) * (count(s, c) + 1));
+	res = (char **)ft_calloc(count(s, c) + 1, sizeof(char *));
 	if (!s || !res)
 		return (0);
 	i = 0;
