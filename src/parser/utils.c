@@ -1,5 +1,11 @@
 #include "parser.h"
 
+/**
+ * @brief  checks if the line is empty or not
+ * @note   '\n' and ' ' count as empty
+ * @param  *line: current line from rt file
+ * @retval true if line is empty, false otherwise
+ */
 bool	line_empty(char *line)
 {
 	int	i;
@@ -16,19 +22,29 @@ bool	line_empty(char *line)
 	return (true);
 }
 
-int	ft_count_array(char **xyz_block)
+/**
+ * @brief  counts the length of a 2d array
+ * @param  **array: a 2d array
+ * @retval the length of the 2d array
+ */
+int	ft_count_array(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (xyz_block[i] != NULL)
+	while (array[i] != NULL)
 		i++;
 	return (i);
 }
 
-bool	float_check(char *block)
+/**
+ * @brief  checks for a valid float value
+ * @param  *value: a float value from the rt file
+ * @retval true if float is valid, false otherwise
+ */
+bool	float_check(char *value)
 {
-	if (ft_isfloat(block) == false)
+	if (ft_isfloat(value) == false)
 		return (false);
 	return (true);
 }

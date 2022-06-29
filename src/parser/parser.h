@@ -128,7 +128,7 @@ void	ft_file_error(int error, int fd);
 /*	UTILS	*/
 
 bool	line_empty(char *line);
-int		ft_count_array(char **xyz_block);
-bool	float_check(char *block);
+int		ft_count_array(char **array);
+bool	float_check(char *value);
 
 #endif
