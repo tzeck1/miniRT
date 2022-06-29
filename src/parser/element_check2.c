@@ -12,7 +12,7 @@ bool	normalized_check(char *x_value, char *y_value, char *z_value)
 	if (x < NO_VEC_MIN || x > NO_VEC_MAX
 		|| y < NO_VEC_MIN || y > NO_VEC_MAX
 		|| z < NO_VEC_MIN || z > NO_VEC_MAX)
-	return (false);	// missing tab?
+		return (false);
 	else
 		return (true);
 }
@@ -37,7 +37,7 @@ bool	orientation_check(char *line, t_parse_errors *parse_errors)
 {
 	char **vec_block;
 
-	vec_block = ft_split(line, ',');	// freed?
+	vec_block = ft_split(line, ',');
 	if (ft_count_array(vec_block) != 3)
 	{
 		ft_parse_error(BAD_ARG, parse_errors->line);
@@ -55,6 +55,7 @@ bool	orientation_check(char *line, t_parse_errors *parse_errors)
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;
 	}
+	ft_free_split(vec_block);
 	if (parse_errors->error == true)
 		return (false);
 	else
@@ -65,7 +66,7 @@ bool	xyz_check(char *line, t_parse_errors *parse_errors)
 {
 	char **xyz_block;
 
-	xyz_block = ft_split(line, ',');	// freed?
+	xyz_block = ft_split(line, ',');
 	if (ft_count_array(xyz_block) != 3)
 	{
 		ft_parse_error(BAD_ARG, parse_errors->line);
@@ -78,6 +79,7 @@ bool	xyz_check(char *line, t_parse_errors *parse_errors)
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;
 	}
+	ft_free_split(xyz_block);
 	if (parse_errors->error == true)
 		return (false);
 	else

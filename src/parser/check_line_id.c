@@ -40,7 +40,6 @@ static bool	check_obj(char *id, t_parse_errors *parse_errors)
 
 static bool	check_capital(char *id, t_parse_errors *parse_errors)
 {
-	// printf("id: %s\n", id);
 	if (ft_strncmp(id, "C", 2) == 0 && parse_errors->cam == true)
 		ft_parse_error(MULT_CAM, parse_errors->line);
 	else if (ft_strncmp(id, "C", 2) == 0)
@@ -77,7 +76,6 @@ void	line_content_check(char *line, t_parse_errors *parse_errors)
 		ft_free_split(split_line);
 		return ;
 	}
-	// couldn't we merge the following if statement into the upper one (with != instead of ==)?
 	if (valid_line(split_line, parse_errors) == false)
 	{
 		parse_errors->error = true;

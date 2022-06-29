@@ -3,17 +3,17 @@
 void	ft_parse_error(int error, int line)
 {
 	if (error == WRONG_TYPE)
-		fprintf(stderr, YELLOW"Error[line %d]: Wrong identifier!\n"RESET, line);
+		fprintf(stderr, YELLOW "Error[line %d]: " WRONG_TYPE_MSG RESET, line);
 	else if (error == MULT_CAM)
-		fprintf(stderr, YELLOW"Error[line %d]: Multiple cameras!\n"RESET, line);
+		fprintf(stderr, YELLOW "Error[line %d]: " MULT_CAM_MSG RESET, line);
 	else if (error == MULT_AMB)
-		fprintf(stderr, YELLOW"Error[line %d]: Multiple amb_lights!\n"RESET, line);
+		fprintf(stderr, YELLOW "Error[line %d]: " MULT_AMB_MSG RESET, line);
 	else if (error == MULT_DIR)
-		fprintf(stderr, YELLOW"Error[line %d]: Multiple dir_lights!\n"RESET, line);
+		fprintf(stderr, YELLOW "Error[line %d]: " MULT_DIR_MSG RESET, line);
 	else if (error == BAD_ARG)
-		fprintf(stderr, YELLOW"Error[line %d]: Bad object info!\n"RESET, line);
+		fprintf(stderr, YELLOW "Error[line %d]: " BAD_ARG_MSG RESET, line);
 	else if (error == NO_FLOAT)
-		fprintf(stderr, YELLOW"Error[line %d]: No number given!\n"RESET, line);
+		fprintf(stderr, YELLOW "Error[line %d]: " NO_FLOAT_MSG RESET, line);
 }
 
 /**
@@ -23,14 +23,14 @@ void	ft_parse_error(int error, int line)
  */
 void	ft_file_error(int error, int fd)
 {
-	close(fd);	// what happens if close(-1), is that fine?
+	close(fd);
 	if (error == ARG_COUNT)
-		fprintf(stderr, "Error: Program requires exactly one argument!\n");
+		fprintf(stderr, "Error: " ARG_COUNT_MSG);
 	else if (error == WRONG_TYPE)
-		fprintf(stderr, "Error: File requires .rt extension!\n");
+		fprintf(stderr, "Error: " WRONG_TYPE_MSG);
 	else if (error == OPEN_ERR)
-		fprintf(stderr, "Error: Cannot open file!\n");
+		fprintf(stderr, "Error: " OPEN_ERR_MSG);
 	else if (error == EMPTY_MAP)
-		fprintf(stderr, "Error: File feels empty (me too)!\n");
+		fprintf(stderr, "Error: " EMPTY_MAP_MSG);
 	ft_exit(EXIT_FAILURE);
 }

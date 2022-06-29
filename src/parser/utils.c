@@ -7,7 +7,7 @@ bool	line_empty(char *line)
 	i = 0;
 	while (line[i + 1] != '\0')
 	{
-		if (line[i] != ' ')	// (line[i] != ' ' && line[i] != '\n')?
+		if (line[i] != ' ')
 			return (false);
 		i++;
 	}
