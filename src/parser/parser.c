@@ -33,6 +33,7 @@ static bool	line_check(int fd)
 	parse_errors = ft_calloc(1, sizeof(t_parse_errors));
 	while (line != NULL)
 	{
+		parse_errors->error = false;
 		parse_errors->line++;
 		if (line_empty(line) == false)
 			line_content_check(line, parse_errors);
