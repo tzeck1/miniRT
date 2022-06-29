@@ -16,7 +16,13 @@ float	vector_dot(t_vector *vec_a, t_vector *vec_b)
 	return (product_x + product_y + product_z);
 }
 
-// float	vector_cross(void)
-// {
-// 	return (0);
-// }
+t_vector	*vector_cross(t_vector *vec_a, t_vector *vec_b)
+{
+	t_vector	*result;
+
+	result = ft_calloc(1, sizeof(t_vector));
+	result->x = vec_a->y * vec_b->z - vec_a->z * vec_b->y;
+	result->y = vec_a->z * vec_b->x - vec_a->x * vec_b->z;
+	result->z = vec_a->x * vec_b->y - vec_a->y * vec_b->x;
+	return (result);
+}
