@@ -20,6 +20,10 @@ void	ft_parse_error(int error, int line)
 		fprintf(stderr, YELLOW "Error[line %d]: " BAD_ARG_MSG RESET, line);
 	else if (error == NO_FLOAT)
 		fprintf(stderr, YELLOW "Error[line %d]: " NO_FLOAT_MSG RESET, line);
+	else if (error == NO_CAM)
+		fprintf(stderr, YELLOW "Error[line %d]: " NO_CAM_MSG RESET, line);
+	else if (error == NO_LIGHT)
+		fprintf(stderr, YELLOW "Error[line %d]: " NO_LIGHT_MSG RESET, line);
 }
 
 /**

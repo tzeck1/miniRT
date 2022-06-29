@@ -5,14 +5,14 @@ bool	line_empty(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i + 1] != '\0')
+	while (line[i] != '\0')
 	{
-		if (line[i] != ' ')
+		if (line[i] != ' ' && line[i] != '\n')
 			return (false);
 		i++;
 	}
-	if (line[i] != '\n')
-		return (false);
+	// if (line[i] != '\n')
+	// 	return (false);
 	return (true);
 }
 
