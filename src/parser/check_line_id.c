@@ -44,9 +44,9 @@ static bool	check_obj(char *id, t_parse_errors *parse_errors)
 		return (true);
 	else if (ft_strncmp(id, "pl", 3) == 0)
 		return (true);
-	else if (ft_strncmp(id, "C", 2) == false
-		&& ft_strncmp(id, "A", 2) == false
-		&& ft_strncmp(id, "L", 2) == false)
+	else if (ft_strncmp(id, "C", 2) != 0
+		&& ft_strncmp(id, "A", 2) != 0
+		&& ft_strncmp(id, "L", 2) != 0)
 	{
 		ft_parse_error(WRONG_TYPE, parse_errors->line);
 		return (false);

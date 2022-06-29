@@ -21,9 +21,9 @@ void	ft_parse_error(int error, int line)
 	else if (error == NO_FLOAT)
 		fprintf(stderr, YELLOW "Error[line %d]: " NO_FLOAT_MSG RESET, line);
 	else if (error == NO_CAM)
-		fprintf(stderr, YELLOW "Error[line %d]: " NO_CAM_MSG RESET, line);
+		fprintf(stderr, YELLOW "Error[file]: " NO_CAM_MSG RESET);
 	else if (error == NO_LIGHT)
-		fprintf(stderr, YELLOW "Error[line %d]: " NO_LIGHT_MSG RESET, line);
+		fprintf(stderr, YELLOW "Error[file]: " NO_LIGHT_MSG RESET);
 }
 
 /**
@@ -35,12 +35,12 @@ void	ft_file_error(int error, int fd)
 {
 	close(fd);
 	if (error == ARG_COUNT)
-		fprintf(stderr, "Error: " ARG_COUNT_MSG);
+		fprintf(stderr, "Error[file]: " ARG_COUNT_MSG);
 	else if (error == WRONG_TYPE)
-		fprintf(stderr, "Error: " WRONG_TYPE_MSG);
+		fprintf(stderr, "Error[file]: " WRONG_TYPE_MSG);
 	else if (error == OPEN_ERR)
-		fprintf(stderr, "Error: " OPEN_ERR_MSG);
+		fprintf(stderr, "Error[file]: " OPEN_ERR_MSG);
 	else if (error == EMPTY_MAP)
-		fprintf(stderr, "Error: " EMPTY_MAP_MSG);
+		fprintf(stderr, "Error[file]: " EMPTY_MAP_MSG);
 	ft_exit(EXIT_FAILURE);
 }

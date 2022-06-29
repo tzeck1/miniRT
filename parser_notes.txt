@@ -16,5 +16,4 @@
 {
 	--> wrong error msg
 }
-	--> minimum error msg dont need a line number
 	--> multiple commas
