@@ -50,7 +50,7 @@ bool	rgb_check(char *line, t_parse_errors *parse_errors)
 {
 	char **rgb_block;
 
-	rgb_block = ft_split(line, ',');	// freed?
+	rgb_block = ft_split(line, ',');
 	if (ft_count_array(rgb_block) != 3)
 	{
 		ft_parse_error(BAD_ARG, parse_errors->line);
@@ -63,6 +63,7 @@ bool	rgb_check(char *line, t_parse_errors *parse_errors)
 		ft_parse_error(NO_FLOAT, parse_errors->line);
 		parse_errors->error = true;
 	}
+	ft_free_split(rgb_block);
 	if (parse_errors->error == true)
 		return (false);
 	else

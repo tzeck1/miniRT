@@ -3,6 +3,18 @@
 
 # include "../../includes/miniRT.h"
 
+# define ARG_COUNT_MSG "Program requires exactly one argument!\n"
+# define OPEN_ERR_MSG "Cannot open file!\n"
+# define WRONG_TYPE_MSG "Wrong or unknown identifier!\n"
+# define EMPTY_MAP_MSG "File feels empty (me too)!\n"
+# define MULT_CAM_MSG "Multiple cameras!\n"
+# define MULT_AMB_MSG "Multiple ambient lightings!\n"
+# define MULT_DIR_MSG "Multiple direct lightings!\n"
+# define NO_CAM_MSG "Program requires exactly one camera!\n"
+# define NO_LIGHT_MSG "Program requires at least one light source!\n"
+# define BAD_ARG_MSG "Bad object info!\n"
+# define NO_FLOAT_MSG "Unvalid number!\n"
+
 typedef enum	e_error
 {
 	ARG_COUNT,
@@ -14,7 +26,6 @@ typedef enum	e_error
 	MULT_DIR,
 	NO_CAM,
 	NO_LIGHT,
-	UNKNOWN_ID,
 	BAD_ARG,
 	NO_FLOAT
 }	t_error;
