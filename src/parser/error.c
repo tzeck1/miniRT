@@ -35,12 +35,12 @@ void	ft_file_error(int error, int fd)
 {
 	close(fd);
 	if (error == ARG_COUNT)
-		fprintf(stderr, "Error[file]: " ARG_COUNT_MSG);
-	else if (error == WRONG_TYPE)
-		fprintf(stderr, "Error[file]: " WRONG_TYPE_MSG);
+		fprintf(stderr, YELLOW "Error[file]: " ARG_COUNT_MSG RESET);
+	else if (error == NO_RT)
+		fprintf(stderr, YELLOW "Error[file]: " NO_RT_MSG RESET);
 	else if (error == OPEN_ERR)
-		fprintf(stderr, "Error[file]: " OPEN_ERR_MSG);
+		fprintf(stderr, YELLOW "Error[file]: " OPEN_ERR_MSG RESET);
 	else if (error == EMPTY_MAP)
-		fprintf(stderr, "Error[file]: " EMPTY_MAP_MSG);
+		fprintf(stderr, YELLOW "Error[file]: " EMPTY_MAP_MSG RESET);
 	ft_exit(EXIT_FAILURE);
 }

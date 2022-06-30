@@ -32,6 +32,6 @@ int	file_check(int argc, char **argv)
 	if (fd < 0)
 		ft_file_error(OPEN_ERR, fd);
 	if (check_for_rt(argv[1]) == false)
-		ft_file_error(WRONG_TYPE, fd);
+		ft_file_error(NO_RT, fd);
 	return (fd);
 }

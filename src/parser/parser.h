@@ -9,6 +9,7 @@
 # define OPEN_ERR_MSG "Cannot open file!\n"
 # define WRONG_TYPE_MSG "Wrong or unknown identifier!\n"
 # define EMPTY_MAP_MSG "File feels empty (me too)!\n"
+# define NO_RT_MSG "Wrong file extension!\n"
 # define MULT_CAM_MSG "Multiple cameras!\n"
 # define MULT_AMB_MSG "Multiple ambient lightings!\n"
 # define MULT_DIR_MSG "Multiple direct lightings!\n"
@@ -34,6 +35,7 @@ typedef enum e_error
 	ARG_COUNT,
 	OPEN_ERR,
 	WRONG_TYPE,
+	NO_RT,
 	EMPTY_MAP,
 	MULT_CAM,
 	MULT_AMB,
