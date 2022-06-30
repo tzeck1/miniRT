@@ -82,7 +82,7 @@ void	pl_add_node(char *line, t_pl_list *pl_head)
 	t_pl_list	*pl_node;
 	char		**data;
 
-	// FIXME split nach comma here
+	replace_commas(line);
 	data = ft_split(line, ' ');
 	pl_node = ft_calloc(1, sizeof(t_pl_list));
 	pl_fill(data, pl_node);

@@ -10,7 +10,6 @@ static void	save_data(char *line, t_dir_light *dir_l)
 {
 	char	**data;
 
-	// FIXME split nach comma here
 	replace_commas(line);
 	data = ft_split(line, ' ');
 	dir_l->identifier = LIGHT;
