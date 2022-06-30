@@ -1,5 +1,11 @@
 #include "../../includes/miniRT.h"
 
+/**
+ * @brief  replaces commas ',' to spaces ' '
+ * @note   for split purposes
+ * @param  *line: current line from rt file
+ * @retval None
+ */
 void	replace_commas(char *line)
 {
 	int	i;
