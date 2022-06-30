@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsiebert <rsiebert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/24 10:16:08 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/06/24 19:01:56 by rsiebert         ###   ########.fr       */
+/*   Created: 2022/06/29 17:37:44 by tzeck             #+#    #+#             */
+/*   Updated: 2022/06/29 19:02:20 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+bool	ft_isint(char *str)
 {
-	void	*p;
+	int		i;
+	long	n;
 
-	p = (void *)malloc(nmemb * size);
-	if (p == NULL)
-		return (NULL);
-	ft_bzero(p, (nmemb * size));
-	if (p == NULL)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		fprintf(stderr, ERROR"%s\n", strerror(errno));
-		ft_exit(EXIT_FAILURE);
+		if (str[i] < '0' || str[i] > '9')
+			return (false);
+		i++;
 	}
-	return (p);
+	n = ft_atoi(str);
+	if (n < INT_MIN || n > INT_MAX)
+		return (false);
+	return (true);
 }

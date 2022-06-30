@@ -12,6 +12,8 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <limits.h>
+# include <float.h>
 # include <time.h> //for runtime tests -!- DELETE BEFORE SUBMIT -!-
 
 /*	COLORS	*/
@@ -183,10 +185,11 @@ typedef struct s_data
 
 /*	PARSER	*/
 
-t_objects	*init_objects(char *rt_file_path);
+bool	parser(int argc, char **argv);
 
 /*  DATA INITIALIZATION */
 
+t_objects	*init_objects(char *rt_file_path);
 t_amb_light	*get_amb_light_data(char *rt_file_path);
 t_dir_light	*get_dir_light_data(char *rt_file_path);
 t_camera	*get_camera_data(char *rt_file_path);
@@ -214,6 +217,7 @@ char		*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int			float_to_fix(float n);
 float		fix_to_float(int raw);
 t_color		*color_from_str(char *red, char *green, char *blue);
+void		replace_commas(char *line);
 
 /*	DEBUG	*/
 
@@ -228,5 +232,6 @@ void		debug_print_sphere_list(t_sp_list *head);
 void		debug_print_sphere_node(t_sp_list *node);
 void		debug_print_plane_list(t_pl_list *head);
 void		debug_print_plane_node(t_pl_list *node);
+void		print_2d_array(char **array);
 
 #endif

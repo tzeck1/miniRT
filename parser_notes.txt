@@ -1,0 +1,19 @@
+./miniRT file_that_does_not_exist
+	-[x]-> wrong error msg
+./miniRT examples/basic_shapes.rt
+	-[x]-> crazy line number [fixed with using libft ft_calloc]
+./miniRT examples/spheres.rt
+	-[x]-> rgb is integer check (no float and no alpha)
+	-[x]-> split line ' ' count elements (macros)
+	-[ ]-> float overflow
+	-[x]-> multiple commas
+./miniRT rt/empty.c
+	-[x]-> wrong error msg
+
+---------------------------------------------------------------------------------
+
+./miniRT rt/empty.c
+{
+	-[x]-> wrong error msg
+}
+	-[x]-> multiple commas
