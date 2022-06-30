@@ -3,6 +3,7 @@
 void	replace_commas(char *line)
 {
 	int	i;
+
 	i = 0;
 	while (line[i] != '\0')
 	{
