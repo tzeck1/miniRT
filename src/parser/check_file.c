@@ -29,7 +29,7 @@ int	file_check(int argc, char **argv)
 	if (argc != 2)
 		ft_file_error(ARG_COUNT, -1);
 	if (check_for_rt(argv[1]) == false)
-		ft_file_error(NO_RT, fd);
+		ft_file_error(NO_RT, -1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		ft_file_error(OPEN_ERR, fd);
