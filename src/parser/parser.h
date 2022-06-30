@@ -15,6 +15,7 @@
 # define MULT_DIR_MSG "Multiple direct lightings!\n"
 # define NO_CAM_MSG "Program requires exactly one camera!\n"
 # define NO_LIGHT_MSG "Program requires at least one light source!\n"
+# define NO_OBJ_MSG "Program requires at least one object!\n"
 # define BAD_ARG_MSG "Bad object info!\n"
 # define NO_FLOAT_MSG "Invalid number!\n"
 
@@ -42,6 +43,7 @@ typedef enum e_error
 	MULT_DIR,
 	NO_CAM,
 	NO_LIGHT,
+	NO_OBJ,
 	BAD_ARG,
 	NO_FLOAT
 }	t_error;
@@ -130,6 +132,7 @@ typedef struct s_parser_utils
 	bool	cam;
 	bool	amb_light;
 	bool	dir_light;
+	bool	obj;
 }	t_parser_utils;
 
 /*	FILE_CHECK	*/

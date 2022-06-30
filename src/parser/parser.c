@@ -20,6 +20,11 @@ static bool	min_objects(t_parser_utils *parser_utils)
 		ft_parse_error(NO_LIGHT, parser_utils->line);
 		flag = false;
 	}
+	if (parser_utils->obj == false)
+	{
+		ft_parse_error(NO_OBJ, parser_utils->line);
+		flag = false;
+	}
 	if (flag == false)
 		return (false);
 	else

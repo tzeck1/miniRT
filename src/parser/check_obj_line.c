@@ -20,7 +20,10 @@ bool	check_pl_line(char **line, t_parser_utils *parser_utils)
 	else if (rgb_check(line[PL_RGB], parser_utils) == false)
 		return (false);
 	else
+	{
+		parser_utils->obj = true;
 		return (true);
+	}
 }
 
 /**
@@ -47,7 +50,10 @@ bool	check_cy_line(char **line, t_parser_utils *parser_utils)
 	else if (rgb_check(line[CY_RGB], parser_utils) == false)
 		return (false);
 	else
+	{
+		parser_utils->obj = true;
 		return (true);
+	}
 }
 
 /**
@@ -70,5 +76,8 @@ bool	check_sp_line(char **line, t_parser_utils *parser_utils)
 	else if (rgb_check(line[SP_RGB], parser_utils) == false)
 		return (false);
 	else
+	{
+		parser_utils->obj = true;
 		return (true);
+	}
 }

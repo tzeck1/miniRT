@@ -24,6 +24,8 @@ void	ft_parse_error(int error, int line)
 		fprintf(stderr, YELLOW "Error[file]: " NO_CAM_MSG RESET);
 	else if (error == NO_LIGHT)
 		fprintf(stderr, YELLOW "Error[file]: " NO_LIGHT_MSG RESET);
+	else if (error == NO_OBJ)
+		fprintf(stderr, YELLOW "Error[file]: " NO_OBJ_MSG RESET);
 }
 
 /**
