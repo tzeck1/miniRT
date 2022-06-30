@@ -1,5 +1,17 @@
 #include "../../includes/miniRT.h"
 
+void	replace_commas(char *line)
+{
+	int	i;
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == ',')
+			line[i] = ' ';
+		i++;
+	}
+}
+
 /**
  * @brief  get obj line from rt file
  * @param  *rt_file_path: file path for open()

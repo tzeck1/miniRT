@@ -48,6 +48,7 @@ t_sp_list	*sp_init_head(char *line)
 	t_sp_list	*sp_head;
 	char		**data;
 
+	replace_commas(line);
 	data = ft_split(line, ' ');
 	sp_head = ft_calloc(1, sizeof(t_sp_list));
 	sp_fill(data, sp_head);

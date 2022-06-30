@@ -11,6 +11,7 @@ static void	save_data(char *line, t_dir_light *dir_l)
 	char	**data;
 
 	// FIXME split nach comma here
+	replace_commas(line);
 	data = ft_split(line, ' ');
 	dir_l->identifier = LIGHT;
 	dir_l->position = vector_from_str(data[1], data[2], data[3]);

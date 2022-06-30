@@ -50,6 +50,7 @@ t_cy_list	*cy_init_head(char *line)
 	t_cy_list	*cy_head;
 	char		**data;
 
+	replace_commas(line);
 	data = ft_split(line, ' ');
 	cy_head = ft_calloc(1, sizeof(t_cy_list));
 	cy_fill(data, cy_head);

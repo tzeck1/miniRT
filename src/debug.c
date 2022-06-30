@@ -197,7 +197,7 @@ void	print_2d_array(char **array)
 	i = 0;
 	while (array[i])
 	{
-		printf("%s ", array[i]);
+		printf("[%s] ", array[i]);
 		i++;
 	}
 	printf("\n");

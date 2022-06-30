@@ -6,7 +6,7 @@
 	-[x]-> rgb is integer check (no float and no alpha)
 	-[x]-> split line ' ' count elements (macros)
 	-[ ]-> float overflow
-	-[ ]-> multiple commas
+	-[x]-> multiple commas
 ./miniRT rt/empty.c
 	-[x]-> wrong error msg
 
@@ -16,4 +16,4 @@
 {
 	-[x]-> wrong error msg
 }
-	-[ ]-> multiple commas
+	-[x]-> multiple commas

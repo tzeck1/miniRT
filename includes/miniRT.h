@@ -217,6 +217,7 @@ char		*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int			float_to_fix(float n);
 float		fix_to_float(int raw);
 t_color		*color_from_str(char *red, char *green, char *blue);
+void		replace_commas(char *line);
 
 /*	DEBUG	*/
 

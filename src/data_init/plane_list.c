@@ -48,6 +48,7 @@ t_pl_list	*pl_init_head(char *line)
 	t_pl_list	*pl_head;
 	char		**data;
 
+	replace_commas(line);
 	data = ft_split(line, ' ');
 	pl_head = ft_calloc(1, sizeof(t_pl_list));
 	pl_fill(data, pl_head);
