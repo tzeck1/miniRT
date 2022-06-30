@@ -116,21 +116,21 @@ typedef enum e_pl_index
 /**
  * @brief  variables for error handeling
  * @param line: current line
- * @param error: true if error in current line
- * @param exit: true if error in file -> exit status 1
+ * @param line_error: true if error in current line
+ * @param fatal_error: true if error in file -> exit status 1
  * @param cam: true if cam object in file
  * @param amb_light: true if ambient light object in file
  * @param dir_light: true if direct light object in file
  */
-typedef struct s_parse_errors
+typedef struct s_parser_utils
 {
 	int		line;
-	bool	error;
-	bool	exit;
+	bool	line_error;
+	bool	fatal_error;
 	bool	cam;
 	bool	amb_light;
 	bool	dir_light;
-}	t_parse_errors;
+}	t_parser_utils;
 
 /*	FILE_CHECK	*/
 
@@ -138,24 +138,24 @@ int		file_check(int argc, char **argv);
 
 /*	LINE_CHECK	*/
 
-void	line_content_check(char *line, t_parse_errors *parse_errors);
-bool	check_pl_line(char **line, t_parse_errors *parse_errors);
-bool	check_cy_line(char **line, t_parse_errors *parse_errors);
-bool	check_sp_line(char **line, t_parse_errors *parse_errors);
-bool	check_dir_line(char **line, t_parse_errors *parse_errors);
-bool	check_amb_line(char **line, t_parse_errors *parse_errors);
-bool	check_cam_line(char **line, t_parse_errors *parse_errors);
+void	line_content_check(char *line, t_parser_utils *parser_utils);
+bool	check_pl_line(char **line, t_parser_utils *parser_utils);
+bool	check_cy_line(char **line, t_parser_utils *parser_utils);
+bool	check_sp_line(char **line, t_parser_utils *parser_utils);
+bool	check_dir_line(char **line, t_parser_utils *parser_utils);
+bool	check_amb_line(char **line, t_parser_utils *parser_utils);
+bool	check_cam_line(char **line, t_parser_utils *parser_utils);
 
 /*	ELEMENT_CHECK	*/
 
 bool	rgb_range_check(char *value);
-bool	diameter_height_check(char *diameter, t_parse_errors *parse_errors);
-bool	ratio_check(char *ratio, t_parse_errors *parse_errors);
-bool	rgb_check(char *line, t_parse_errors *parse_errors);
+bool	diameter_height_check(char *diameter, t_parser_utils *parser_utils);
+bool	ratio_check(char *ratio, t_parser_utils *parser_utils);
+bool	rgb_check(char *line, t_parser_utils *parser_utils);
 bool	normalized_check(char *x_value, char *y_value, char *z_value);
-bool	fov_check(char *line, t_parse_errors *parse_error);
-bool	orientation_check(char *line, t_parse_errors *parse_errors);
-bool	xyz_check(char *line, t_parse_errors *parse_errors);
+bool	fov_check(char *line, t_parser_utils *parser_utils);
+bool	orientation_check(char *line, t_parser_utils *parser_utils);
+bool	xyz_check(char *line, t_parser_utils *parser_utils);
 
 /*	ERROR	*/
 
