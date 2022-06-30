@@ -44,6 +44,10 @@
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
 
+/*	MLX	*/
+# define WIN_HEIGHT	600
+# define WIN_WIDTH	600
+
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
 {
@@ -210,6 +214,10 @@ void		vector_scale(t_vector *vec_res, t_vector *vec_a, float n);
 float		vector_dot(t_vector *vec_a, t_vector *vec_b);
 float		vector_length(t_vector *vec);
 void		vector_normalize(t_vector *vec);
+
+/*	MLX	*/
+
+mlx_t		*init_mlx(void);
 
 /*	UTILS	*/
 

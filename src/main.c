@@ -29,11 +29,15 @@ void	ft_exit(int status)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
+	mlx_t	*mlx;
 
 	if (parser(argc, argv) == false)
 		ft_exit(EXIT_FAILURE);
 	data = ft_calloc(1, sizeof(t_data));
 	data->objs = init_objects(argv[1]);
-	// free_data(data);
+	mlx = init_mlx();
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	free_data(data);
 	ft_exit(EXIT_SUCCESS);
 }
