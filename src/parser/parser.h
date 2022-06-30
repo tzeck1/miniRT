@@ -167,5 +167,6 @@ void	ft_file_error(int error, int fd);
 bool	line_empty(char *line);
 int		ft_count_array(char **array);
 bool	float_check(char *value);
+bool	check_comma_count(char *str);
 
 #endif

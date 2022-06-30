@@ -1,6 +1,30 @@
 #include "parser.h"
 
 /**
+ * @brief  checks if block is divided by exactly two commas
+ * @param  *str: block to check [x,y,z] || [r,g,b]
+ * @retval false if more than two commas in block
+ */
+bool	check_comma_count(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	if (count == 2)
+		return (true);
+	else
+		return (false);
+}
+
+/**
  * @brief  checks if the line is empty or not
  * @note   '\n' and ' ' count as empty
  * @param  *line: current line from rt file

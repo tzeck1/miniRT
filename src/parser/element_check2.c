@@ -56,7 +56,7 @@ bool	orientation_check(char *line, t_parse_errors *parse_errors)
 	char	**vec_block;
 
 	vec_block = ft_split(line, ',');
-	if (ft_count_array(vec_block) != 3)
+	if (check_comma_count(line) == false || ft_count_array(vec_block) != 3)
 	{
 		ft_parse_error(BAD_ARG, parse_errors->line);
 		parse_errors->error = true;
@@ -91,7 +91,7 @@ bool	xyz_check(char *line, t_parse_errors *parse_errors)
 	char	**xyz_block;
 
 	xyz_block = ft_split(line, ',');
-	if (ft_count_array(xyz_block) != 3)
+	if (check_comma_count(line) == false || ft_count_array(xyz_block) != 3)
 	{
 		ft_parse_error(BAD_ARG, parse_errors->line);
 		parse_errors->error = true;

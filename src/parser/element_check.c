@@ -75,7 +75,7 @@ bool	rgb_check(char *line, t_parse_errors *parse_errors)
 	char	**rgb_block;
 
 	rgb_block = ft_split(line, ',');
-	if (ft_count_array(rgb_block) != 3)
+	if (check_comma_count(line) == false || ft_count_array(rgb_block) != 3)
 	{
 		ft_parse_error(BAD_ARG, parse_errors->line);
 		parse_errors->error = true;

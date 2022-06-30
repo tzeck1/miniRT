@@ -1,5 +1,5 @@
 ./miniRT file_that_does_not_exist
-	-[ ]-> wrong error msg
+	-[x]-> wrong error msg
 ./miniRT examples/basic_shapes.rt
 	-[x]-> crazy line number [fixed with using libft ft_calloc]
 ./miniRT examples/spheres.rt
@@ -8,12 +8,12 @@
 	-[ ]-> float overflow
 	-[ ]-> multiple commas
 ./miniRT rt/empty.c
-	-[ ]-> wrong error msg
+	-[x]-> wrong error msg
 
 ---------------------------------------------------------------------------------
 
 ./miniRT rt/empty.c
 {
-	-[ ]-> wrong error msg
+	-[x]-> wrong error msg
 }
 	-[ ]-> multiple commas
