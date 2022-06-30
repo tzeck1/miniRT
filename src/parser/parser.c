@@ -31,7 +31,7 @@ static bool	min_objects(t_parser_utils *parser_utils)
  * @param  fd: file descriptor of rt file
  * @retval false if any misconfiguration occurs, true otherwise
  */
-static bool	line_check(int fd, t_parser_utils	*parser_utils)
+static bool	line_check(int fd, t_parser_utils *parser_utils)
 {
 	char			*line;
 
