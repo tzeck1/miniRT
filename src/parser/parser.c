@@ -31,15 +31,13 @@ static bool	min_objects(t_parser_utils *parser_utils)
  * @param  fd: file descriptor of rt file
  * @retval false if any misconfiguration occurs, true otherwise
  */
-static bool	line_check(int fd)
+static bool	line_check(int fd, t_parser_utils	*parser_utils)
 {
 	char			*line;
-	t_parser_utils	*parser_utils;
 
 	line = get_next_line(fd);
 	if (line == NULL)
 		ft_file_error(EMPTY_MAP, fd);
-	parser_utils = ft_calloc(1, sizeof(t_parser_utils));
 	while (line != NULL)
 	{
 		parser_utils->line_error = false;
@@ -51,7 +49,7 @@ static bool	line_check(int fd)
 	}
 	if (min_objects(parser_utils) == false)
 		return (false);
-	if (parser_utils->line_error == true)
+	if (parser_utils->fatal_error == true)
 		return (false);
 	return (true);
 }
@@ -69,7 +67,7 @@ bool	parser(int argc, char **argv)
 
 	fd = file_check(argc, argv);
 	parser_utils = ft_calloc(1, sizeof(t_parser_utils));
-	if (line_check(fd) == true)
+	if (line_check(fd, parser_utils) == true)
 	{
 		free(parser_utils);
 		return (true);
