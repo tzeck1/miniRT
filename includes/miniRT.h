@@ -197,10 +197,16 @@ typedef struct s_mlx_data
 	int			width;
 }	t_mlx_data;
 
+typedef struct s_meshes
+{
+	
+}	t_meshes
+
 typedef struct s_data
 {
 	struct s_objects	*objs;
 	struct s_mlx_data	*mlx_data;
+	struct s_meshes		*meshes;
 }	t_data;
 
 /*	PARSER	*/
