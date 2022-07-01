@@ -199,18 +199,18 @@ typedef struct s_mlx_data
 
 typedef struct s_triangle
 {
-	t_vector	v1;
-	t_vector	v2;
-	t_vector	v3;
+	t_vector	*v1;
+	t_vector	*v2;
+	t_vector	*v3;
 }	t_triangle;
 
 typedef struct s_sphere
 {
-	float		origin;
 	float		a;
 	float		b;
-	t_vector	*vertices;
-	t_triangle	*triangles;
+	t_vector	*origin;
+	t_vector	**vertices;
+	t_triangle	**triangles;
 }	t_sphere;
 
 typedef struct s_meshes
