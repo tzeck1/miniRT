@@ -69,8 +69,8 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
-	t_vector	origin;
-	t_vector	direction;
+	t_vector	*origin;
+	t_vector	*direction;
 	float		t_min;
 	float		t_max;
 }	t_ray;
