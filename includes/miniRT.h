@@ -67,6 +67,14 @@ typedef struct s_vector
 	float	z;
 }	t_vector;
 
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+	float		t_min;
+	float		t_max;
+}	t_ray;
+
 typedef struct s_color
 {
 	int	red;
