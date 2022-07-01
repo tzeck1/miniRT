@@ -197,10 +197,26 @@ typedef struct s_mlx_data
 	int			width;
 }	t_mlx_data;
 
+typedef struct s_triangle
+{
+	t_vector	v1;
+	t_vector	v2;
+	t_vector	v3;
+}	t_triangle;
+
+typedef struct s_sphere
+{
+	float		origin;
+	float		a;
+	float		b;
+	t_vector	*vertices;
+	t_triangle	*triangles;
+}	t_sphere;
+
 typedef struct s_meshes
 {
-	
-}	t_meshes
+	struct s_sphere	*sphere;
+}	t_meshes;
 
 typedef struct s_data
 {
@@ -249,6 +265,9 @@ int			float_to_fix(float n);
 float		fix_to_float(int raw);
 t_color		*color_from_str(char *red, char *green, char *blue);
 void		replace_commas(char *line);
+
+/*	MESH	*/
+t_meshes	*init_meshes(t_objects *objs);
 
 /*	DEBUG	*/
 

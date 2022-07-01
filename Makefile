@@ -34,7 +34,7 @@ SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
 		$(PARS_PATH)check_file.c		$(PARS_PATH)check_line_id.c	$(PARS_PATH)check_obj_line.c\
 		$(PARS_PATH)check_caps_line.c	$(PARS_PATH)element_check.c	$(PARS_PATH)element_check2.c\
 		$(MRT_MLX_PATH)mlx.c\
-		$(SRC_PATH)screen_loop.c
+		$(SRC_PATH)screen_loop.c		$(SRC_PATH)mesh.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
