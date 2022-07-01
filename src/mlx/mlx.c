@@ -12,7 +12,7 @@ void	mrt_key_hook(mlx_key_data_t keydata, void *mlx)
 		mlx_close_window((mlx_t *)mlx);
 }
 
-mlx_t	*init_mlx(void)
+mlx_t	*init_mlx(t_data *data)
 {
 	mlx_t	*mlx;
 
