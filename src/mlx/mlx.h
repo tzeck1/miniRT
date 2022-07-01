@@ -3,9 +3,6 @@
 
 # include "../../includes/miniRT.h"
 
-# define WIN_HEIGHT	600
-# define WIN_WIDTH	600
-
 # define INIT_ERR_MSG	"MiniLibX initiliazation failed!\n"
 
 /**

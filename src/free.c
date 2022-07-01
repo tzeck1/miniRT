@@ -127,9 +127,12 @@ void	free_cam_light(t_camera *cam, t_dir_light *dir_l, t_amb_light *amb_l)
 void	free_objects(t_objects *objs)
 {
 	free_cam_light(objs->cam, objs->dir_l, objs->amb_l);
-	free_cy_list(objs->cy_head);
-	free_sp_list(objs->sp_head);
-	free_pl_list(objs->pl_head);
+	if (objs->cy_head != NULL)
+		free_cy_list(objs->cy_head);
+	if (objs->sp_head != NULL)
+		free_sp_list(objs->sp_head);
+	if (objs->pl_head != NULL)
+		free_pl_list(objs->pl_head);
 	free(objs);
 	objs = NULL;
 }

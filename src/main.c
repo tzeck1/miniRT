@@ -35,7 +35,8 @@ int	main(int argc, char **argv)
 		ft_exit(EXIT_FAILURE);
 	data = ft_calloc(1, sizeof(t_data));
 	data->objs = init_objects(argv[1]);
-	mlx = init_mlx();
+	data->mlx_data = ft_calloc(1, sizeof(t_mlx_data));	// free
+	mlx = init_mlx(data->mlx_data);
 	screen_loop(mlx, data);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

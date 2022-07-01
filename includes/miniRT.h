@@ -182,9 +182,17 @@ typedef struct s_objects
 	struct s_pl_list	*pl_head;
 }	t_objects;
 
+typedef struct s_mlx_data
+{
+	mlx_image_t	*image;
+	int			height;
+	int			width;
+}	t_mlx_data;
+
 typedef struct s_data
 {
 	struct s_objects	*objs;
+	struct s_mlx_data	*mlx_data;
 }	t_data;
 
 /*	PARSER	*/
@@ -217,7 +225,8 @@ void		vector_normalize(t_vector *vec);
 
 /*	MLX	*/
 
-mlx_t		*init_mlx(void);
+mlx_t		*init_mlx(t_mlx_data *mlx_data);
+void		screen_loop(mlx_t *mlx, t_data *data);
 
 /*	UTILS	*/
 
