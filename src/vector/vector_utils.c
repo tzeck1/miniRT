@@ -2,31 +2,33 @@
 
 /**
  * @brief  calc vector length
- * @param  *vec: vector
+ * @param  vec: vector
  * @retval length of vector
  */
-float	vector_length(t_vector *vec)
+float	vector_length(t_vector vec)
 {
-	return (sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z));
+	return (sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
 
 /**
- * @brief  scaling vec_a by n (multiplication)
- * @param  *vec_res: product of vec_a multiplied with n
+ * @brief  scaling vec by n (multiplication)
  * @param  n: scaler
+ * @retval product of vec multiplied with n
  */
-void	vector_scale(t_vector *vec_res, t_vector *vec_a, float n)
+t_vector	vector_scale(t_vector vec, float n)
 {
-	vec_res->x = vec_a->x * n;
-	vec_res->y = vec_a->y * n;
-	vec_res->z = vec_a->z * n;
+	t_vector	vec_scaled;
+	vec_scaled.x = vec.x * n;
+	vec_scaled.y = vec.y * n;
+	vec_scaled.z = vec.z * n;
 }
 
 /**
  * @brief  scale points so length becomes one unit long
- * @param  *vec: vector
+ * @param  vec: vector
+ * @retval normalized vector
  */
-void	vector_normalize(t_vector *vec)
+t_vector	vector_normalize(t_vector vec)
 {
 	float	length;
 	float	inv_length;
@@ -35,6 +37,7 @@ void	vector_normalize(t_vector *vec)
 	if (length > 0)
 	{
 		inv_length = 1 / length;
-		vector_scale(vec, vec, inv_length);
+		vec = vector_scale(vec, inv_length);
 	}
+	return (vec);
 }

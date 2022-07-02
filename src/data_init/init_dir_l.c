@@ -15,10 +15,9 @@ static void	save_data(char *line, t_dir_light *dir_l)
 	dir_l->identifier = LIGHT;
 	dir_l->position = vector_from_str(data[1], data[2], data[3]);
 	dir_l->ratio = ft_atof(data[4]);
-	dir_l->rgb = ft_calloc(1, sizeof(t_color));
-	dir_l->rgb->red = ft_atoi(data[5]);
-	dir_l->rgb->green = ft_atoi(data[6]);
-	dir_l->rgb->blue = ft_atoi(data[7]);
+	dir_l->rgb.red = ft_atoi(data[5]);
+	dir_l->rgb.green = ft_atoi(data[6]);
+	dir_l->rgb.blue = ft_atoi(data[7]);
 	ft_free_split(data);
 }
 

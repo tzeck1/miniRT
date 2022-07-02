@@ -81,9 +81,9 @@ typedef struct s_pl_list
 {
 	int					identifier;
 	int					i;
-	t_vector			*i_hat;
-	t_vector			*j_hat;
-	t_color				*rgb;
+	t_vector			i_hat;
+	t_vector			j_hat;
+	t_color				rgb;
 	struct s_pl_list	*next;
 	struct s_pl_list	*prev;
 }	t_pl_list;
@@ -99,9 +99,9 @@ typedef struct s_sp_list
 {
 	int					identifier;
 	int					i;
-	t_vector			*center;
+	t_vector			center;
 	float				radius;
-	t_color				*rgb;
+	t_color				rgb;
 	struct s_sp_list	*next;
 	struct s_sp_list	*prev;
 }	t_sp_list;
@@ -119,11 +119,11 @@ typedef struct s_cy_list
 {
 	int					identifier;
 	int					i;
-	t_vector			*center;
-	t_vector			*direction;
+	t_vector			center;
+	t_vector			direction;
 	float				radius;
 	float				height;
-	t_color				*rgb;
+	t_color				rgb;
 	struct s_cy_list	*next;
 	struct s_cy_list	*prev;
 }	t_cy_list;
@@ -137,8 +137,8 @@ typedef struct s_cy_list
 typedef struct s_camera
 {
 	int			identifier;
-	t_vector	*position;
-	t_vector	*direction;
+	t_vector	position;
+	t_vector	direction;
 	float		fov;
 }	t_camera;
 
@@ -151,9 +151,9 @@ typedef struct s_camera
 typedef struct s_dir_light
 {
 	int			identifier;
-	t_vector	*position;
+	t_vector	position;
 	float		ratio;
-	t_color		*rgb;
+	t_color		rgb;
 }	t_dir_light;
 
 /**
@@ -165,7 +165,7 @@ typedef struct s_amb_light
 {
 	int			identifier;
 	float		ratio;
-	t_color		*rgb;
+	t_color		rgb;
 }	t_amb_light;
 
 typedef struct s_objects
@@ -200,29 +200,29 @@ void		free_objects(t_objects *objs);
 
 /*	VECTOR MANAGEMENT	*/
 
-t_vector	*vector_new(float x, float y, float z);
-t_vector	*vector_from_str(char *x, char *y, char *z);
-void		vector_change(t_vector *vec, float x, float y, float z);
-void		vector_copy(t_vector *vec_src, t_vector *vec_dst);
-void		vector_add(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
-void		vector_sub(t_vector *vec_res, t_vector *vec_a, t_vector *vec_b);
-void		vector_scale(t_vector *vec_res, t_vector *vec_a, float n);
-float		vector_dot(t_vector *vec_a, t_vector *vec_b);
-float		vector_length(t_vector *vec);
-void		vector_normalize(t_vector *vec);
+t_vector	vector_new(float x, float y, float z);
+t_vector	vector_from_str(char *x, char *y, char *z);
+t_vector	vector_change(t_vector vec, float x, float y, float z);
+t_vector	vector_copy(t_vector vec_src);
+t_vector	vector_add(t_vector vec_a, t_vector vec_b);
+t_vector	vector_sub(t_vector vec_a, t_vector vec_b);
+t_vector	vector_scale(t_vector vec, float n);
+float		vector_dot(t_vector vec_a, t_vector vec_b);
+float		vector_length(t_vector vec);
+t_vector	vector_normalize(t_vector vec);
 
 /*	UTILS	*/
 
 char		*get_obj_line(char *rt_file_path, char *obj_id, int obj_index);
 int			float_to_fix(float n);
 float		fix_to_float(int raw);
-t_color		*color_from_str(char *red, char *green, char *blue);
+t_color		color_from_str(char *red, char *green, char *blue);
 void		replace_commas(char *line);
 
 /*	DEBUG	*/
 
-void		debug_print_vector(t_vector *vec);
-void		debug_print_rgb(t_color *rgb);
+void		debug_print_vector(t_vector vec);
+void		debug_print_rgb(t_color rgb);
 void		debug_print_cylinder_list(t_cy_list *head);
 void		debug_print_cylinder_node(t_cy_list *node);
 void		debug_print_ambient_light(t_amb_light *obj);

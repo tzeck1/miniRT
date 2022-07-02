@@ -15,21 +15,21 @@ char	*get_type(int type)
 	return (NULL);
 }
 
-void	debug_print_vector(t_vector *vec)
+void	debug_print_vector(t_vector vec)
 {
-	printf("x-raw:\t\t\t%f\n", vec->x);
+	printf("x-raw:\t\t\t%f\n", vec.x);
 	// printf("x-float:\t\t%f\n", fix_to_float(vec->x));
-	printf("y-raw:\t\t\t%f\n", vec->y);
+	printf("y-raw:\t\t\t%f\n", vec.y);
 	// printf("y-float:\t\t%f\n", fix_to_float(vec->y));
-	printf("z-raw:\t\t\t%f\n", vec->z);
+	printf("z-raw:\t\t\t%f\n", vec.z);
 	// printf("z-float:\t\t%f\n", fix_to_float(vec->z));
 }
 
-void	debug_print_rgb(t_color *rgb)
+void	debug_print_rgb(t_color rgb)
 {
-	printf("red:\t\t\t%i\n", rgb->red);
-	printf("green:\t\t\t%i\n", rgb->green);
-	printf("blue:\t\t\t%i\n", rgb->blue);
+	printf("red:\t\t\t%i\n", rgb.red);
+	printf("green:\t\t\t%i\n", rgb.green);
+	printf("blue:\t\t\t%i\n", rgb.blue);
 }
 
 void	debug_print_ambient_light(t_amb_light *obj)

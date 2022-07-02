@@ -55,13 +55,12 @@ char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index)
  * @brief  creates new color struct from string
  * @retval t_color pointer
  */
-t_color	*color_from_str(char *red, char *green, char *blue)
+t_color	color_from_str(char *red, char *green, char *blue)
 {
-	t_color	*color;
+	t_color	color;
 
-	color = ft_calloc(1, sizeof(t_color));
-	color->red = ft_atoi(red);
-	color->green = ft_atoi(green);
-	color->blue = ft_atoi(blue);
+	color.red = ft_atoi(red);
+	color.green = ft_atoi(green);
+	color.blue = ft_atoi(blue);
 	return (color);
 }

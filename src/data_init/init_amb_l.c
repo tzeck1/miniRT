@@ -14,10 +14,9 @@ static void	save_data(char *line, t_amb_light *amb_l)
 	data = ft_split(line, ' ');
 	amb_l->identifier = AMBIENT;
 	amb_l->ratio = ft_atof(data[1]);
-	amb_l->rgb = ft_calloc(1, sizeof(t_color));
-	amb_l->rgb->red = ft_atoi(data[2]);
-	amb_l->rgb->green = ft_atoi(data[3]);
-	amb_l->rgb->blue = ft_atoi(data[4]);
+	amb_l->rgb.red = ft_atoi(data[2]);
+	amb_l->rgb.green = ft_atoi(data[3]);
+	amb_l->rgb.blue = ft_atoi(data[4]);
 	ft_free_split(data);
 }
 

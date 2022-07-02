@@ -2,32 +2,30 @@
 
 /**
  * @brief  creates new vector
- * @retval t_vector pointer
+ * @retval new vector
  */
-t_vector	*vector_new(float x, float y, float z)
+t_vector	vector_new(float x, float y, float z)
 {
-	t_vector	*vec;
+	t_vector	vec;
 
-	vec = ft_calloc(1, sizeof(t_vector));
-	vec->x = x;
-	vec->y = y;
-	vec->z = z;
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
 	return (vec);
 }
 
 /**
  * @brief  creates new vector from string
  * @note   only for input reading
- * @retval t_vector pointer
+ * @retval new vector
  */
-t_vector	*vector_from_str(char *x, char *y, char *z)
+t_vector	vector_from_str(char *x, char *y, char *z)
 {
-	t_vector	*vec;
+	t_vector	vec;
 
-	vec = ft_calloc(1, sizeof(t_vector));
-	vec->x = ft_atof(x);
-	vec->y = ft_atof(y);
-	vec->z = ft_atof(z);
+	vec.x = ft_atof(x);
+	vec.y = ft_atof(y);
+	vec.z = ft_atof(z);
 	return (vec);
 }
 
@@ -37,26 +35,26 @@ t_vector	*vector_from_str(char *x, char *y, char *z)
  * @param  x: new x value
  * @param  y: new y value
  * @param  z: new z value
+ * @retval vector with new values
  */
-void	vector_change(t_vector *vec, float x, float y, float z)
+t_vector	vector_change(t_vector vec, float x, float y, float z)
 {
-	if (vec == NULL)
-		return ;
-	vec->x = x;
-	vec->y = y;
-	vec->z = z;
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	return (vec);
 }
 
 /**
- * @brief  copy values from source vector to destination vector
+ * @brief  copy values from source vector to new vector
  * @param  *vec_src: values to be copied
- * @param  *vec_dst: values to be overwritten
+ * @retval new vector with values from vec_src
  */
-void	vector_copy(t_vector *vec_src, t_vector *vec_dst)
+t_vector	vector_copy(t_vector vec_src)
 {
-	if (vec_src == NULL || vec_dst == NULL)
-		return ;
-	vec_dst->x = vec_src->x;
-	vec_dst->y = vec_src->y;
-	vec_dst->y = vec_src->y;
+	t_vector	vec;
+	vec.x = vec_src.x;
+	vec.y = vec_src.y;
+	vec.y = vec_src.y;
+	return (vec);
 }
