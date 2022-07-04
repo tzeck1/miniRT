@@ -178,9 +178,18 @@ typedef struct s_objects
 	struct s_pl_list	*pl_head;
 }	t_objects;
 
+typedef struct s_screen
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	int			height;
+	int			width;
+}	t_screen;
+
 typedef struct s_data
 {
 	struct s_objects	*objs;
+	struct s_screen		*screen;
 }	t_data;
 
 /*	PARSER	*/
