@@ -43,6 +43,8 @@
 # define LIGHT_MAX	1.0
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
+# define T_MIN		1.1;
+# define T_MAX		1000;
 
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
@@ -69,6 +71,14 @@ typedef struct s_color
 	int	green;
 	int	blue;
 }	t_color;
+
+typedef struct s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+	float		t_min;
+	float		t_max;
+} t_ray;
 
 /**
  * @param identifier: pl in rt file
@@ -202,6 +212,10 @@ t_objects	*init_objects(char *rt_file_path);
 t_amb_light	*get_amb_light_data(char *rt_file_path);
 t_dir_light	*get_dir_light_data(char *rt_file_path);
 t_camera	*get_camera_data(char *rt_file_path);
+
+/*	RAY TRACER	*/
+
+void	basic_ray(t_screen *screen, t_objects *objs);
 
 /*	DATA FREE	*/
 

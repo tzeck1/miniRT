@@ -18,6 +18,7 @@ float	vector_length(t_vector vec)
 t_vector	vector_scale(t_vector vec, float n)
 {
 	t_vector	vec_scaled;
+
 	vec_scaled.x = vec.x * n;
 	vec_scaled.y = vec.y * n;
 	vec_scaled.z = vec.z * n;

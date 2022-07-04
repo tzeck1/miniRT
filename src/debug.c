@@ -17,11 +17,11 @@ char	*get_type(int type)
 
 void	debug_print_vector(t_vector vec)
 {
-	printf("x-raw:\t\t\t%f\n", vec.x);
+	printf("x[%f]\n", vec.x);
 	// printf("x-float:\t\t%f\n", fix_to_float(vec->x));
-	printf("y-raw:\t\t\t%f\n", vec.y);
+	printf("y[%f]\n", vec.y);
 	// printf("y-float:\t\t%f\n", fix_to_float(vec->y));
-	printf("z-raw:\t\t\t%f\n", vec.z);
+	printf("z[%f]\n", vec.z);
 	// printf("z-float:\t\t%f\n", fix_to_float(vec->z));
 }
 
