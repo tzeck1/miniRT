@@ -53,6 +53,7 @@ t_vector	vector_change(t_vector vec, float x, float y, float z)
 t_vector	vector_copy(t_vector vec_src)
 {
 	t_vector	vec;
+
 	vec.x = vec_src.x;
 	vec.y = vec_src.y;
 	vec.y = vec_src.y;

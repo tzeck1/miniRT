@@ -42,7 +42,6 @@ t_vector	vector_add(t_vector vec_a, t_vector vec_b)
 	vec_sum.y = vec_a.y + vec_b.y;
 	vec_sum.z = vec_a.z + vec_b.z;
 	return (vec_sum);
-
 }
 
 /**
@@ -57,5 +56,4 @@ t_vector	vector_sub(t_vector vec_a, t_vector vec_b)
 	vec_diff.y = vec_a.y - vec_b.y;
 	vec_diff.z = vec_a.z - vec_b.z;
 	return (vec_diff);
-
 }
