@@ -30,8 +30,8 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	t_ray	ray;
 
 	float	fov = cam->fov * M_PI / 180.0;
-	ray.origin.x = x * (2.0 * tanf(fov / 2.0) / (float)screen->width) + cam->position.x - 1.0;
-	ray.origin.y =  1.0 - y * (2.0 * tanf(fov / 2.0) / (float)screen->height) + cam->position.y;
+	ray.origin.x = x * (2.0 * tanf(fov / 2.0) / (float)screen->width) + cam->position.x - tanf(fov / 2);
+	ray.origin.y =  tanf(fov / 2) - y * (2.0 * tanf(fov / 2.0) / (float)screen->height) + cam->position.y;
 	// ray.origin.x = (x * (2.0 / (float)screen->width) + cam->position.x) - 1.0;
 	// ray.origin.y = 1.0 - y * (2.0 / (float)screen->height) + cam->position.y;
 	ray.origin.z = cam->position.z + 1;
