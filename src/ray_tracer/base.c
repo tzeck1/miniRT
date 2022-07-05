@@ -28,16 +28,14 @@ static bool	ray_sphere(t_ray ray, t_sp_list *sphere)
 static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 {
 	t_ray	ray;
-
-	float	fov = cam->fov * M_PI / 180.0;
+	float	fov;
+	fov = cam->fov * M_PI / 180.0;
 	ray.origin.x = x * (2.0 * tanf(fov / 2.0) / (float)screen->width) + cam->position.x - tanf(fov / 2);
 	ray.origin.y =  tanf(fov / 2) - y * (2.0 * tanf(fov / 2.0) / (float)screen->height) + cam->position.y;
-	// ray.origin.x = (x * (2.0 / (float)screen->width) + cam->position.x) - 1.0;
-	// ray.origin.y = 1.0 - y * (2.0 / (float)screen->height) + cam->position.y;
-	ray.origin.z = cam->position.z + 1;
-	printf("Pixel [%.0f,%.0f]\n", x, y);
-	debug_print_vector(ray.origin);
-	printf("--------------------\n");
+	ray.origin.z = cam->direction.z;
+	// printf("Pixel [%.0f,%.0f]\n", x, y);
+	// debug_print_vector(ray.origin);
+	// printf("--------------------\n");
 	ray.direction = vector_copy(cam->direction);
 	ray.t_min = T_MIN;
 	ray.t_max = T_MAX;
