@@ -18,6 +18,20 @@ static int	count_spheres(t_sp_list *sp_head)
 	return (count + 1);
 }
 
+static int	get_color(t_color rgb)
+{
+	int	red;
+	int	green;
+	int	blue;
+	int	a;
+
+	red = rgb.red << 24;
+	green = rgb.green << 16;
+	blue = rgb.blue << 8;
+	a = 255;
+	return (red | green | blue | a);
+}
+
 static float	ray_sphere(t_ray ray, t_sp_list *sphere)
 {
 	float	a;
@@ -96,7 +110,7 @@ void	basic_ray(t_screen *screen, t_objects *objs)
 			ray = create_ray(screen, objs->cam, x, y);
 			tval = intersection(ray, objs);
 			if (tval.t != 1.0 / 0.0)
-				mlx_put_pixel(screen->img, x, y, 0x00FFFF);
+				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb));
 			else
 				mlx_put_pixel(screen->img, x, y, 0x0000FF);
 			x++;
