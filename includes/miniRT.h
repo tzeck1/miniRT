@@ -43,8 +43,8 @@
 # define LIGHT_MAX	1.0
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
-# define T_MIN		1.1;
-# define T_MAX		1000;
+# define T_MIN		1.1
+# define T_MAX		1000
 
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
@@ -79,6 +79,12 @@ typedef struct s_ray
 	float		t_min;
 	float		t_max;
 } t_ray;
+
+typedef struct s_tval
+{
+	float	t;
+	t_color	rgb;
+}	t_tval;
 
 /**
  * @param identifier: pl in rt file
