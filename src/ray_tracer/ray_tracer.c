@@ -1,5 +1,11 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  convertes rgb-values into a hex representation
+ * @note   0xRRGGBBAA
+ * @param  rgb: color struct from an object
+ * @retval color in hex representation in int
+ */
 static int	get_color(t_color rgb)
 {
 	int	red;
@@ -14,6 +20,14 @@ static int	get_color(t_color rgb)
 	return (red | green | blue | a);
 }
 
+/**
+ * @brief  creates a ray corresponding to x and y screen position of pixel
+ * @param  *screen: mlx data struct
+ * @param  *cam: camera object struct
+ * @param  x: x-value of pixel on screen
+ * @param  y: y-value of pixel on screen
+ * @retval ray struct
+ */
 static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 {
 	t_ray	ray;
@@ -29,6 +43,12 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	return (ray);
 }
 
+/**
+ * @brief  calls the object loops and determines the object closest to screen
+ * @param  ray: ray to calculate the intersections with
+ * @param  *objs: objects data struct
+ * @retval informations to the object closest to screen
+ */
 static t_tval	intersection(t_ray ray, t_objects *objs)
 {
 	t_tval	tval;
@@ -37,6 +57,11 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 	return (tval);
 }
 
+/**
+ * @brief  Loops through every pixel and calculates their color with ray tracing
+ * @param  *screen: mlx data struct
+ * @param  *objs: objects data struct
+ */
 void	ray_tracing(t_screen *screen, t_objects *objs)
 {
 	int		x;

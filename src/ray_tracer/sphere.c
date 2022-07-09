@@ -1,5 +1,10 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  counts the number of nodes in the sphere linked list
+ * @param  *sp_head: head of the circular sphere linked list
+ * @retval the count of nodes in the list
+ */
 static int	count_spheres(t_sp_list *sp_head)
 {
 	t_sp_list	*tmp;
@@ -18,6 +23,12 @@ static int	count_spheres(t_sp_list *sp_head)
 	return (count + 1);
 }
 
+/**
+ * @brief  calculates a ray-sphere intersection
+ * @param  ray: ray to calculate the intersection with
+ * @param  *sphere: the current sphere node to calculate the intersection with
+ * @retval the closest intersection distance or infinity if no intersection
+ */
 static float	ray_sphere(t_ray ray, t_sp_list *sphere)
 {
 	float	a;
@@ -43,6 +54,12 @@ static float	ray_sphere(t_ray ray, t_sp_list *sphere)
 		return (1.0 / 0.0);
 }
 
+/**
+ * @brief  iterates through all spheres and calculates for possible intersections
+ * @param  ray: ray to calculate the intersections with
+ * @param  *objs: object data struct
+ * @retval informations to the sphere closest to screen
+ */
 t_tval	sphere_loop(t_ray ray, t_objects *objs)
 {
 	t_tval	tval;
