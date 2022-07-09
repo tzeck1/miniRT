@@ -25,9 +25,9 @@ static float	ray_sphere(t_ray ray, t_sp_list *sphere)
 	float	c;
 	float	dist;
 
-	a = vector_dot(ray.direction, ray.direction);
-	b = 2.0 * vector_dot(ray.direction, vector_sub(ray.origin, sphere->center));
-	c = powf(vector_length(vector_sub(ray.origin, sphere->center)), 2.0);
+	a = vector_dot(ray.dir, ray.dir);
+	b = 2.0 * vector_dot(ray.dir, vector_sub(ray.og, sphere->center));
+	c = powf(vector_length(vector_sub(ray.og, sphere->center)), 2.0);
 	c = c - powf(sphere->radius, 2.0);
 	dist = b * b - 4.0f * a * c;
 	if (dist > 0)

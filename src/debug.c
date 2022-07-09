@@ -34,7 +34,7 @@ void	debug_print_rgb(t_color rgb)
 
 void	debug_print_ambient_light(t_amb_light *obj)
 {
-	printf("identifier:\t\t%s\n", get_type(obj->identifier));
+	printf("id:\t\t%s\n", get_type(obj->id));
 	printf("ratio-raw:\t\t%f\n", obj->ratio);
 	// printf("ratio-float:\t\t%f\n", fix_to_float(obj->ratio));
 	debug_print_rgb(obj->rgb);
@@ -43,8 +43,8 @@ void	debug_print_ambient_light(t_amb_light *obj)
 
 void	debug_print_direct_light(t_dir_light *obj)
 {
-	printf("identifier:\t\t%s\n", get_type(obj->identifier));
-	debug_print_vector(obj->position);
+	printf("id:\t\t%s\n", get_type(obj->id));
+	debug_print_vector(obj->pos);
 	printf("ratio-raw:\t\t%f\n", obj->ratio);
 	// printf("ratio-float:\t\t%f\n", fix_to_float(obj->ratio));
 	debug_print_rgb(obj->rgb);
@@ -53,9 +53,9 @@ void	debug_print_direct_light(t_dir_light *obj)
 
 void	debug_print_camera(t_camera *obj)
 {
-	printf("identifier:\t\t%s\n", get_type(obj->identifier));
-	debug_print_vector(obj->position);
-	debug_print_vector(obj->direction);
+	printf("id:\t\t%s\n", get_type(obj->id));
+	debug_print_vector(obj->pos);
+	debug_print_vector(obj->dir);
 	printf("FOV-raw:\t\t%f\n", obj->fov);
 	// printf("FOV-float:\t\t%f\n", fix_to_float(obj->fov));
 	printf("\n");
@@ -78,10 +78,10 @@ void	debug_print_cylinder_list(t_cy_list *head)
 
 void	debug_print_cylinder_node(t_cy_list *node)
 {
-	printf("identifier:\t\t%s\n", get_type(node->identifier));
+	printf("id:\t\t%s\n", get_type(node->id));
 	printf("index:\t\t\t%i\n", node->i);
 	debug_print_vector(node->center);
-	debug_print_vector(node->direction);
+	debug_print_vector(node->dir);
 	printf("radius-raw:\t\t%f\n", node->radius);
 	// printf("radius-float:\t\t%f\n", fix_to_float(node->radius));
 	printf("height-raw:\t\t%f\n", node->height);
@@ -110,7 +110,7 @@ void	debug_print_sphere_list(t_sp_list *head)
 
 void	debug_print_sphere_node(t_sp_list *node)
 {
-	printf("identifier:\t\t%s\n", get_type(node->identifier));
+	printf("id:\t\t%s\n", get_type(node->id));
 	printf("index:\t\t\t%i\n", node->i);
 	debug_print_vector(node->center);
 	printf("radius-raw:\t\t%f\n", node->radius);
@@ -139,7 +139,7 @@ void	debug_print_plane_list(t_pl_list *head)
 
 void	debug_print_plane_node(t_pl_list *node)
 {
-	printf("identifier:\t\t%s\n", get_type(node->identifier));
+	printf("id:\t\t%s\n", get_type(node->id));
 	printf("index:\t\t\t%i\n", node->i);
 	debug_print_vector(node->i_hat);
 	debug_print_vector(node->j_hat);
