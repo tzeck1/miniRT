@@ -221,7 +221,7 @@ t_camera	*get_camera_data(char *rt_file_path);
 
 /*	RAY TRACER	*/
 
-void	basic_ray(t_screen *screen, t_objects *objs);
+void	ray_tracing(t_screen *screen, t_objects *objs);
 
 /*	DATA FREE	*/
 
