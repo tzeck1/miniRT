@@ -53,7 +53,8 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 {
 	t_tval	tval;
 
-	tval = sphere_loop(ray, objs);
+	// tval = sphere_loop(ray, objs);
+	tval = plane_loop(ray, objs);
 	return (tval);
 }
 
