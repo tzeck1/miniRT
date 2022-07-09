@@ -3,6 +3,10 @@
 
 # include "../../includes/miniRT.h"
 
+/**
+ * @param  t: smallest intersection distance
+ * @param  rgb: color struct from closest intersection object
+ */
 typedef struct s_tval
 {
 	float	t;
