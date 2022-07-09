@@ -83,16 +83,16 @@ typedef struct s_ray
 /**
  * @param id: pl in rt file
  * @param i: index for node in pl_list
- * @param i_hat: pos of plane
- * @param j_hat: normalized oriantation vector
+ * @param center: pos of plane
+ * @param dir: normalized oriantation vector
  * @param rgb: color struct
  */
 typedef struct s_pl_list
 {
 	int					id;
 	int					i;
-	t_vector			i_hat;
-	t_vector			j_hat;
+	t_vector			center;
+	t_vector			dir;
 	t_color				rgb;
 	struct s_pl_list	*next;
 	struct s_pl_list	*prev;

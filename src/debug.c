@@ -141,8 +141,8 @@ void	debug_print_plane_node(t_pl_list *node)
 {
 	printf("id:\t\t%s\n", get_type(node->id));
 	printf("index:\t\t\t%i\n", node->i);
-	debug_print_vector(node->i_hat);
-	debug_print_vector(node->j_hat);
+	debug_print_vector(node->center);
+	debug_print_vector(node->dir);
 	debug_print_rgb(node->rgb);
 	printf("address:\t\t%p\n", node);
 	printf("next:\t\t\t%p\n", node->next);
