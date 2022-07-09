@@ -56,6 +56,6 @@ t_vector	vector_copy(t_vector vec_src)
 
 	vec.x = vec_src.x;
 	vec.y = vec_src.y;
-	vec.y = vec_src.y;
+	vec.z = vec_src.z;
 	return (vec);
 }

@@ -32,9 +32,9 @@ int	cy_counter(char *rt_file_path)
  */
 void	cy_fill(char **data, t_cy_list *cy_node)
 {
-	cy_node->identifier = CYLINDER;
+	cy_node->id = CYLINDER;
 	cy_node->center = vector_from_str(data[1], data[2], data[3]);
-	cy_node->direction = vector_from_str(data[4], data[5], data[6]);
+	cy_node->dir = vector_from_str(data[4], data[5], data[6]);
 	cy_node->radius = ft_atof(data[7]) / 2;
 	cy_node->height = ft_atof(data[8]);
 	cy_node->rgb = color_from_str(data[9], data[10], data[11]);

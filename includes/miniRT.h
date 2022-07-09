@@ -43,8 +43,8 @@
 # define LIGHT_MAX	1.0
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
-# define T_MIN		1.1;
-# define T_MAX		1000;
+# define T_MIN		1.1
+# define T_MAX		1000
 
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
@@ -74,22 +74,22 @@ typedef struct s_color
 
 typedef struct s_ray
 {
-	t_vector	origin;
-	t_vector	direction;
+	t_vector	og;
+	t_vector	dir;
 	float		t_min;
 	float		t_max;
 } t_ray;
 
 /**
- * @param identifier: pl in rt file
+ * @param id: pl in rt file
  * @param i: index for node in pl_list
- * @param i_hat: position of plane
+ * @param i_hat: pos of plane
  * @param j_hat: normalized oriantation vector
  * @param rgb: color struct
  */
 typedef struct s_pl_list
 {
-	int					identifier;
+	int					id;
 	int					i;
 	t_vector			i_hat;
 	t_vector			j_hat;
@@ -99,15 +99,15 @@ typedef struct s_pl_list
 }	t_pl_list;
 
 /**
- * @param identifier: sp in rt file
+ * @param id: sp in rt file
  * @param i: index for node in sp_list
- * @param center: position of sphere
+ * @param center: pos of sphere
  * @param radius: sphere diameter / 2
  * @param rgb: color struct
  */
 typedef struct s_sp_list
 {
-	int					identifier;
+	int					id;
 	int					i;
 	t_vector			center;
 	float				radius;
@@ -117,20 +117,20 @@ typedef struct s_sp_list
 }	t_sp_list;
 
 /**
- * @param identifier: cy in rt file
+ * @param id: cy in rt file
  * @param i: index for node in cy_list
- * @param center: position of cylinder
- * @param direction: normalized oriantation vector
+ * @param center: pos of cylinder
+ * @param dir: normalized oriantation vector
  * @param radius: cylinder diameter / 2
  * @param height: cylinder height
  * @param rgb: color struct
  */
 typedef struct s_cy_list
 {
-	int					identifier;
+	int					id;
 	int					i;
 	t_vector			center;
-	t_vector			direction;
+	t_vector			dir;
 	float				radius;
 	float				height;
 	t_color				rgb;
@@ -139,41 +139,41 @@ typedef struct s_cy_list
 }	t_cy_list;
 
 /**
- * @param identifier: C in rt file
- * @param position: position of camera
- * @param direction: normalized oriantation vector
+ * @param id: C in rt file
+ * @param pos: pos of camera
+ * @param dir: normalized oriantation vector
  * @param fov: horizontal field of view in degrees
  */
 typedef struct s_camera
 {
-	int			identifier;
-	t_vector	position;
-	t_vector	direction;
+	int			id;
+	t_vector	pos;
+	t_vector	dir;
 	float		fov;
 }	t_camera;
 
 /**
- * @param identifier: L in rt file
- * @param position: position of direct light
+ * @param id: L in rt file
+ * @param pos: pos of direct light
  * @param ratio: light brightness ratio
  * @param rgb: color struct
  */
 typedef struct s_dir_light
 {
-	int			identifier;
-	t_vector	position;
+	int			id;
+	t_vector	pos;
 	float		ratio;
 	t_color		rgb;
 }	t_dir_light;
 
 /**
- * @param identifier: A in rt file
+ * @param id: A in rt file
  * @param ratio: light brightness ratio
  * @param rgb: color struct
  */
 typedef struct s_amb_light
 {
-	int			identifier;
+	int			id;
 	float		ratio;
 	t_color		rgb;
 }	t_amb_light;
@@ -215,7 +215,7 @@ t_camera	*get_camera_data(char *rt_file_path);
 
 /*	RAY TRACER	*/
 
-void	basic_ray(t_screen *screen, t_objects *objs);
+void	ray_tracing(t_screen *screen, t_objects *objs);
 
 /*	DATA FREE	*/
 

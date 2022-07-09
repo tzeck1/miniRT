@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 	data = ft_calloc(1, sizeof(t_data));
 	data->objs = init_objects(argv[1]);
 	init_mlx(data);
-	basic_ray(data->screen, data->objs);
+	ray_tracing(data->screen, data->objs);
 	mlx_loop(data->screen->mlx);
 	mlx_terminate(data->screen->mlx);
 	free_data(data);
