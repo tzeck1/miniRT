@@ -80,12 +80,6 @@ typedef struct s_ray
 	float		t_max;
 } t_ray;
 
-typedef struct s_tval
-{
-	float	t;
-	t_color	rgb;
-}	t_tval;
-
 /**
  * @param identifier: pl in rt file
  * @param i: index for node in pl_list
