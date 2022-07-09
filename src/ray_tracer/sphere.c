@@ -58,7 +58,7 @@ static float	ray_sphere(t_ray ray, t_sp_list *sphere)
  * @brief  iterates through all spheres and calculates for possible intersections
  * @param  ray: ray to calculate the intersections with
  * @param  *objs: object data struct
- * @retval informations to the sphere closest to screen
+ * @retval informations on the sphere closest to screen
  */
 t_tval	sphere_loop(t_ray ray, t_objects *objs)
 {

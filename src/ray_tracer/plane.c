@@ -1,5 +1,10 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  counts the number of nodes in the plane linked list
+ * @param  *pl_head: head of the circular plane linked list
+ * @retval the count of nodes in the list
+ */
 static int	count_planes(t_pl_list *pl_head)
 {
 	t_pl_list	*tmp;
@@ -18,6 +23,12 @@ static int	count_planes(t_pl_list *pl_head)
 	return (count + 1);
 }
 
+/**
+ * @brief  calculates a ray-plane intersection
+ * @param  ray: ray to calculate the ntersection with
+ * @param  *plane: the current plane node to calculate the intersection with
+ * @retval the closest intersection distance or infinity if no solution
+ */
 static float	ray_plane(t_ray ray, t_pl_list *plane)
 {
 	float	t;
@@ -31,6 +42,12 @@ static float	ray_plane(t_ray ray, t_pl_list *plane)
 	return (t);
 }
 
+/**
+ * @brief  iterates through all planes and calculates for possible intersections
+ * @param  ray: ray to calculate the intersections with
+ * @param  *objs: object data struct
+ * @retval informations on the plane closest to screen
+ */
 t_tval	plane_loop(t_ray ray, t_objects *objs)
 {
 	t_tval	tval;
