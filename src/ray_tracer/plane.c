@@ -23,7 +23,7 @@ static float	ray_plane(t_ray ray, t_pl_list *plane)
 	float	t;
 	float	denom;
 
-	denom =  vector_dot(ray.dir, plane->dir);
+	denom = vector_dot(ray.dir, plane->dir);
 	if (denom <= 0.0001f)
 		t = 1.0 / 0.0;
 	else
