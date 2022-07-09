@@ -56,7 +56,7 @@ t_tval	sphere_loop(t_ray ray, t_objects *objs)
 	while (i != sp_last_i)
 	{
 		t = ray_sphere(ray, objs->sp_head);
-		if (t < tval.t)
+		if (t < tval.t && t > T_MIN && t < T_MAX)
 		{
 			tval.t = t;
 			tval.rgb = objs->sp_head->rgb;
