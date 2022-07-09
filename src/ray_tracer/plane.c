@@ -20,15 +20,15 @@ static int	count_planes(t_pl_list *pl_head)
 
 static float	ray_plane(t_ray ray, t_pl_list *plane)
 {
-	float denom;
+	float	t;
+	float	denom;
 
-	denom = vector_dot(plane->j_hat, ray.dir);
-	if (abs(denom) > 0.0001f)
-	{
-		float t = (plane->i_hat - ray.origin).dot(normal) / denom;
-		if (t >= 0) return true; // you might want to allow an epsilon here too
-	}
-	return false;
+	denom =  vector_dot(ray.dir, plane->dir);
+	if (denom <= 0.0001f)
+		t = 1.0 / 0.0;
+	else
+		t = vector_dot(vector_sub(plane->center, ray.og), plane->dir) / denom;
+	return (t);
 }
 
 t_tval	plane_loop(t_ray ray, t_objects *objs)

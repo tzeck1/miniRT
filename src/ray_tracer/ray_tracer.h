@@ -17,4 +17,8 @@ typedef struct s_tval
 
 t_tval	sphere_loop(t_ray ray, t_objects *objs);
 
+/*	PLANE	*/
+
+t_tval	plane_loop(t_ray ray, t_objects *objs);
+
 #endif
