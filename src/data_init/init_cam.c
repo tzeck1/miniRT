@@ -13,8 +13,8 @@ static void	save_data(char *line, t_camera *cam)
 	replace_commas(line);
 	data = ft_split(line, ' ');
 	cam->id = CAMERA;
-	cam->pos = vector_from_str(data[1], data[2], data[3]);
-	cam->dir = vector_from_str(data[4], data[5], data[6]);
+	cam->pos = vec_from_str(data[1], data[2], data[3]);
+	cam->dir = vec_from_str(data[4], data[5], data[6]);
 	cam->fov = ft_atof(data[7]);
 	ft_free_split(data);
 }

@@ -33,7 +33,7 @@ int	sp_counter(char *rt_file_path)
 void	sp_fill(char **data, t_sp_list *sp_node)
 {
 	sp_node->id = SPHERE;
-	sp_node->center = vector_from_str(data[1], data[2], data[3]);
+	sp_node->center = vec_from_str(data[1], data[2], data[3]);
 	sp_node->radius = ft_atof(data[4]) / 2;
 	sp_node->rgb = color_from_str(data[5], data[6], data[7]);
 }

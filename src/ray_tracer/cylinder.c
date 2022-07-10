@@ -38,10 +38,10 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 	float	hi;
 	t_vector	C;
 
-	C = vector_new(cylinder->center.x, ray.og.y, cylinder->center.z);
-	c = vector_dot(vector_new(ray.og.x, 0, ray.og.z), vector_normalize(vector_sub(C, ray.og)));
+	C = vec_new(cylinder->center.x, ray.og.y, cylinder->center.z);
+	c = vec_dot(vec_new(ray.og.x, 0, ray.og.z), vec_norm(vec_sub(C, ray.og)));
 	alpha = acosf(c) * (180/M_PI);
-	hc = sinf(alpha) * vector_length(vector_sub(C, ray.og));
+	hc = sinf(alpha) * vec_len(vec_sub(C, ray.og));
 	if (hc > cylinder->radius)
 		return (1.0 / 0.0);
 	hi = sqrtf(powf(cylinder->radius, 2.0) - powf(hc, 2.0));

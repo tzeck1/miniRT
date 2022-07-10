@@ -5,7 +5,7 @@
  * @param  vec: vector
  * @retval length of vector
  */
-float	vector_length(t_vector vec)
+float	vec_len(t_vector vec)
 {
 	return (sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
@@ -15,7 +15,7 @@ float	vector_length(t_vector vec)
  * @param  n: scaler
  * @retval product of vec multiplied with n
  */
-t_vector	vector_scale(t_vector vec, float n)
+t_vector	vec_scale(t_vector vec, float n)
 {
 	t_vector	vec_scaled;
 
@@ -30,16 +30,16 @@ t_vector	vector_scale(t_vector vec, float n)
  * @param  vec: vector
  * @retval normalized vector
  */
-t_vector	vector_normalize(t_vector vec)
+t_vector	vec_norm(t_vector vec)
 {
 	float	length;
 	float	inv_length;
 
-	length = vector_length(vec);
+	length = vec_len(vec);
 	if (length > 0)
 	{
 		inv_length = 1 / length;
-		vec = vector_scale(vec, inv_length);
+		vec = vec_scale(vec, inv_length);
 	}
 	return (vec);
 }
