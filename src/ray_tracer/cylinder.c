@@ -32,8 +32,20 @@ static int	count_cylinder(t_cy_list *cy_head)
 static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 {
 	float	t;
+	float	c;
+	float	alpha;
+	float	hc;
+	float	hi;
+	t_vector	C;
 
-	t = 0.0;
+	C = vector_new(cylinder->center.x, ray.og.y, cylinder->center.z);
+	c = vector_dot(vector_new(ray.og.x, 0, ray.og.z), vector_normalize(vector_sub(C, ray.og)));
+	alpha = acosf(c) * (180/M_PI);
+	hc = sinf(alpha) * vector_length(vector_sub(C, ray.og));
+	if (hc > cylinder->radius)
+		return (1.0 / 0.0);
+	hi = sqrtf(powf(cylinder->radius, 2.0) - powf(hc, 2.0));
+	t = (hc / tanf(alpha)) - hi;
 	return (t);
 }
 
