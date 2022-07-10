@@ -223,16 +223,16 @@ void		free_objects(t_objects *objs);
 
 /*	VECTOR MANAGEMENT	*/
 
-t_vector	vector_new(float x, float y, float z);
-t_vector	vector_from_str(char *x, char *y, char *z);
-t_vector	vector_change(t_vector vec, float x, float y, float z);
-t_vector	vector_copy(t_vector vec_src);
-t_vector	vector_add(t_vector vec_a, t_vector vec_b);
-t_vector	vector_sub(t_vector vec_a, t_vector vec_b);
-t_vector	vector_scale(t_vector vec, float n);
-float		vector_dot(t_vector vec_a, t_vector vec_b);
-float		vector_length(t_vector vec);
-t_vector	vector_normalize(t_vector vec);
+t_vector	vec_new(float x, float y, float z);
+t_vector	vec_from_str(char *x, char *y, char *z);
+t_vector	vec_change(t_vector vec, float x, float y, float z);
+t_vector	vec_copy(t_vector vec_src);
+t_vector	vec_add(t_vector vec_a, t_vector vec_b);
+t_vector	vec_sub(t_vector vec_a, t_vector vec_b);
+t_vector	vec_scale(t_vector vec, float n);
+float		vec_dot(t_vector vec_a, t_vector vec_b);
+float		vec_len(t_vector vec);
+t_vector	vec_norm(t_vector vec);
 
 /*	UTILS	*/
 
