@@ -31,35 +31,44 @@ static int	count_cylinder(t_cy_list *cy_head)
  */
 static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 {
+	float	t1;
+	float	t2;
 	float	t;
+	float	a;
+	float	b;
 	float	c;
-	float	alpha;
-	float	hc;
-	float	hi;
-	t_vector	C;
+	float	dist;
+	float	m1;
+	float	m2;
+	t_vector	x;
 
-	if (ray.og.y < (cylinder->center.y - cylinder->height / 2) || ray.og.y > (cylinder->center.y + cylinder->height / 2))
-		return (1.0 / 0.0);
-	C = vec_new(cylinder->center.x, ray.og.y, cylinder->center.z);
-	c = vec_dot(vec_new(ray.dir.x, 0, ray.dir.z), vec_norm(vec_sub(C, ray.og)));
-	if (c == 1.0)
-		return (vec_len(vec_sub(C, ray.og)) - cylinder->radius);
-	printf("c\t\t->\t[%f]\n", c);
-	alpha = acosf(c);
-	printf("alpha\t-> [%f]\n", alpha * (180/M_PI));
-	hc = sinf(alpha) * vec_len(vec_sub(C, ray.og));
-	printf("|hc|\t-> [%f]\n", hc);
-	if (hc > cylinder->radius)
+	x = vec_sub(ray.og, cylinder->center);
+
+	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, cylinder->dir), 2.0);
+	b = 2.0 * (vec_dot(ray.dir, x) - vec_dot(ray.dir, cylinder->dir) * vec_dot(x, cylinder->dir));
+	c = vec_dot(x, x) - powf(vec_dot(x, cylinder->dir), 2.0) - powf(cylinder->radius, 2.0);
+	printf("a -> [%f]\nb -> [%f]\nc -> [%f]\n\n", a, b, c);
+
+	dist = b * b - 4.0f * a * c;
+	if (dist >= 0)
 	{
-		printf("Does not hit!\n\n");
-		return (1.0 / 0.0);
+		t1 = (-b + sqrtf(dist)) / (2 * a);
+		t2 = (-b - sqrtf(dist)) / (2 * a);
 	}
-	hi = sqrtf(powf(cylinder->radius, 2.0) - powf(hc, 2.0));
-	printf("|hi|\t-> [%f]\n", hi);
-	printf("|hr|\t-> [%f]\n", hc / tanf(alpha));
-	t = (hc / tanf(alpha)) - hi;
-	printf("t\t\t-> [%f]\n\n", t);
-	return (t);
+	else if (dist < 0)
+	{
+		t1 = 1.0 / 0.0;
+		t2 = 1.0 / 0.0;
+	}
+	m1 = vec_dot(ray.dir, cylinder->dir) * t1 + vec_dot(x, cylinder->dir);
+	m2 = vec_dot(ray.dir, cylinder->dir) * t2 + vec_dot(x, cylinder->dir);
+
+	if (m1 >= 0 && m1 <= cylinder->height)
+		return (t1);
+	else if (m2 >= 0 && m2 <= cylinder->height)
+		return (t2);
+	else
+		return (1.0 / 0.0);
 }
 
 /**

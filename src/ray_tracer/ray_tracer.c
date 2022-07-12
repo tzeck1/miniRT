@@ -54,13 +54,13 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 	t_tval	tval_sp;
 	t_tval	tval_cy;
 
-	tval_sp = sphere_loop(ray, objs);
+	// tval_sp = sphere_loop(ray, objs);
 	// tval = plane_loop(ray, objs);
 	tval_cy = cylinder_loop(ray, objs);
-	if (tval_sp.t < tval_cy.t)
-		return (tval_sp);
-	else
-		return(tval_cy);
+	// if (tval_sp.t < tval_cy.t)
+		// return (tval_sp);
+	// else
+	return(tval_cy);
 }
 
 /**
@@ -81,9 +81,9 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 		x = 0;
 		while (x < screen->width)
 		{
-			printf("-- Pixel\t[%d] [%d] --\n", x, y);
+			// printf("-- Pixel\t[%d] [%d] --\n", x, y);
 			ray = create_ray(screen, objs->cam, x, y);
-			printf("Ray\t\t->\t[%.2f] [%.2f] [%.2f]\n", ray.og.x, ray.og.y, ray.og.z);
+			// printf("Ray\t\t->\t[%.2f] [%.2f] [%.2f]\n", ray.og.x, ray.og.y, ray.og.z);
 			tval = intersection(ray, objs);
 			if (tval.t != 1.0 / 0.0)
 				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb));
