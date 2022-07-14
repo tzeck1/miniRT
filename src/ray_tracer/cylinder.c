@@ -42,17 +42,14 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 	float	m2;
 	t_vector	x;
 	t_vector	H;
-	t_vector	new_dir;
-
-	new_dir = vec_new(cylinder->dir.y, cylinder->dir.x, cylinder->dir.z);
 
 	// H = cy.og - cy.dir * h/2
-	H = vec_sub(cylinder->center, vec_scale(new_dir, (cylinder->height / 2)));
+	H = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
 	x = vec_sub(ray.og, H);
 
-	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, new_dir), 2.0);
-	b = 2.0 * (vec_dot(ray.dir, x) - vec_dot(ray.dir, new_dir) * vec_dot(x, new_dir));
-	c = vec_dot(x, x) - powf(vec_dot(x, new_dir), 2.0) - powf(cylinder->radius, 2.0);
+	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, cylinder->dir), 2.0);
+	b = 2.0 * (vec_dot(ray.dir, x) - vec_dot(ray.dir, cylinder->dir) * vec_dot(x, cylinder->dir));
+	c = vec_dot(x, x) - powf(vec_dot(x, cylinder->dir), 2.0) - powf(cylinder->radius, 2.0);
 	// printf("a -> [%f]\nb -> [%f]\nc -> [%f]\n\n", a, b, c);
 
 	dist = b * b - 4.0f * a * c;
@@ -66,8 +63,8 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 		t1 = 1.0 / 0.0;
 		t2 = 1.0 / 0.0;
 	}
-	m1 = vec_dot(ray.dir, new_dir) * t1 + vec_dot(x, new_dir);
-	m2 = vec_dot(ray.dir, new_dir) * t2 + vec_dot(x, new_dir);
+	m1 = vec_dot(ray.dir, cylinder->dir) * t1 + vec_dot(x, cylinder->dir);
+	m2 = vec_dot(ray.dir, cylinder->dir) * t2 + vec_dot(x, cylinder->dir);
 
 	if (m1 >= 0 && m1 <= cylinder->height)
 		return (t1);
