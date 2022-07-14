@@ -20,6 +20,7 @@ t_tval	sphere_loop(t_ray ray, t_objects *objs);
 /*	PLANE	*/
 
 t_tval	plane_loop(t_ray ray, t_objects *objs);
+float	ray_plane(t_ray ray, t_pl_list *plane);
 
 /*	CYLINDER	*/
 

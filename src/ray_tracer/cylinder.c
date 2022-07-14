@@ -23,6 +23,26 @@ static int	count_cylinder(t_cy_list *cy_head)
 	return (count + 1);
 }
 
+static float	caps_check(t_ray ray, t_cy_list *cylinder)
+{
+	t_pl_list	top_cap;
+	t_pl_list	low_cap;
+
+	top_cap.center = cylinder->center - cylinder->dir * (cylinder->height / 2);
+	low_cap.center = cylinder->center + cylinder->dir * (cylinder->height / 2);
+}
+
+static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector x)
+{
+	float	m;
+
+	m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(x, cylinder->dir);
+	if (m >= 0 && m <= cylinder->height)
+		return (true);
+	else
+		return (false);
+}
+
 /**
  * @brief  calculates a ray-cylinder intersection
  * @param  ray: ray to calculate the ntersection with
