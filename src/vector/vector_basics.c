@@ -4,7 +4,7 @@
  * @brief  creates new vector
  * @retval new vector
  */
-t_vector	vector_new(float x, float y, float z)
+t_vector	vec_new(float x, float y, float z)
 {
 	t_vector	vec;
 
@@ -19,7 +19,7 @@ t_vector	vector_new(float x, float y, float z)
  * @note   only for input reading
  * @retval new vector
  */
-t_vector	vector_from_str(char *x, char *y, char *z)
+t_vector	vec_from_str(char *x, char *y, char *z)
 {
 	t_vector	vec;
 
@@ -37,7 +37,7 @@ t_vector	vector_from_str(char *x, char *y, char *z)
  * @param  z: new z value
  * @retval vector with new values
  */
-t_vector	vector_change(t_vector vec, float x, float y, float z)
+t_vector	vec_change(t_vector vec, float x, float y, float z)
 {
 	vec.x = x;
 	vec.y = y;
@@ -50,11 +50,12 @@ t_vector	vector_change(t_vector vec, float x, float y, float z)
  * @param  *vec_src: values to be copied
  * @retval new vector with values from vec_src
  */
-t_vector	vector_copy(t_vector vec_src)
+t_vector	vec_copy(t_vector vec_src)
 {
 	t_vector	vec;
+
 	vec.x = vec_src.x;
 	vec.y = vec_src.y;
-	vec.y = vec_src.y;
+	vec.z = vec_src.z;
 	return (vec);
 }

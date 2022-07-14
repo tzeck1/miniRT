@@ -19,6 +19,7 @@ SRC_PATH = ./src/
 PARS_PATH = ./src/parser/
 INIT_PATH = ./src/data_init/
 VEC_PATH = ./src/vector/
+RT_PATH = ./src/ray_tracer/
 OBJ_PATH = ./obj/
 MLX_PATH = ./MLX42/
 GLFW_PATH = ~/.brew/opt/glfw/lib/
@@ -31,7 +32,8 @@ SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
 		$(VEC_PATH)vector_arithmetics.c	$(VEC_PATH)vector_basics.c	$(VEC_PATH)vector_utils.c\
 		$(PARS_PATH)parser.c			$(PARS_PATH)error.c			$(PARS_PATH)utils.c\
 		$(PARS_PATH)check_file.c		$(PARS_PATH)check_line_id.c	$(PARS_PATH)check_obj_line.c\
-		$(PARS_PATH)check_caps_line.c	$(PARS_PATH)element_check.c	$(PARS_PATH)element_check2.c
+		$(PARS_PATH)check_caps_line.c	$(PARS_PATH)element_check.c	$(PARS_PATH)element_check2.c\
+		$(RT_PATH)ray_tracer.c			$(RT_PATH)sphere.c			$(RT_PATH)plane.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))

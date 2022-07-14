@@ -4,7 +4,7 @@
  * @brief  dot product (vector multiplication)
  * @retval product of vec_a and vec_b
  */
-float	vector_dot(t_vector vec_a, t_vector vec_b)
+float	vec_dot(t_vector vec_a, t_vector vec_b)
 {
 	float	product_x;
 	float	product_y;
@@ -20,7 +20,7 @@ float	vector_dot(t_vector vec_a, t_vector vec_b)
  * @brief  computes cross product of two vectors
  * @retval cross product (as a pseudo vector)
  */
-t_vector	vector_cross(t_vector vec_a, t_vector vec_b)
+t_vector	vec_cross(t_vector vec_a, t_vector vec_b)
 {
 	t_vector	vec_cross;
 
@@ -34,7 +34,7 @@ t_vector	vector_cross(t_vector vec_a, t_vector vec_b)
  * @brief  adds two vectors and returns the result
  * @retval sum of vec_a and vec_b
  */
-t_vector	vector_add(t_vector vec_a, t_vector vec_b)
+t_vector	vec_add(t_vector vec_a, t_vector vec_b)
 {
 	t_vector	vec_sum;
 
@@ -42,14 +42,13 @@ t_vector	vector_add(t_vector vec_a, t_vector vec_b)
 	vec_sum.y = vec_a.y + vec_b.y;
 	vec_sum.z = vec_a.z + vec_b.z;
 	return (vec_sum);
-
 }
 
 /**
  * @brief  subtracts two vectors and returns the result
  * @retval differnece of vec_a and vec_b
  */
-t_vector	vector_sub(t_vector vec_a, t_vector vec_b)
+t_vector	vec_sub(t_vector vec_a, t_vector vec_b)
 {
 	t_vector	vec_diff;
 
@@ -57,5 +56,4 @@ t_vector	vector_sub(t_vector vec_a, t_vector vec_b)
 	vec_diff.y = vec_a.y - vec_b.y;
 	vec_diff.z = vec_a.z - vec_b.z;
 	return (vec_diff);
-
 }

@@ -12,7 +12,7 @@ static void	save_data(char *line, t_amb_light *amb_l)
 
 	replace_commas(line);
 	data = ft_split(line, ' ');
-	amb_l->identifier = AMBIENT;
+	amb_l->id = AMBIENT;
 	amb_l->ratio = ft_atof(data[1]);
 	amb_l->rgb.red = ft_atoi(data[2]);
 	amb_l->rgb.green = ft_atoi(data[3]);

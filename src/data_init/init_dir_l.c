@@ -12,8 +12,8 @@ static void	save_data(char *line, t_dir_light *dir_l)
 
 	replace_commas(line);
 	data = ft_split(line, ' ');
-	dir_l->identifier = LIGHT;
-	dir_l->position = vector_from_str(data[1], data[2], data[3]);
+	dir_l->id = LIGHT;
+	dir_l->pos = vec_from_str(data[1], data[2], data[3]);
 	dir_l->ratio = ft_atof(data[4]);
 	dir_l->rgb.red = ft_atoi(data[5]);
 	dir_l->rgb.green = ft_atoi(data[6]);

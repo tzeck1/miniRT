@@ -32,9 +32,9 @@ int	pl_counter(char *rt_file_path)
  */
 void	pl_fill(char **data, t_pl_list *pl_node)
 {
-	pl_node->identifier = PLANE;
-	pl_node->i_hat = vector_from_str(data[1], data[2], data[3]);
-	pl_node->j_hat = vector_from_str(data[4], data[5], data[6]);
+	pl_node->id = PLANE;
+	pl_node->center = vec_from_str(data[1], data[2], data[3]);
+	pl_node->dir = vec_from_str(data[4], data[5], data[6]);
 	pl_node->rgb = color_from_str(data[7], data[8], data[9]);
 }
 
