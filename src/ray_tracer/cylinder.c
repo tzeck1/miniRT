@@ -25,11 +25,33 @@ static int	count_cylinder(t_cy_list *cy_head)
 
 static float	caps_check(t_ray ray, t_cy_list *cylinder)
 {
-	t_pl_list	top_cap;
-	t_pl_list	low_cap;
+	float	t1;
+	float	t2;
+	t_vector	p1;
+	t_vector	p2;
+	t_pl_list	*top_cap;
+	t_pl_list	*low_cap;
 
-	top_cap.center = cylinder->center - cylinder->dir * (cylinder->height / 2);
-	low_cap.center = cylinder->center + cylinder->dir * (cylinder->height / 2);
+	top_cap = ft_calloc(1, sizeof(t_pl_list));
+	low_cap = ft_calloc(1, sizeof(t_pl_list));
+	top_cap->center = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
+	top_cap->center = cylinder->dir;
+	low_cap->center = vec_add(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
+	low_cap->center = cylinder->dir;
+	t1 = ray_plane(ray, top_cap);
+	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
+	t2 = ray_plane(ray, low_cap);
+	p2 = vec_add(ray.og, vec_scale(ray.dir, t2));
+	if (vec_len(vec_sub(top_cap->center, p1)) > cylinder->radius)
+		t1 = 1.0 / 0.0;
+	if (vec_len(vec_sub(top_cap->center, p2)) > cylinder->radius)
+		t2 = 1.0 / 0.0;
+	if (t1 < t2)
+		return (t1);
+	else if (t2 < t1)
+		return (t2);
+	else
+		return (1.0 / 0.0);
 }
 
 static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector x)
@@ -77,21 +99,35 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 	{
 		t1 = (-b + sqrtf(dist)) / (2 * a);
 		t2 = (-b - sqrtf(dist)) / (2 * a);
+		if (mcheck(t1, ray, cylinder, x) == true && mcheck(t2, ray, cylinder, x))
+		{
+			if (t1 < t2)
+				return (t1);
+			else
+				return (t2);
+		}
+		else if (mcheck(t1, ray, cylinder, x) == false || mcheck(t2, ray, cylinder, x) == false)
+		{
+			if (mcheck(t1, ray, cylinder, x) == false)
+				t1 = caps_check(ray, cylinder);
+			if (mcheck(t2, ray, cylinder, x) == false)
+				t2 = caps_check(ray, cylinder);
+			if (t1 == 1.0 / 0.0 && t2 == 1.0 / 0.0)
+				return (1.0 / 0.0);
+			else if (t1 < t2)
+				return (t1);
+			else
+				return (t2);
+		}
 	}
 	else if (dist < 0)
 	{
-		t1 = 1.0 / 0.0;
-		t2 = 1.0 / 0.0;
+		t1 = caps_check(ray, cylinder);
+		if (t1 != 1.0 / 0.0)
+			return (t1);
+		else
+			return (1.0 / 0.0);
 	}
-	m1 = vec_dot(ray.dir, cylinder->dir) * t1 + vec_dot(x, cylinder->dir);
-	m2 = vec_dot(ray.dir, cylinder->dir) * t2 + vec_dot(x, cylinder->dir);
-
-	if (m1 >= 0 && m1 <= cylinder->height)
-		return (t1);
-	else if (m2 >= 0 && m2 <= cylinder->height)
-		return (t2);
-	else
-		return (1.0 / 0.0);
 }
 
 /**
