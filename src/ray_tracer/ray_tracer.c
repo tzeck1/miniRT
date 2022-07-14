@@ -51,11 +51,19 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
  */
 static t_tval	intersection(t_ray ray, t_objects *objs)
 {
-	t_tval	tval;
+	t_tval	sp_tval;
+	t_tval	pl_tval;
 
-	tval = sphere_loop(ray, objs);
-	// tval = plane_loop(ray, objs);
-	return (tval);
+	sp_tval.t = 1.0 / 0.0;
+	pl_tval.t = 1.0 / 0.0;
+	if (objs->sp_head != NULL)
+		sp_tval = sphere_loop(ray, objs);
+	if (objs->pl_head != NULL)
+		pl_tval = plane_loop(ray, objs);
+	if (sp_tval.t < pl_tval.t)
+		return (sp_tval);
+	else
+		return (pl_tval);
 }
 
 /**
