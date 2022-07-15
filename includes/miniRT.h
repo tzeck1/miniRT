@@ -67,9 +67,10 @@ typedef struct s_vector
 
 typedef struct s_color
 {
-	int	red;
-	int	green;
-	int	blue;
+	int		red;
+	int		green;
+	int		blue;
+	uint32_t	a;
 }	t_color;
 
 typedef struct s_ray

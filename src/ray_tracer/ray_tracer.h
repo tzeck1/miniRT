@@ -9,8 +9,10 @@
  */
 typedef struct s_tval
 {
-	float	t;
-	t_color	rgb;
+	float		t;
+	t_vector	hit_point;
+	t_vector	normal;
+	t_color		rgb;
 }	t_tval;
 
 /*	SPHERE	*/

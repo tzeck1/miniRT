@@ -22,7 +22,7 @@ t_vector	vec_scale(t_vector vec, float n)
 	vec_scaled.x = vec.x * n;
 	vec_scaled.y = vec.y * n;
 	vec_scaled.z = vec.z * n;
-	return (vec);
+	return (vec_scaled);
 }
 
 /**
