@@ -11,14 +11,14 @@ static int	get_color(t_color rgb)
 	int	red;
 	int	green;
 	int	blue;
-	uint32_t a;
+	unsigned int a;
 	uint32_t		res;
 
 	red = 255;
 	green = 255;
 	blue = 255;
 	a = rgb.a;
-	printf("red %d, green %d, blue %d, a %d\n", red, green, blue, a);
+	printf("red %d, green %d, blue %d, a %f\n", red, green, blue, a);
 	res = (red << 24) + (green << 16) + (blue << 8) | a;
 	printf("Color: %X\n", res);
 	return (res);
