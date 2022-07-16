@@ -14,12 +14,12 @@ static int	get_color(t_color rgb)
 	unsigned int a;
 	uint32_t		res;
 
-	red = 255;
-	green = 255;
-	blue = 255;
+	red = 255 << 24;
+	green = 255 << 16;
+	blue = 255 << 8;
 	a = rgb.a;
 	printf("red %d, green %d, blue %d, a %f\n", red, green, blue, a);
-	res = (red << 24) + (green << 16) + (blue << 8) | a;
+	res = red | green | blue | a;
 	printf("Color: %X\n", res);
 	return (res);
 }
@@ -57,17 +57,21 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 {
 	t_tval	sp_tval;
 	t_tval	pl_tval;
+	t_tval	cy_tval;
 
 	sp_tval.t = 1.0 / 0.0;
 	pl_tval.t = 1.0 / 0.0;
+	cy_tval.t = 1.0 / 0.0;
 	if (objs->sp_head != NULL)
 		sp_tval = sphere_loop(ray, objs);
 	if (objs->pl_head != NULL)
 		pl_tval = plane_loop(ray, objs);
-	if (sp_tval.t < pl_tval.t)
-		return (sp_tval);
-	else
-		return (pl_tval);
+	if (objs->cy_head != NULL)
+		cy_tval = cylinder_loop(ray, objs);
+	// if (sp_tval.t < pl_tval.t)
+	// 	return (sp_tval);
+	// else
+	return (cy_tval);
 }
 
 /**
@@ -93,7 +97,7 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 			if (tval.t != 1.0 / 0.0)
 				mlx_put_pixel(screen->img, x, y, + get_color(tval.rgb));
 			else
-				mlx_put_pixel(screen->img, x, y, 0x0000FF);
+				mlx_put_pixel(screen->img, x, y, 0x000000FF);
 			x++;
 		}
 		y++;

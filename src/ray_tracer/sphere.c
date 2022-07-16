@@ -84,7 +84,7 @@ t_tval	sphere_loop(t_ray ray, t_objects *objs)
 			else
 			{
 				float f = vec_dot(tval.normal, vec_scale(ray.dir, -1));
-				tval.rgb.a = (f >= 1.0 ? 255 : (f <= 0.0 ? 0 : (int)floor(f * 256.0)));
+				tval.rgb.a = f * 255.999;//(f >= 1.0 ? 255 : (f <= 0.0 ? 0 : (int)floor(f * 256.0)));
 			}
 		}
 		objs->sp_head = objs->sp_head->next;
