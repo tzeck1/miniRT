@@ -8,6 +8,7 @@ miniRT
 README.md
 test*
 a.out
+*.txt
 libft.a
 .DS_Store
 TODO*
