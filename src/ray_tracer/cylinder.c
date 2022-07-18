@@ -1,6 +1,30 @@
 #include "ray_tracer.h"
 
 /**
+ * @brief  lowkey shading effect from obj center
+ * @note   just for testing shapes, delete when implementing real light
+ */
+static unsigned int temp_shading(t_tval tval, t_ray ray, t_objects *objs)
+{
+	float	t = tval.t;
+	tval.hit_point = vec_add(ray.og, vec_scale(ray.dir, t));
+	t_vector H = vec_sub(objs->cy_head->center, vec_scale(objs->cy_head->dir, (objs->cy_head->height / 2)));
+	t_vector x = vec_sub(ray.og, H);
+	float m = vec_dot(ray.dir, objs->cy_head->dir) * t + vec_dot(x, objs->cy_head->dir);
+	t_vector ax_point = vec_add(H, vec_scale(objs->cy_head->dir, m));
+	tval.normal = vec_norm(vec_sub(tval.hit_point, ax_point));
+	tval.rgb = objs->cy_head->rgb;
+	if (0.0 > vec_dot(tval.normal, vec_scale(ray.dir, -1)))
+		tval.rgb.a = 0;
+	else
+	{
+		float f = vec_dot(tval.normal, vec_scale(ray.dir, -1));
+		tval.rgb.a = f * 255.999;//(f >= 1.0 ? 255 : (f <= 0.0 ? 0 : (int)floor(f * 256.0)));
+	}
+	return (tval.rgb.a);
+}
+
+/**
  * @brief  counts the number of nodes in the cylinder linked list
  * @param  *cy_head: head of the circular cylinder linked list
  * @retval the count of nodes in the list
@@ -23,42 +47,54 @@ static int	count_cylinder(t_cy_list *cy_head)
 	return (count + 1);
 }
 
-// static float	caps_check(t_ray ray, t_cy_list *cylinder)
-// {
-// 	float	t1;
-// 	float	t2;
-// 	t_vector	p1;
-// 	t_vector	p2;
-// 	t_pl_list	*top_cap;
-// 	t_pl_list	*low_cap;
-
-// 	top_cap = ft_calloc(1, sizeof(t_pl_list));
-// 	low_cap = ft_calloc(1, sizeof(t_pl_list));
-// 	top_cap->center = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
-// 	top_cap->center = cylinder->dir;
-// 	low_cap->center = vec_add(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
-// 	low_cap->center = cylinder->dir;
-// 	t1 = ray_plane(ray, top_cap);
-// 	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
-// 	t2 = ray_plane(ray, low_cap);
-// 	p2 = vec_add(ray.og, vec_scale(ray.dir, t2));
-// 	if (vec_len(vec_sub(top_cap->center, p1)) > cylinder->radius)
-// 		t1 = 1.0 / 0.0;
-// 	if (vec_len(vec_sub(top_cap->center, p2)) > cylinder->radius)
-// 		t2 = 1.0 / 0.0;
-// 	if (t1 < t2)
-// 		return (t1);
-// 	else if (t2 < t1)
-// 		return (t2);
-// 	else
-// 		return (1.0 / 0.0);
-// }
-
-static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector x)
+/**
+ * @brief  checks if ray hits top or low cap of the cylinder
+ * @param  ray: current ray
+ * @param  *cylinder: current cylinder
+ * @retval t for cap_hit, or inf in no hit
+ */
+static float	caps_check(t_ray ray, t_cy_list *cylinder)
 {
-	float	m;
+	float	t1;
+	float	t2;
+	t_vector	p1;
+	t_vector	p2;
+	t_pl_list	*top_cap;
+	t_pl_list	*low_cap;
 
-	m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(x, cylinder->dir);
+	top_cap = ft_calloc(1, sizeof(t_pl_list));
+	low_cap = ft_calloc(1, sizeof(t_pl_list));
+	top_cap->center = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
+	top_cap->dir = cylinder->dir;
+	low_cap->center = vec_add(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
+	low_cap->dir = cylinder->dir;
+	t1 = ray_plane(ray, top_cap);
+	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
+	t2 = ray_plane(ray, low_cap);
+	p2 = vec_add(ray.og, vec_scale(ray.dir, t2));
+	if (vec_len(vec_sub(top_cap->center, p1)) > cylinder->radius)
+		t1 = 1.0 / 0.0;
+	if (vec_len(vec_sub(top_cap->center, p2)) > cylinder->radius)
+		t2 = 1.0 / 0.0;
+	if (t1 <= t2)
+		return (t1);
+	else
+		return (t2);
+}
+
+/**
+ * @brief  cuts of inf cylinder at cy.height
+ * @param  t: hitpoint distance
+ * @param  ray: current ray
+ * @param  *cylinder: current cylinder
+ * @param  x: point on the cy axis
+ * @retval 
+ */
+static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector X)
+{
+	float		m;
+
+	m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(X, cylinder->dir);
 	if (m >= 0 && m <= cylinder->height)
 		return (true);
 	else
@@ -73,58 +109,55 @@ static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector x)
  */
 static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 {
-	float	t1;
-	float	t2;
-	float	t;
-	float	a;
-	float	b;
-	float	c;
-	float	dist;
-	float	m1;
-	float	m2;
-	t_vector	x;
+	float		a;
+	float		b;
+	float		c;
+	float		dist;
+	float		t1;
+	float		t2;
 	t_vector	H;
+	t_vector	C;
+	t_vector	w;
+	t_vector	h;
+	t_vector	X;
 
-	// H = cy.og - cy.dir * h/2
-	H = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
-	x = vec_sub(ray.og, H);
+	H = vec_sub(cylinder->center, vec_scale(cylinder->dir, cylinder->height / 2));
+	C = vec_add(H, vec_scale(cylinder->dir, cylinder->height));
+	h = vec_norm(vec_sub(H, C));
+	w = vec_sub(ray.og, C);
+	X = vec_sub(ray.og, H);
 
-	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, cylinder->dir), 2.0);
-	b = 2.0 * (vec_dot(ray.dir, x) - vec_dot(ray.dir, cylinder->dir) * vec_dot(x, cylinder->dir));
-	c = vec_dot(x, x) - powf(vec_dot(x, cylinder->dir), 2.0) - powf(cylinder->radius, 2.0);
-	// printf("a -> [%f]\nb -> [%f]\nc -> [%f]\n\n", a, b, c);
+	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, h), 2.0);
+	b = 2 * (vec_dot(ray.dir, w) - vec_dot(ray.dir, h) * vec_dot(w, h));
+	c = vec_dot(w, w) - powf(vec_dot(w, h), 2.0) - powf(cylinder->radius, 2.0);
 
-	dist = b * b - 4.0f * a * c;
+	dist = b * b - 4.0 * a * c;
 	if (dist >= 0)
 	{
 		t1 = (-b + sqrtf(dist)) / (2 * a);
 		t2 = (-b - sqrtf(dist)) / (2 * a);
-		if (mcheck(t1, ray, cylinder, x) == true && mcheck(t2, ray, cylinder, x))
+		if (mcheck(t1, ray, cylinder, X) == true && mcheck(t2, ray, cylinder, X) == true)
 		{
-			if (t1 < t2)
+			if (t1 <= t2)
 				return (t1);
 			else
 				return (t2);
 		}
-		// else if (mcheck(t1, ray, cylinder, x) == false || mcheck(t2, ray, cylinder, x) == false)
-		// {
-		// 	// if (mcheck(t1, ray, cylinder, x) == false)
-		// 	// 	t1 = caps_check(ray, cylinder);
-		// 	// if (mcheck(t2, ray, cylinder, x) == false)
-		// 	// 	t2 = caps_check(ray, cylinder);
-		// 	if (t1 == 1.0 / 0.0 && t2 == 1.0 / 0.0)
-		// 		return (1.0 / 0.0);
-		// 	else if (t1 < t2)
-		// 		return (t1);
-		// 	else
-		// 		return (t2);
-		// }
+		if (mcheck(t1, ray, cylinder, X) == false)
+			t1 = caps_check(ray, cylinder);
+		if (mcheck(t2, ray, cylinder, X) == false)
+			t2 = caps_check(ray, cylinder);
+		if (t1 <= t2)
+			return (t1);
+		else
+			return (t2);
 	}
-	// else if (dist < 0)
-	// {
-	// 	// t1 = caps_check(ray, cylinder);
-	// 	if (t1 != 1.0 / 0.0)
-	// 		return (t1);
+	else
+	{
+		// t1 = caps_check(ray, cylinder);
+		// return (t1);
+		return (1.0 / 0.0);
+	}
 }
 
 /**
@@ -146,24 +179,10 @@ t_tval	cylinder_loop(t_ray ray, t_objects *objs)
 	while (i != cy_last_i)
 	{
 		t = ray_cylinder(ray, objs->cy_head);
-		printf("t: %f\n", t);
 		if (t < tval.t && t > T_MIN && t < T_MAX)
 		{
 			tval.t = t;
-			tval.hit_point = vec_add(ray.og, vec_scale(ray.dir, t));
-			t_vector H = vec_sub(objs->cy_head->center, vec_scale(objs->cy_head->dir, (objs->cy_head->height / 2)));
-			t_vector x = vec_sub(ray.og, H);
-			float m = vec_dot(ray.dir, objs->cy_head->dir) * t + vec_dot(x, objs->cy_head->dir);
-			t_vector ax_point = vec_add(H, vec_scale(objs->cy_head->dir, m));
-			tval.normal = vec_norm(vec_sub(tval.hit_point, ax_point));
-			tval.rgb = objs->cy_head->rgb;
-			if (0.0 > vec_dot(tval.normal, vec_scale(ray.dir, -1)))
-				tval.rgb.a = 0;
-			else
-			{
-				float f = vec_dot(tval.normal, vec_scale(ray.dir, -1));
-				tval.rgb.a = f * 255.999;//(f >= 1.0 ? 255 : (f <= 0.0 ? 0 : (int)floor(f * 256.0)));
-			}
+			tval.rgb.a = temp_shading(tval, ray, objs);
 		}
 		objs->cy_head = objs->cy_head->next;
 		i++;
