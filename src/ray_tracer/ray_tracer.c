@@ -18,9 +18,9 @@ static int	get_color(t_color rgb)
 	green = 255 << 16;
 	blue = 255 << 8;
 	a = rgb.a;
-	printf("red %d, green %d, blue %d, a %f\n", red, green, blue, a);
+	// printf("red %d, green %d, blue %d, a %f\n", red, green, blue, a);
 	res = red | green | blue | a;
-	printf("Color: %X\n", res);
+	// printf("Color: %X\n", res);
 	return (res);
 }
 
@@ -102,7 +102,9 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 		{
 			ray = create_ray(screen, objs->cam, x, y);
 			tval = intersection(ray, objs);
-			if (tval.t != 1.0 / 0.0)
+			if (x == 375 && y == 375)
+				mlx_put_pixel(screen->img, x, y, 0xFF0000FF);
+			else if (tval.t != 1.0 / 0.0)
 				mlx_put_pixel(screen->img, x, y, + get_color(tval.rgb));
 			else
 				mlx_put_pixel(screen->img, x, y, 0x000000FF);

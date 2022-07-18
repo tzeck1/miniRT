@@ -64,9 +64,9 @@ static float	caps_check(t_ray ray, t_cy_list *cylinder)
 
 	top_cap = ft_calloc(1, sizeof(t_pl_list));
 	low_cap = ft_calloc(1, sizeof(t_pl_list));
-	top_cap->center = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
+	top_cap->center = vec_sub(cylinder->center, vec_scale(vec_norm(cylinder->dir), (cylinder->height / 2)));
 	top_cap->dir = cylinder->dir;
-	low_cap->center = vec_add(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
+	low_cap->center = vec_add(cylinder->center, vec_scale(vec_norm(cylinder->dir), (cylinder->height / 2)));
 	low_cap->dir = cylinder->dir;
 	t1 = ray_plane(ray, top_cap);
 	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
@@ -94,7 +94,6 @@ static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector h, t_vector
 {
 	float		m;
 
-	// m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(X, cylinder->dir);
 	m = vec_dot(vec_sub(vec_add(ray.og, vec_scale(ray.dir, t)), C), h);
 	if (m >= 0 && m <= cylinder->height)
 		return (true);
@@ -122,14 +121,14 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 	t_vector	h;
 	t_vector	X;
 
-	H = vec_sub(cylinder->center, vec_scale(cylinder->dir, cylinder->height / 2));
-	C = vec_add(H, vec_scale(cylinder->dir, cylinder->height));
+	H = vec_add(cylinder->center, vec_scale(vec_norm(cylinder->dir), cylinder->height / 2));
+	C = vec_sub(cylinder->center, vec_scale(vec_norm(cylinder->dir), cylinder->height / 2));
 	h = vec_norm(vec_sub(H, C));
 	w = vec_sub(ray.og, C);
 	X = vec_sub(ray.og, H);
 
 	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, h), 2.0);
-	b = 2 * (vec_dot(ray.dir, w) - vec_dot(ray.dir, h) * vec_dot(w, h));
+	b = 2.0 * (vec_dot(ray.dir, w) - vec_dot(ray.dir, h) * vec_dot(w, h));
 	c = vec_dot(w, w) - powf(vec_dot(w, h), 2.0) - powf(cylinder->radius, 2.0);
 
 	dist = b * b - 4.0 * a * c;
