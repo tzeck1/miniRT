@@ -90,11 +90,12 @@ static float	caps_check(t_ray ray, t_cy_list *cylinder)
  * @param  x: point on the cy axis
  * @retval 
  */
-static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector X)
+static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector h, t_vector C)
 {
 	float		m;
 
-	m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(X, cylinder->dir);
+	// m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(X, cylinder->dir);
+	m = vec_dot(vec_sub(vec_add(ray.og, vec_scale(ray.dir, t)), C), h);
 	if (m >= 0 && m <= cylinder->height)
 		return (true);
 	else
@@ -136,16 +137,16 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 	{
 		t1 = (-b + sqrtf(dist)) / (2 * a);
 		t2 = (-b - sqrtf(dist)) / (2 * a);
-		if (mcheck(t1, ray, cylinder, X) == true && mcheck(t2, ray, cylinder, X) == true)
+		if (mcheck(t1, ray, cylinder, h, C) == true && mcheck(t2, ray, cylinder, h, C) == true)
 		{
 			if (t1 <= t2)
 				return (t1);
 			else
 				return (t2);
 		}
-		if (mcheck(t1, ray, cylinder, X) == false)
+		if (mcheck(t1, ray, cylinder, h, C) == false)
 			t1 = caps_check(ray, cylinder);
-		if (mcheck(t2, ray, cylinder, X) == false)
+		if (mcheck(t2, ray, cylinder, h, C) == false)
 			t2 = caps_check(ray, cylinder);
 		if (t1 <= t2)
 			return (t1);
@@ -154,9 +155,9 @@ static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 	}
 	else
 	{
-		// t1 = caps_check(ray, cylinder);
-		// return (t1);
-		return (1.0 / 0.0);
+		t1 = caps_check(ray, cylinder);
+		return (t1);
+		// return (1.0 / 0.0);
 	}
 }
 
