@@ -83,6 +83,7 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 	if (cy_tval.t < result.t)
 		result = cy_tval;
 	return (result);
+}
 
 /**
  * @brief  Loops through every pixel and calculates their color with ray tracing

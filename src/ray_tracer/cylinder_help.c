@@ -1,5 +1,13 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  calls plane_check and compares distance to cy radius
+ * @param  ray: current ray
+ * @param  radius: current radius
+ * @param  *h_cap: top disk of the cylinder
+ * @param  *c_cap: bottom disk of the cylinder
+ * @retval 
+ */
 float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap)
 {
 	float		t1;
@@ -22,10 +30,10 @@ float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap)
 }
 
 /**
- * @brief  checks if ray hits top or low cap of the cylinder
+ * @brief  set info for top/bottom cap
  * @param  ray: current ray
  * @param  *cylinder: current cylinder
- * @retval t for cap_hit, or inf in no hit
+ * @retval t if anhitpoint was found, inf if no hit
  */
 float	caps_check(t_ray ray, t_cy_list *cylinder)
 {

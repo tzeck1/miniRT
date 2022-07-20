@@ -23,6 +23,13 @@ static int	count_cylinder(t_cy_list *cy_head)
 	return (count + 1);
 }
 
+/**
+ * @brief  calc t if we have a hit point on the cy surface
+ * @param  cy: cylinder information for calculations
+ * @param  ray: current ray
+ * @param  *cylinder: current cylinder
+ * @retval hit distance (t)
+ */
 static float	cy_hit(t_cy cy, t_ray ray, t_cy_list *cylinder)
 {
 	float	t1;
@@ -48,6 +55,12 @@ static float	cy_hit(t_cy cy, t_ray ray, t_cy_list *cylinder)
 		return (t2);
 }
 
+/**
+ * @brief  set variables for calc hitpoint
+ * @param  ray: current ray
+ * @param  *cylinder: current cylinder
+ * @retval filled cy struct
+ */
 static t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
 {
 	t_cy	cy;
@@ -69,6 +82,12 @@ static t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
 	return (cy);
 }
 
+/**
+ * @brief  calls functions to find hitpoint
+ * @param  ray: current ray
+ * @param  *cylinder: current cylinder
+ * @retval returns hit distance (t) or inf if no point was found
+ */
 static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
 {
 	t_cy		cy;
