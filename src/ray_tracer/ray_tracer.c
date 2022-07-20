@@ -34,7 +34,7 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	float	fov;
 
 	fov = tanf((cam->fov * M_PI / 180.0) / 2.0);
-
+  
 	/*--------------	ORTHOGONAL	--------------*/
 	// ray.og.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
 	// ray.og.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
@@ -83,7 +83,6 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 	if (cy_tval.t < result.t)
 		result = cy_tval;
 	return (result);
-}
 
 /**
  * @brief  Loops through every pixel and calculates their color with ray tracing
