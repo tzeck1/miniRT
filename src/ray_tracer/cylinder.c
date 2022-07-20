@@ -23,115 +23,66 @@ static int	count_cylinder(t_cy_list *cy_head)
 	return (count + 1);
 }
 
-static float	caps_check(t_ray ray, t_cy_list *cylinder)
+static float	cy_hit(t_cy cy, t_ray ray, t_cy_list *cylinder)
 {
 	float	t1;
 	float	t2;
-	t_vector	p1;
-	t_vector	p2;
-	t_pl_list	*top_cap;
-	t_pl_list	*low_cap;
 
-	top_cap = ft_calloc(1, sizeof(t_pl_list));
-	low_cap = ft_calloc(1, sizeof(t_pl_list));
-	top_cap->center = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
-	top_cap->center = cylinder->dir;
-	low_cap->center = vec_add(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
-	low_cap->center = cylinder->dir;
-	t1 = ray_plane(ray, top_cap);
-	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
-	t2 = ray_plane(ray, low_cap);
-	p2 = vec_add(ray.og, vec_scale(ray.dir, t2));
-	if (vec_len(vec_sub(top_cap->center, p1)) > cylinder->radius)
-		t1 = 1.0 / 0.0;
-	if (vec_len(vec_sub(top_cap->center, p2)) > cylinder->radius)
-		t2 = 1.0 / 0.0;
-	if (t1 < t2)
-		return (t1);
-	else if (t2 < t1)
-		return (t2);
-	else
-		return (1.0 / 0.0);
-}
-
-static bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector x)
-{
-	float	m;
-
-	m = vec_dot(ray.dir, cylinder->dir) * t + vec_dot(x, cylinder->dir);
-	if (m >= 0 && m <= cylinder->height)
-		return (true);
-	else
-		return (false);
-}
-
-/**
- * @brief  calculates a ray-cylinder intersection
- * @param  ray: ray to calculate the ntersection with
- * @param  *cylinder: the current cylinder node to calculate the intersection with
- * @retval the closest intersection distance or infinity if no solution
- */
-static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
-{
-	float	t1;
-	float	t2;
-	float	t;
-	float	a;
-	float	b;
-	float	c;
-	float	dist;
-	float	m1;
-	float	m2;
-	t_vector	x;
-	t_vector	H;
-
-	// H = cy.og - cy.dir * h/2
-	H = vec_sub(cylinder->center, vec_scale(cylinder->dir, (cylinder->height / 2)));
-	x = vec_sub(ray.og, H);
-
-	a = vec_dot(ray.dir, ray.dir) - powf(vec_dot(ray.dir, cylinder->dir), 2.0);
-	b = 2.0 * (vec_dot(ray.dir, x) - vec_dot(ray.dir, cylinder->dir) * vec_dot(x, cylinder->dir));
-	c = vec_dot(x, x) - powf(vec_dot(x, cylinder->dir), 2.0) - powf(cylinder->radius, 2.0);
-	// printf("a -> [%f]\nb -> [%f]\nc -> [%f]\n\n", a, b, c);
-
-	dist = b * b - 4.0f * a * c;
-	if (dist >= 0)
+	t1 = (-cy.b + sqrtf(cy.dist)) / (2 * cy.a);
+	t2 = (-cy.b - sqrtf(cy.dist)) / (2 * cy.a);
+	if (mcheck(t1, ray, cylinder, cy.axis) == true
+		&& mcheck(t2, ray, cylinder, cy.axis) == true)
 	{
-		t1 = (-b + sqrtf(dist)) / (2 * a);
-		t2 = (-b - sqrtf(dist)) / (2 * a);
-		if (mcheck(t1, ray, cylinder, x) == true && mcheck(t2, ray, cylinder, x))
-		{
-			if (t1 < t2)
-				return (t1);
-			else
-				return (t2);
-		}
-		else if (mcheck(t1, ray, cylinder, x) == false || mcheck(t2, ray, cylinder, x) == false)
-		{
-			if (mcheck(t1, ray, cylinder, x) == false)
-				t1 = caps_check(ray, cylinder);
-			if (mcheck(t2, ray, cylinder, x) == false)
-				t2 = caps_check(ray, cylinder);
-			if (t1 == 1.0 / 0.0 && t2 == 1.0 / 0.0)
-				return (1.0 / 0.0);
-			else if (t1 < t2)
-				return (t1);
-			else
-				return (t2);
-		}
-	}
-	else if (dist < 0)
-	{
-		t1 = caps_check(ray, cylinder);
-		if (t1 != 1.0 / 0.0)
+		if (t1 <= t2)
 			return (t1);
 		else
-			return (1.0 / 0.0);
+			return (t2);
 	}
+	if (mcheck(t1, ray, cylinder, cy.axis) == false)
+		t1 = caps_check(ray, cylinder);
+	if (mcheck(t2, ray, cylinder, cy.axis) == false)
+		t2 = caps_check(ray, cylinder);
+	if (t1 <= t2)
+		return (t1);
+	else
+		return (t2);
+}
+
+static t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
+{
+	t_cy	cy;
+
+	cy.h = vec_add(cylinder->center, vec_scale(vec_norm(cylinder->dir),
+				cylinder->height / 2));
+	cy.l = vec_sub(cylinder->center, vec_scale(vec_norm(cylinder->dir),
+				cylinder->height / 2));
+	cy.axis = vec_norm(vec_sub(cy.h, cy.l));
+	cy.w = vec_sub(ray.og, cy.l);
+	cy.a = vec_dot(ray.dir, ray.dir);
+	cy.a -= powf(vec_dot(ray.dir, cy.axis), 2.0);
+	cy.b = vec_dot(ray.dir, cy.w);
+	cy.b -= vec_dot(cy.w, cy.axis) * vec_dot(ray.dir, cy.axis);
+	cy.b *= 2.0;
+	cy.c = vec_dot(cy.w, cy.w) - powf(vec_dot(cy.w, cy.axis), 2.0);
+	cy.c -= powf(cylinder->radius, 2.0);
+	cy.dist = cy.b * cy.b - 4.0 * cy.a * cy.c;
+	return (cy);
+}
+
+static float	ray_cylinder(t_ray ray, t_cy_list *cylinder)
+{
+	t_cy		cy;
+
+	cy = cy_calc(ray, cylinder);
+	cy.dist = cy.b * cy.b - 4.0 * cy.a * cy.c;
+	if (cy.dist >= 0)
+		return (cy_hit(cy, ray, cylinder));
+	else
+		return (caps_check(ray, cylinder));
 }
 
 /**
- * @brief  iterates through all cylinder and calculates for possible intersections
+ * @brief  iterates through all cy and calculates for possible intersections
  * @param  ray: ray to calculate the intersections with
  * @param  *objs: object data struct
  * @retval informations on the cylinder closest to screen
