@@ -8,16 +8,16 @@
  */
 static int	get_color(t_color rgb)
 {
-	int	red;
-	int	green;
-	int	blue;
-	int	a;
+	int				red;
+	int				green;
+	int				blue;
+	uint32_t		res;
 
 	red = rgb.red << 24;
 	green = rgb.green << 16;
 	blue = rgb.blue << 8;
-	a = 255;
-	return (red | green | blue | a);
+	res = red | green | blue | 0xFF;
+	return (res);
 }
 
 /**
@@ -34,10 +34,20 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	float	fov;
 
 	fov = tanf((cam->fov * M_PI / 180.0) / 2.0);
-	ray.og.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
-	ray.og.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
-	ray.og.z = cam->dir.z;
-	ray.dir = vec_copy(cam->dir);
+  
+	/*--------------	ORTHOGONAL	--------------*/
+	// ray.og.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
+	// ray.og.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
+	// ray.og.z = cam->dir.z;
+	// ray.dir = vec_copy(cam->dir);
+
+	/*--------------	PINEHOLE	--------------*/
+	ray.og = vec_copy(cam->pos);
+	ray.dir.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
+	ray.dir.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
+	ray.dir.z = cam->dir.z;
+	ray.dir = vec_norm(ray.dir);
+
 	ray.t_min = T_MIN;
 	ray.t_max = T_MAX;
 	return (ray);
@@ -51,12 +61,28 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
  */
 static t_tval	intersection(t_ray ray, t_objects *objs)
 {
-	t_tval	tval;
+	t_tval	sp_tval;
+	t_tval	pl_tval;
+	t_tval	cy_tval;
+	t_tval	result;
 
-	tval = sphere_loop(ray, objs);
-	// tval = plane_loop(ray, objs);
-	return (tval);
-}
+	sp_tval.t = 1.0 / 0.0;
+	pl_tval.t = 1.0 / 0.0;
+	cy_tval.t = 1.0 / 0.0;
+	result.t = 1.0 / 0.0;
+	if (objs->sp_head != NULL)
+		sp_tval = sphere_loop(ray, objs);
+	if (sp_tval.t < result.t)
+		result = sp_tval;
+	if (objs->pl_head != NULL)
+		pl_tval = plane_loop(ray, objs);
+	if (pl_tval.t < result.t)
+		result = pl_tval;
+	if (objs->cy_head != NULL)
+		cy_tval = cylinder_loop(ray, objs);
+	if (cy_tval.t < result.t)
+		result = cy_tval;
+	return (result);
 
 /**
  * @brief  Loops through every pixel and calculates their color with ray tracing
@@ -81,7 +107,7 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 			if (tval.t != 1.0 / 0.0)
 				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb));
 			else
-				mlx_put_pixel(screen->img, x, y, 0x0000FF);
+				mlx_put_pixel(screen->img, x, y, 0x000000FF);
 			x++;
 		}
 		y++;

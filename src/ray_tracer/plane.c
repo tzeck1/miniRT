@@ -29,7 +29,7 @@ static int	count_planes(t_pl_list *pl_head)
  * @param  *plane: the current plane node to calculate the intersection with
  * @retval the closest intersection distance or infinity if no solution
  */
-static float	ray_plane(t_ray ray, t_pl_list *plane)
+float	ray_plane(t_ray ray, t_pl_list *plane)
 {
 	float	t;
 	float	denom;
