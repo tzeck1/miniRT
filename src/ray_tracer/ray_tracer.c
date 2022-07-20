@@ -11,13 +11,17 @@ static int	get_color(t_color rgb)
 	int	red;
 	int	green;
 	int	blue;
-	int	a;
+	unsigned int a;
+	uint32_t		res;
 
-	red = rgb.red << 24;
-	green = rgb.green << 16;
-	blue = rgb.blue << 8;
-	a = 255;
-	return (red | green | blue | a);
+	red = 255 << 24;
+	green = 255 << 16;
+	blue = 255 << 8;
+	a = 0xFF;
+	// printf("red %d, green %d, blue %d, a %f\n", red, green, blue, a);
+	res = red | green | blue | a;
+	// printf("Color: %X\n", res);
+	return (res);
 }
 
 /**
@@ -34,10 +38,18 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	float	fov;
 
 	fov = tanf((cam->fov * M_PI / 180.0) / 2.0);
-	ray.og.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
-	ray.og.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
-	ray.og.z = cam->pos.z + 1;
-	ray.dir = vec_copy(cam->dir);
+
+	// ray.og.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
+	// ray.og.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
+	// ray.og.z = cam->dir.z;
+	// ray.dir = vec_copy(cam->dir);
+
+	ray.og = vec_copy(cam->pos);
+	ray.dir.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
+	ray.dir.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
+	ray.dir.z = cam->dir.z;
+	ray.dir = vec_norm(ray.dir);
+
 	ray.t_min = T_MIN;
 	ray.t_max = T_MAX;
 	return (ray);
@@ -51,16 +63,34 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
  */
 static t_tval	intersection(t_ray ray, t_objects *objs)
 {
-	t_tval	tval_sp;
-	t_tval	tval_cy;
+	t_tval	sp_tval;
+	t_tval	pl_tval;
+	t_tval	cy_tval;
+	t_tval	result;
 
-	// tval_sp = sphere_loop(ray, objs);
-	// tval = plane_loop(ray, objs);
-	tval_cy = cylinder_loop(ray, objs);
-	// if (tval_sp.t < tval_cy.t)
-		// return (tval_sp);
-	// else
-	return(tval_cy);
+	sp_tval.t = 1.0 / 0.0;
+	pl_tval.t = 1.0 / 0.0;
+	cy_tval.t = 1.0 / 0.0;
+	result.t = 1.0 / 0.0;
+	if (objs->sp_head != NULL)
+	{
+		sp_tval = sphere_loop(ray, objs);
+		if (sp_tval.t < result.t)
+			result = sp_tval;
+	}
+	if (objs->pl_head != NULL)
+	{
+		pl_tval = plane_loop(ray, objs);
+		if (pl_tval.t < result.t)
+			result = pl_tval;
+	}
+	if (objs->cy_head != NULL)
+	{
+		cy_tval = cylinder_loop(ray, objs);
+		if (cy_tval.t < result.t)
+			result = cy_tval;
+	}
+	return (result);
 }
 
 /**
@@ -81,14 +111,12 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 		x = 0;
 		while (x < screen->width)
 		{
-			// printf("-- Pixel\t[%d] [%d] --\n", x, y);
 			ray = create_ray(screen, objs->cam, x, y);
-			// printf("Ray\t\t->\t[%.2f] [%.2f] [%.2f]\n", ray.og.x, ray.og.y, ray.og.z);
 			tval = intersection(ray, objs);
 			if (tval.t != 1.0 / 0.0)
-				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb));
+				mlx_put_pixel(screen->img, x, y, + get_color(tval.rgb));
 			else
-				mlx_put_pixel(screen->img, x, y, 0x0000FF);
+				mlx_put_pixel(screen->img, x, y, 0x000000FF);
 			x++;
 		}
 		y++;
