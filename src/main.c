@@ -72,5 +72,28 @@ int	main(int argc, char **argv)
 	mlx_loop(data->screen->mlx);
 	mlx_terminate(data->screen->mlx);
 	free_data(data);
+	
+	// t_vector	vec;
+	// t_vector	C;
+	// t_vector	r_og;
+	// float		hc;
+	// float		hi;
+	// float		hr;
+	// float		t;
+	// float		alpha;
+
+	// vec = vec_new(-1.6,0,8);
+	// vec = vec_norm(vec);
+	// C = vec_new(0,0,0);
+	// r_og = vec_new(1.6,0,-8);
+	// alpha = acosf(vec.z);
+	// hc = sinf(alpha) * vec_len(vec_sub(C,r_og));
+	// hi = sqrtf(powf(2.0,2.0) - powf(hc, 2));
+	// hr = hc / tanf(alpha);
+	// t = hr - hi;
+	// printf("[%.8f]\n", t);
+	// printf("dot_product -> [%f]\n", res);
+
+
 	ft_exit(EXIT_SUCCESS);
 }
