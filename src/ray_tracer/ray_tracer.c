@@ -42,6 +42,8 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	// ray.dir = vec_copy(cam->dir);
 
 	/*--------------	PINEHOLE	--------------*/
+	x += 0.5;
+	y += 0.5;
 	ray.og = vec_copy(cam->pos);
 	ray.dir.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
 	ray.dir.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
