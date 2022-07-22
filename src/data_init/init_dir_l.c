@@ -38,7 +38,10 @@ t_dir_light	*get_dir_light_data(char *rt_file_path)
 	obj_index = 0;
 	line = get_obj_line(rt_file_path, LIGHT_ID, obj_index);
 	if (line == NULL)
+	{
+		free(dir_l);
 		dir_l = NULL;
+	}
 	else
 	{
 		save_data(line, dir_l);

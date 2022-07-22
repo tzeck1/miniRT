@@ -37,7 +37,10 @@ t_amb_light	*get_amb_light_data(char *rt_file_path)
 	obj_index = 0;
 	line = get_obj_line(rt_file_path, AMB_LIGHT_ID, obj_index);
 	if (line == NULL)
+	{
+		free(amb_l);
 		amb_l = NULL;
+	}
 	else
 	{
 		save_data(line, amb_l);
