@@ -7,6 +7,7 @@
 void	free_data(t_data *data)
 {
 	free_objects(data->objs);
+	free(data->screen);
 	free(data);
 	data = NULL;
 }

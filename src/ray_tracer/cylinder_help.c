@@ -23,6 +23,8 @@ float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap)
 		t1 = 1.0 / 0.0;
 	if (vec_len(vec_sub(c_cap->center, p2)) > radius)
 		t2 = 1.0 / 0.0;
+	free(h_cap);
+	free(c_cap);
 	if (t1 <= t2)
 		return (t1);
 	else
