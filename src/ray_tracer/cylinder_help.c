@@ -21,7 +21,7 @@ float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap)
 	p2 = vec_add(ray.og, vec_scale(ray.dir, t2));
 	if (vec_len(vec_sub(h_cap->center, p1)) > radius)
 		t1 = 1.0 / 0.0;
-	if (vec_len(vec_sub(h_cap->center, p2)) > radius)
+	if (vec_len(vec_sub(c_cap->center, p2)) > radius)
 		t2 = 1.0 / 0.0;
 	if (t1 <= t2)
 		return (t1);
