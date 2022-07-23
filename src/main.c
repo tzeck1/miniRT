@@ -69,32 +69,19 @@ int	main(int argc, char **argv)
 	data = ft_calloc(1, sizeof(t_data));
 	data->objs = init_objects(argv[1]);
 	init_mlx(data);
+	mlx_image_t *bg = mlx_new_image(data->screen->mlx, data->screen->width, data->screen->height);
+	for (int x = 0; x < data->screen->width; x++)
+	{
+		for (int y = 0; y < data->screen->height; y++)
+		{
+			mlx_put_pixel(bg, x, y, 0x000000FF);
+		}
+	}
+	mlx_image_to_window(data->screen->mlx, bg, 0, 0);
+	mlx_set_instance_depth(bg->instances, -200);
 	ray_tracing(data->screen, data->objs);
 	mlx_loop(data->screen->mlx);
 	mlx_terminate(data->screen->mlx);
 	free_data(data);
-	
-	// t_vector	vec;
-	// t_vector	C;
-	// t_vector	r_og;
-	// float		hc;
-	// float		hi;
-	// float		hr;
-	// float		t;
-	// float		alpha;
-
-	// vec = vec_new(-1.6,0,8);
-	// vec = vec_norm(vec);
-	// C = vec_new(0,0,0);
-	// r_og = vec_new(1.6,0,-8);
-	// alpha = acosf(vec.z);
-	// hc = sinf(alpha) * vec_len(vec_sub(C,r_og));
-	// hi = sqrtf(powf(2.0,2.0) - powf(hc, 2));
-	// hr = hc / tanf(alpha);
-	// t = hr - hi;
-	// printf("[%.8f]\n", t);
-	// printf("dot_product -> [%f]\n", res);
-
-
 	ft_exit(EXIT_SUCCESS);
 }

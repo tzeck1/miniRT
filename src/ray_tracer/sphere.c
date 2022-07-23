@@ -76,7 +76,16 @@ t_tval	sphere_loop(t_ray ray, t_objects *objs)
 		if (t < tval.t && t > T_MIN && t < T_MAX)
 		{
 			tval.t = t;
+			t_vector hit_point = vec_add(ray.og, vec_scale(ray.dir, t));
+			t_vector normal = vec_norm(vec_sub(hit_point, objs->sp_head->center));
 			tval.rgb = objs->sp_head->rgb;
+			if (0.0 > vec_dot(normal, vec_scale(ray.dir, -1)))
+				tval.rgb.a = 0;
+			else
+			{
+				float f = vec_dot(normal, vec_scale(ray.dir, -1));
+				tval.rgb.a = f * 255.999;//(f >= 1.0 ? 255 : (f <= 0.0 ? 0 : (int)floor(f * 256.0)));
+			}
 		}
 		objs->sp_head = objs->sp_head->next;
 		i++;

@@ -1,22 +1,32 @@
 #include "ray_tracer.h"
 
+static int	min(int n1, int n2)
+{
+	if (n1 < n2)
+		return (n1);
+	else
+		return (n2);
+}
+
 /**
  * @brief  convertes rgb-values into a hex representation
  * @note   0xRRGGBBAA
  * @param  rgb: color struct from an object
  * @retval color in hex representation in int
  */
-static int	get_color(t_color rgb)
+static int	get_color(t_color rgb, t_amb_light *amb)
 {
 	int				red;
 	int				green;
 	int				blue;
+	int				a;
 	uint32_t		res;
 
-	red = rgb.red << 24;
-	green = rgb.green << 16;
-	blue = rgb.blue << 8;
-	res = red | green | blue | 0xFF;
+	red = min(rgb.red + (amb->rgb.red * amb->ratio), 255) << 24;
+	green = min(rgb.green + (amb->rgb.green * amb->ratio), 255) << 16;
+	blue = min(rgb.blue + (amb->rgb.blue * amb->ratio), 255) << 8;
+	a = min((rgb.a * 0.9) + (255 * amb->ratio), 255);
+	res = red | green | blue | a;
 	return (res);
 }
 
@@ -108,7 +118,7 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 			ray = create_ray(screen, objs->cam, x, y);
 			tval = intersection(ray, objs);
 			if (tval.t != 1.0 / 0.0)
-				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb));
+				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb, objs->amb_l));
 			else
 				mlx_put_pixel(screen->img, x, y, 0x000000FF);
 			x++;

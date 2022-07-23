@@ -70,6 +70,7 @@ typedef struct s_color
 	int	red;
 	int	green;
 	int	blue;
+	int	a;
 }	t_color;
 
 typedef struct s_ray
