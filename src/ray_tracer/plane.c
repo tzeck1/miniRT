@@ -1,6 +1,23 @@
 #include "ray_tracer.h"
 
 /**
+ * @brief  gets the normal of a plane
+ * @param  *pl_node: the plane object to get the normal from
+ * @param  ray: ray to get normal
+ * @retval the normal vector of the plane
+ */
+static t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray)
+{
+	t_vector	normal;
+
+	if (0.0 > vec_dot(pl_node->dir, ray.dir))
+		normal = vec_scale(pl_node->dir, -1);
+	else
+		normal = pl_node->dir;
+	return (normal);
+}
+
+/**
  * @brief  counts the number of nodes in the plane linked list
  * @param  *pl_head: head of the circular plane linked list
  * @retval the count of nodes in the list
