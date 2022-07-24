@@ -9,8 +9,11 @@
  */
 typedef struct s_tval
 {
-	float	t;
-	t_color	rgb;
+	float		t;
+	t_vector	hit_point;
+	t_color		rgb;
+	int			obj_id;
+	int			obj_type;
 }	t_tval;
 
 typedef struct s_cy

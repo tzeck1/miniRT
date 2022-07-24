@@ -61,9 +61,11 @@ t_tval	plane_loop(t_ray ray, t_objects *objs)
 	while (i != pl_last_i)
 	{
 		t = ray_plane(ray, objs->pl_head);
-		if (t < tval.t && t > T_MIN && t < T_MAX)
+		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
+			tval.obj_id = objs->pl_head->i;
+			tval.obj_type = PLANE;
 			tval.rgb = objs->pl_head->rgb;
 		}
 		objs->pl_head = objs->pl_head->next;

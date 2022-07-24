@@ -1,5 +1,60 @@
 #include "ray_tracer.h"
 
+static t_vector calc_normal(int obj_type, int object_i, t_objects *objs)
+{
+	t_vector	normal;
+	t_sp_list	*sphere;
+	t_pl_list	*plane;
+	t_cy_list	*cylinder;
+
+	if (obj_type == SPHERE)
+	{
+		sphere = ft_calloc(1, sizeof(t_sp_list));
+		sphere = objs->sp_head;
+		while(sphere->i != object_i)
+			sphere = sphere->next;
+		;//normal = sp_normal()
+		free(sphere);
+	}
+	else if (obj_type == PLANE)
+	{
+		plane = ft_calloc(1, sizeof(t_pl_list));
+		plane = objs->pl_head;
+		while(plane->i != object_i)
+			plane = plane->next;
+		;//normal = pl_normal()
+		free(plane);
+	}
+	else if (obj_type == CYLINDER)
+	{
+		cylinder = ft_calloc(1, sizeof(t_cy_list));
+		cylinder = objs->cy_head;
+		while(cylinder->i != object_i)
+			cylinder = cylinder->next;
+		;//normal = cy_normal()
+		free(cylinder);
+	}
+	return (normal);
+}
+
+static int	init_shading(t_tval point, t_ray ray, t_objects *objs)
+{
+	int			a;
+	t_vector	normal;
+	t_vector	light_dir;
+
+	point.hit_point = vec_add(ray.og, vec_scale(ray.dir, point.t));
+	normal = calc_normal(point.obj_type, point.obj_id, objs);
+	light_dir = vec_norm(vec_sub(objs->dir_l->pos, point.hit_point));
+	if (vec_dot(normal, light_dir) < 0)
+		a = 0;
+	else if (in_shadow() == false)
+		a = 0;
+	else
+		a = vec_dot(normal, light_dir) * 255.999;
+	return (a);
+}
+
 static int	min(int n1, int n2)
 {
 	if (n1 < n2)
@@ -25,7 +80,7 @@ static int	get_color(t_color rgb, t_amb_light *amb)
 	red = min(rgb.red + (amb->rgb.red * amb->ratio), 255) << 24;
 	green = min(rgb.green + (amb->rgb.green * amb->ratio), 255) << 16;
 	blue = min(rgb.blue + (amb->rgb.blue * amb->ratio), 255) << 8;
-	a = min((rgb.a * 0.9) + (255 * amb->ratio), 255);
+	a = min((rgb.a * 1) + (255 * amb->ratio), 255);
 	res = red | green | blue | a;
 	return (res);
 }
@@ -60,8 +115,8 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	ray.dir.z = cam->dir.z;
 	ray.dir = vec_norm(ray.dir);
 
-	ray.t_min = T_MIN;
-	ray.t_max = T_MAX;
+	ray.t_min = 0.1;
+	ray.t_max = 1000.0;
 	return (ray);
 }
 
@@ -94,6 +149,7 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 		cy_tval = cylinder_loop(ray, objs);
 	if (cy_tval.t < result.t)
 		result = cy_tval;
+	result = init_shading(result, ray, objs);
 	return (result);
 }
 

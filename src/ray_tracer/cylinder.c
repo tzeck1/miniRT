@@ -119,9 +119,11 @@ t_tval	cylinder_loop(t_ray ray, t_objects *objs)
 	while (i != cy_last_i)
 	{
 		t = ray_cylinder(ray, objs->cy_head);
-		if (t < tval.t && t > T_MIN && t < T_MAX)
+		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
+			tval.obj_id = objs->cy_head->i;
+			tval.obj_type = CYLINDER;
 			tval.rgb = objs->cy_head->rgb;
 		}
 		objs->cy_head = objs->cy_head->next;

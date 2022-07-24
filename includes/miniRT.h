@@ -43,8 +43,6 @@
 # define LIGHT_MAX	1.0
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
-# define T_MIN		1.1
-# define T_MAX		1000
 
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
