@@ -6,7 +6,7 @@
  * @param  ray: ray to get normal
  * @retval the normal vector of the plane
  */
-static t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray)
+t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray)
 {
 	t_vector	normal;
 
@@ -81,7 +81,7 @@ t_tval	plane_loop(t_ray ray, t_objects *objs)
 		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
-			tval.obj_id = objs->pl_head->i;
+			tval.obj_i = objs->pl_head->i;
 			tval.obj_type = PLANE;
 			tval.rgb = objs->pl_head->rgb;
 		}

@@ -1,37 +1,37 @@
 #include "ray_tracer.h"
 
-static t_vector calc_normal(int obj_type, int object_i, t_objects *objs)
+static t_vector calc_normal(t_tval point, t_objects *objs, t_ray ray)
 {
 	t_vector	normal;
 	t_sp_list	*sphere;
 	t_pl_list	*plane;
 	t_cy_list	*cylinder;
 
-	if (obj_type == SPHERE)
+	if (point.obj_type == SPHERE)
 	{
 		sphere = ft_calloc(1, sizeof(t_sp_list));
 		sphere = objs->sp_head;
-		while(sphere->i != object_i)
+		while(sphere->i != point.obj_i)
 			sphere = sphere->next;
-		;//normal = sp_normal()
+		normal = get_sphere_normal(sphere, point, ray);
 		free(sphere);
 	}
-	else if (obj_type == PLANE)
+	else if (point.obj_type == PLANE)
 	{
 		plane = ft_calloc(1, sizeof(t_pl_list));
 		plane = objs->pl_head;
-		while(plane->i != object_i)
+		while(plane->i != point.obj_i)
 			plane = plane->next;
-		;//normal = pl_normal()
+		normal = get_plane_normal(plane, ray);
 		free(plane);
 	}
-	else if (obj_type == CYLINDER)
+	else if (point.obj_type == CYLINDER)
 	{
 		cylinder = ft_calloc(1, sizeof(t_cy_list));
 		cylinder = objs->cy_head;
-		while(cylinder->i != object_i)
+		while(cylinder->i != point.obj_i)
 			cylinder = cylinder->next;
-		;//normal = cy_normal()
+		normal = get_cylinder_normal(cylinder, point, ray);
 		free(cylinder);
 	}
 	return (normal);
@@ -43,13 +43,15 @@ static int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 	t_vector	normal;
 	t_vector	light_dir;
 
+	if (objs->dir_l == NULL)
+		return (0);
 	point.hit_point = vec_add(ray.og, vec_scale(ray.dir, point.t));
-	normal = calc_normal(point.obj_type, point.obj_id, objs);
+	normal = calc_normal(point, objs, ray);
 	light_dir = vec_norm(vec_sub(objs->dir_l->pos, point.hit_point));
 	if (vec_dot(normal, light_dir) < 0)
 		a = 0;
-	else if (in_shadow() == false)
-		a = 0;
+	// else if (in_shadow() == false)
+		// a = 0;
 	else
 		a = vec_dot(normal, light_dir) * 255.999;
 	return (a);
@@ -149,7 +151,8 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 		cy_tval = cylinder_loop(ray, objs);
 	if (cy_tval.t < result.t)
 		result = cy_tval;
-	result = init_shading(result, ray, objs);
+	if (result.t != 1.0 / 0.0)
+		result.rgb.a = init_shading(result, ray, objs);
 	return (result);
 }
 

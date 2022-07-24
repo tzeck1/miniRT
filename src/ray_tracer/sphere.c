@@ -7,7 +7,7 @@
  * @param  ray: ray to get intersection point
  * @retval the normal vector of the sphere from intersection point
  */
-static t_vector	get_sphere_normal(t_sp_list *sp_node, t_tval tval, t_ray ray)
+t_vector	get_sphere_normal(t_sp_list *sp_node, t_tval tval, t_ray ray)
 {
 	t_vector	normal;
 	t_vector	hit_point;
@@ -94,7 +94,7 @@ t_tval	sphere_loop(t_ray ray, t_objects *objs)
 		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
-			tval.obj_id = objs->sp_head->i;
+			tval.obj_i = objs->sp_head->i;
 			tval.obj_type = SPHERE;
 			tval.rgb = objs->sp_head->rgb;
 		}

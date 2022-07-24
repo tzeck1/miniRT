@@ -12,7 +12,7 @@ typedef struct s_tval
 	float		t;
 	t_vector	hit_point;
 	t_color		rgb;
-	int			obj_id;
+	int			obj_i;
 	int			obj_type;
 }	t_tval;
 
@@ -31,11 +31,13 @@ typedef struct s_cy
 /*	SPHERE	*/
 
 t_tval	sphere_loop(t_ray ray, t_objects *objs);
+t_vector	get_sphere_normal(t_sp_list *sp_node, t_tval tval, t_ray ray);
 
 /*	PLANE	*/
 
 t_tval	plane_loop(t_ray ray, t_objects *objs);
 float	ray_plane(t_ray ray, t_pl_list *plane);
+t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray);
 
 /*	CYLINDER	*/
 
