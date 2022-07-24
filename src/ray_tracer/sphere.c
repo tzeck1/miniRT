@@ -1,6 +1,24 @@
 #include "ray_tracer.h"
 
 /**
+ * @brief  gets the normal of an intersection point of a sphere
+ * @param  *sp_node: the sphere object to get the normal from
+ * @param  tval: struct with information on ray-sphere intersection
+ * @param  ray: ray to get intersection point
+ * @retval the normal vector of the sphere from intersection point
+ */
+static t_vector	get_sphere_normal(t_sp_list *sp_node, t_tval tval, t_ray ray)
+{
+	t_vector	normal;
+	t_vector	hit_point;
+
+	hit_point = vec_add(ray.og, vec_scale(ray.dir, tval.t));
+	normal = vec_sub(hit_point, sp_node->center);
+	normal = vec_norm(normal);
+	return (normal);
+}
+
+/**
  * @brief  counts the number of nodes in the sphere linked list
  * @param  *sp_head: head of the circular sphere linked list
  * @retval the count of nodes in the list
