@@ -11,9 +11,9 @@ t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray)
 	t_vector	normal;
 
 	if (0.0 > vec_dot(pl_node->dir, ray.dir))
-		normal = vec_scale(pl_node->dir, -1);
-	else
 		normal = pl_node->dir;
+	else
+		normal = vec_scale(pl_node->dir, -1);
 	return (normal);
 }
 

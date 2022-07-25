@@ -14,7 +14,7 @@ static t_vector calc_normal(t_tval point, t_objects *objs, t_ray ray)
 		while(sphere->i != point.obj_i)
 			sphere = sphere->next;
 		normal = get_sphere_normal(sphere, point, ray);
-		free(sphere);
+		// free(sphere);
 	}
 	else if (point.obj_type == PLANE)
 	{
@@ -23,7 +23,7 @@ static t_vector calc_normal(t_tval point, t_objects *objs, t_ray ray)
 		while(plane->i != point.obj_i)
 			plane = plane->next;
 		normal = get_plane_normal(plane, ray);
-		free(plane);
+		// free(plane);
 	}
 	else if (point.obj_type == CYLINDER)
 	{
@@ -32,7 +32,7 @@ static t_vector calc_normal(t_tval point, t_objects *objs, t_ray ray)
 		while(cylinder->i != point.obj_i)
 			cylinder = cylinder->next;
 		normal = get_cylinder_normal(cylinder, point, ray);
-		free(cylinder);
+		// free(cylinder);
 	}
 	return (normal);
 }
@@ -50,10 +50,10 @@ static int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 	light_dir = vec_norm(vec_sub(objs->dir_l->pos, point.hit_point));
 	if (vec_dot(normal, light_dir) < 0)
 		a = 0;
+	else
+	a = vec_dot(normal, light_dir) * 255.999;
 	// else if (in_shadow() == false)
 		// a = 0;
-	else
-		a = vec_dot(normal, light_dir) * 255.999;
 	return (a);
 }
 
@@ -71,7 +71,7 @@ static int	min(int n1, int n2)
  * @param  rgb: color struct from an object
  * @retval color in hex representation in int
  */
-static int	get_color(t_color rgb, t_amb_light *amb)
+static int	get_color(t_color rgb, t_amb_light *amb, t_dir_light *dir)
 {
 	int				red;
 	int				green;
@@ -82,7 +82,7 @@ static int	get_color(t_color rgb, t_amb_light *amb)
 	red = min(rgb.red + (amb->rgb.red * amb->ratio), 255) << 24;
 	green = min(rgb.green + (amb->rgb.green * amb->ratio), 255) << 16;
 	blue = min(rgb.blue + (amb->rgb.blue * amb->ratio), 255) << 8;
-	a = min((rgb.a * 1) + (255 * amb->ratio), 255);
+	a = min((rgb.a * dir->ratio) + (255 * amb->ratio), 255);
 	res = red | green | blue | a;
 	return (res);
 }
@@ -109,8 +109,8 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	// ray.dir = vec_copy(cam->dir);
 
 	/*--------------	PINEHOLE	--------------*/
-	x += 0.5;
-	y += 0.5;
+	// x += 0.5;
+	// y += 0.5;
 	ray.og = vec_copy(cam->pos);
 	ray.dir.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
 	ray.dir.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
@@ -177,7 +177,7 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 			ray = create_ray(screen, objs->cam, x, y);
 			tval = intersection(ray, objs);
 			if (tval.t != 1.0 / 0.0)
-				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb, objs->amb_l));
+				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb, objs->amb_l, objs->dir_l));
 			else
 				mlx_put_pixel(screen->img, x, y, 0x000000FF);
 			x++;
