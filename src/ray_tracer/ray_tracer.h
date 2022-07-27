@@ -28,6 +28,8 @@ typedef struct s_cy
 	float		dist;
 }	t_cy;
 
+t_tval	intersection(t_ray ray, t_objects *objs, bool flag);
+
 /*	SPHERE	*/
 
 t_tval	sphere_loop(t_ray ray, t_objects *objs);

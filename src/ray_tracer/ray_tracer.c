@@ -1,5 +1,21 @@
 #include "ray_tracer.h"
 
+static bool	in_shadow(t_objects *objs, t_vector hit_point, float t_max)
+{
+	t_ray	ray;
+	t_tval	result;
+
+	ray.og = hit_point;
+	ray.dir = vec_norm(vec_sub(objs->dir_l->pos, hit_point));
+	ray.t_min = 0.01;
+	ray.t_max = vec_len(vec_sub(hit_point, objs->dir_l->pos));
+	result = intersection(ray, objs, false);
+	if (result.t == 1.0 / 0.0)
+		return (true);
+	else
+		return (false);
+}
+
 static t_vector calc_normal(t_tval point, t_objects *objs, t_ray ray)
 {
 	t_vector	normal;
@@ -44,10 +60,10 @@ static int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 	light_dir = vec_norm(vec_sub(objs->dir_l->pos, point.hit_point));
 	if (vec_dot(normal, light_dir) < 0)
 		a = 0;
+	else if (in_shadow(objs, point.hit_point, point.t) == false)
+		a = 0;
 	else
-	a = vec_dot(normal, light_dir) * 255.999;
-	// else if (in_shadow() == false)
-		// a = 0;
+		a = vec_dot(normal, light_dir) * 255.999;
 	return (a);
 }
 
@@ -122,7 +138,7 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
  * @param  *objs: objects data struct
  * @retval informations to the object closest to screen
  */
-static t_tval	intersection(t_ray ray, t_objects *objs)
+t_tval	intersection(t_ray ray, t_objects *objs, bool flag)
 {
 	t_tval	sp_tval;
 	t_tval	pl_tval;
@@ -145,7 +161,7 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 		cy_tval = cylinder_loop(ray, objs);
 	if (cy_tval.t < result.t)
 		result = cy_tval;
-	if (result.t != 1.0 / 0.0)
+	if (result.t != 1.0 / 0.0 && flag == true)
 		result.rgb.a = init_shading(result, ray, objs);
 	return (result);
 }
@@ -169,7 +185,7 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 		while (x < screen->width)
 		{
 			ray = create_ray(screen, objs->cam, x, y);
-			tval = intersection(ray, objs);
+			tval = intersection(ray, objs, true);
 			if (tval.t != 1.0 / 0.0)
 				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb, objs->amb_l, objs->dir_l));
 			else
