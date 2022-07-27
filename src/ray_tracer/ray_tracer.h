@@ -31,13 +31,13 @@ typedef struct s_cy
 /*	SPHERE	*/
 
 t_tval	sphere_loop(t_ray ray, t_objects *objs);
-t_vector	get_sphere_normal(t_sp_list *sp_node, t_tval tval, t_ray ray);
+t_vector	get_sphere_normal(t_sp_list sp_node, t_tval tval, t_ray ray);
 
 /*	PLANE	*/
 
 t_tval	plane_loop(t_ray ray, t_objects *objs);
 float	ray_plane(t_ray ray, t_pl_list *plane);
-t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray);
+t_vector	get_plane_normal(t_pl_list pl_node, t_ray ray);
 
 /*	CYLINDER	*/
 
@@ -45,6 +45,6 @@ t_tval	cylinder_loop(t_ray ray, t_objects *objs);
 bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector axis);
 float	caps_check(t_ray ray, t_cy_list *cylinder);
 float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap);
-t_vector	get_cylinder_normal(t_cy_list *cy_node, t_tval tval, t_ray ray);
+t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray);
 
 #endif

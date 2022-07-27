@@ -3,36 +3,30 @@
 static t_vector calc_normal(t_tval point, t_objects *objs, t_ray ray)
 {
 	t_vector	normal;
-	t_sp_list	*sphere;
-	t_pl_list	*plane;
-	t_cy_list	*cylinder;
+	t_sp_list	sphere;
+	t_pl_list	plane;
+	t_cy_list	cylinder;
 
 	if (point.obj_type == SPHERE)
 	{
-		sphere = ft_calloc(1, sizeof(t_sp_list));
-		sphere = objs->sp_head;
-		while(sphere->i != point.obj_i)
-			sphere = sphere->next;
+		sphere = *objs->sp_head;
+		while(sphere.i != point.obj_i)
+			sphere = *sphere.next;
 		normal = get_sphere_normal(sphere, point, ray);
-		// free(sphere);
 	}
 	else if (point.obj_type == PLANE)
 	{
-		plane = ft_calloc(1, sizeof(t_pl_list));
-		plane = objs->pl_head;
-		while(plane->i != point.obj_i)
-			plane = plane->next;
+		plane = *objs->pl_head;
+		while(plane.i != point.obj_i)
+			plane = *plane.next;
 		normal = get_plane_normal(plane, ray);
-		// free(plane);
 	}
-	else if (point.obj_type == CYLINDER)
+	else
 	{
-		cylinder = ft_calloc(1, sizeof(t_cy_list));
-		cylinder = objs->cy_head;
-		while(cylinder->i != point.obj_i)
-			cylinder = cylinder->next;
+		cylinder = *objs->cy_head;
+		while(cylinder.i != point.obj_i)
+			cylinder = *cylinder.next;
 		normal = get_cylinder_normal(cylinder, point, ray);
-		// free(cylinder);
 	}
 	return (normal);
 }

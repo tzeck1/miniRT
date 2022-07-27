@@ -7,13 +7,13 @@
  * @param  ray: ray to get intersection point
  * @retval the normal vector of the sphere from intersection point
  */
-t_vector	get_sphere_normal(t_sp_list *sp_node, t_tval tval, t_ray ray)
+t_vector	get_sphere_normal(t_sp_list sp_node, t_tval tval, t_ray ray)
 {
 	t_vector	normal;
 	t_vector	hit_point;
 
 	hit_point = vec_add(ray.og, vec_scale(ray.dir, tval.t));
-	normal = vec_sub(hit_point, sp_node->center);
+	normal = vec_sub(hit_point, sp_node.center);
 	normal = vec_norm(normal);
 	return (normal);
 }
