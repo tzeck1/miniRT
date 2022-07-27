@@ -6,14 +6,14 @@
  * @param  ray: ray to get normal
  * @retval the normal vector of the plane
  */
-t_vector	get_plane_normal(t_pl_list *pl_node, t_ray ray)
+t_vector	get_plane_normal(t_pl_list pl_node, t_ray ray)
 {
 	t_vector	normal;
 
-	if (0.0 > vec_dot(pl_node->dir, ray.dir))
-		normal = pl_node->dir;
+	if (0.0 > vec_dot(pl_node.dir, ray.dir))
+		normal = pl_node.dir;
 	else
-		normal = vec_scale(pl_node->dir, -1);
+		normal = vec_scale(pl_node.dir, -1);
 	return (normal);
 }
 

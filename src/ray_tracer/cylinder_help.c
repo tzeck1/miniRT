@@ -7,21 +7,19 @@
  * @param  ray: ray to get the intersection point
  * @retval the normal vector of the cylinder from intersection point
  */
-t_vector	get_cylinder_normal(t_cy_list *cy_node, t_tval tval, t_ray ray)
+t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray)
 {
 	t_vector	normal;
-	t_vector	hit_point;
-	t_vector	tmp;
 	float		m;
 
-	t_vector h = vec_add(cy_node->center, vec_scale(vec_norm(cy_node->dir), (cy_node->height / 2)));
-	t_vector l = vec_sub(cy_node->center, vec_scale(vec_norm(cy_node->dir), (cy_node->height / 2)));
+	t_vector h = vec_add(cy_node.center, vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2)));
+	t_vector l = vec_sub(cy_node.center, vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2)));
 	t_vector axis = vec_norm(vec_sub(h, l));
 	m = vec_dot(vec_sub(vec_add(ray.og, vec_scale(ray.dir, tval.t)), l), axis);
-	if (vec_len(vec_sub(tval.hit_point, h)) < cy_node->radius)
-		normal = cy_node->dir;
-	else if (vec_len(vec_sub(tval.hit_point, l)) < cy_node->radius)
-		normal = vec_scale(cy_node->dir, -1.0);
+	if (vec_len(vec_sub(tval.hit_point, h)) < cy_node.radius)
+		normal = cy_node.dir;
+	else if (vec_len(vec_sub(tval.hit_point, l)) < cy_node.radius)
+		normal = vec_scale(cy_node.dir, -1.0);
 	else
 	{
 		t_vector pt = vec_add(l, vec_scale(axis, m));

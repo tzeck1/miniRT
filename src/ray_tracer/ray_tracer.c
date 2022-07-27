@@ -1,6 +1,6 @@
 #include "ray_tracer.h"
 
-static bool	in_shadow(t_objects *objs, t_vector hit_point, float t_max)
+static bool	in_shadow(t_objects *objs, t_vector hit_point)
 {
 	t_ray	ray;
 	t_tval	result;
@@ -60,7 +60,7 @@ static int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 	light_dir = vec_norm(vec_sub(objs->dir_l->pos, point.hit_point));
 	if (vec_dot(normal, light_dir) < 0)
 		a = 0;
-	else if (in_shadow(objs, point.hit_point, point.t) == false)
+	else if (in_shadow(objs, point.hit_point) == false)
 		a = 0;
 	else
 		a = vec_dot(normal, light_dir) * 255.999;

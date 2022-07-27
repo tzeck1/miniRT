@@ -60,7 +60,7 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 $(NAME): $(OBJ)
 	@make -C MLX42
 	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) libft/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -lm -L $(GLFW_PATH) libft/libft.a -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
