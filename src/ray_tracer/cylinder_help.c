@@ -11,10 +11,15 @@ t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray)
 {
 	t_vector	normal;
 	float		m;
+	t_vector	h;
+	t_vector	l;
+	t_vector	axis;
 
-	t_vector h = vec_add(cy_node.center, vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2)));
-	t_vector l = vec_sub(cy_node.center, vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2)));
-	t_vector axis = vec_norm(vec_sub(h, l));
+	h = vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2));
+	h = vec_add(cy_node.center, h);
+	l = vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2));
+	l = vec_sub(cy_node.center, l);
+	axis = vec_norm(vec_sub(h, l));
 	m = vec_dot(vec_sub(vec_add(ray.og, vec_scale(ray.dir, tval.t)), l), axis);
 	if (vec_len(vec_sub(tval.hit_point, h)) < cy_node.radius)
 		normal = cy_node.dir;
@@ -22,21 +27,9 @@ t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray)
 		normal = vec_scale(cy_node.dir, -1.0);
 	else
 	{
-		t_vector pt = vec_add(l, vec_scale(axis, m));
-		normal = vec_norm(vec_sub(tval.hit_point, pt));
+		normal = vec_sub(tval.hit_point, vec_add(l, vec_scale(axis, m)));
+		normal = vec_norm(normal);
 	}
-	// if (m <= 0)
-	// 	return (vec_scale(cy_node->dir, -1));
-	// else if (m >= cy_node->height)
-	// 	return (cy_node->dir);
-	// else
-	// {
-	// 	tmp = vec_scale(cy_node->dir, cy_node->height / 2);
-	// 	tmp = vec_sub(cy_node->center, tmp);
-	// 	tmp = vec_add(tmp, vec_scale(cy_node->dir, m));
-	// 	hit_point = vec_add(ray.og, vec_scale(ray.dir, tval.t));
-	// 	normal = vec_norm(vec_sub(hit_point, tmp));
-	// }
 	return (normal);
 }
 
@@ -48,7 +41,7 @@ t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray)
  * @param  *c_cap: bottom disk of the cylinder
  * @retval 
  */
-float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap)
+float	caps_hit(t_ray ray, float rad, t_pl_list *h_cap, t_pl_list *c_cap)
 {
 	float		t1;
 	float		t2;
@@ -59,9 +52,9 @@ float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap)
 	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
 	t2 = ray_plane(ray, c_cap);
 	p2 = vec_add(ray.og, vec_scale(ray.dir, t2));
-	if (vec_len(vec_sub(h_cap->center, p1)) > radius)
+	if (vec_len(vec_sub(h_cap->center, p1)) > rad)
 		t1 = 1.0 / 0.0;
-	if (vec_len(vec_sub(c_cap->center, p2)) > radius)
+	if (vec_len(vec_sub(c_cap->center, p2)) > rad)
 		t2 = 1.0 / 0.0;
 	free(h_cap);
 	free(c_cap);

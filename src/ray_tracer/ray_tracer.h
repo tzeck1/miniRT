@@ -28,25 +28,31 @@ typedef struct s_cy
 	float		dist;
 }	t_cy;
 
-t_tval	intersection(t_ray ray, t_objects *objs, bool flag);
+t_tval		intersection(t_ray ray, t_objects *objs, bool flag);
 
 /*	SPHERE	*/
 
-t_tval	sphere_loop(t_ray ray, t_objects *objs);
+t_tval		sphere_loop(t_ray ray, t_objects *objs);
 t_vector	get_sphere_normal(t_sp_list sp_node, t_tval tval, t_ray ray);
 
 /*	PLANE	*/
 
-t_tval	plane_loop(t_ray ray, t_objects *objs);
-float	ray_plane(t_ray ray, t_pl_list *plane);
+t_tval		plane_loop(t_ray ray, t_objects *objs);
+float		ray_plane(t_ray ray, t_pl_list *plane);
 t_vector	get_plane_normal(t_pl_list pl_node, t_ray ray);
 
 /*	CYLINDER	*/
 
-t_tval	cylinder_loop(t_ray ray, t_objects *objs);
-bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector axis);
-float	caps_check(t_ray ray, t_cy_list *cylinder);
-float	caps_hit(t_ray ray, float radius, t_pl_list *h_cap, t_pl_list *c_cap);
+t_tval		cylinder_loop(t_ray ray, t_objects *objs);
+bool		mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector axis);
+float		caps_check(t_ray ray, t_cy_list *cylinder);
+float		caps_hit(t_ray ray, float rad, t_pl_list *h_cap, t_pl_list *c_cap);
 t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray);
+
+/*	UTILS	*/
+
+int			min(int n1, int n2);
+int			get_color(t_color rgb, t_amb_light *amb, t_dir_light *dir);
+int			init_shading(t_tval point, t_ray ray, t_objects *objs);
 
 #endif

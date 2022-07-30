@@ -14,7 +14,6 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <float.h>
-# include <time.h> //for runtime tests -!- DELETE BEFORE SUBMIT -!-
 
 /*	COLORS	*/
 # define RED		"\033[31m"
@@ -77,7 +76,7 @@ typedef struct s_ray
 	t_vector	dir;
 	float		t_min;
 	float		t_max;
-} t_ray;
+}	t_ray;
 
 /**
  * @param id: pl in rt file
@@ -201,9 +200,11 @@ typedef struct s_data
 	struct s_screen		*screen;
 }	t_data;
 
+void		init_mlx(t_data *data);
+
 /*	PARSER	*/
 
-bool	parser(int argc, char **argv);
+bool		parser(int argc, char **argv);
 
 /*  DATA INITIALIZATION */
 
@@ -214,7 +215,7 @@ t_camera	*get_camera_data(char *rt_file_path);
 
 /*	RAY TRACER	*/
 
-void	ray_tracing(t_screen *screen, t_objects *objs);
+void		ray_tracing(t_screen *screen, t_objects *objs);
 
 /*	DATA FREE	*/
 
