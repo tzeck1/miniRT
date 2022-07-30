@@ -1,5 +1,11 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  checks if line from hit point to light intersects any objects
+ * @param  *objs: objs in our scene
+ * @param  hit_point: current hit point / pixel
+ * @retval true if light blocked / point in shadow
+ */
 static bool	in_shadow(t_objects *objs, t_vector hit_point)
 {
 	t_ray	ray;
@@ -11,11 +17,18 @@ static bool	in_shadow(t_objects *objs, t_vector hit_point)
 	ray.t_max = vec_len(vec_sub(hit_point, objs->dir_l->pos));
 	result = intersection(ray, objs, false);
 	if (result.t == 1.0 / 0.0)
-		return (true);
-	else
 		return (false);
+	else
+		return (true);
 }
 
+/**
+ * @brief  calc the surface normal based on the object to calc lighting
+ * @param  point: current hit point / pixel
+ * @param  *objs: objs in our scene
+ * @param  ray: ray from cam to current hit point
+ * @retval surface normal of current hit point and object
+ */
 static t_vector	calc_normal(t_tval point, t_objects *objs, t_ray ray)
 {
 	t_sp_list	sphere;
@@ -45,6 +58,13 @@ static t_vector	calc_normal(t_tval point, t_objects *objs, t_ray ray)
 	}
 }
 
+/**
+ * @brief  calculates transperency based on how much light hits the point
+ * @param  point: hitpoint we want to shade
+ * @param  ray: ray from cam to current hit point
+ * @param  *objs: objs in our scene
+ * @retval a: how bright the pixel will be
+ */
 int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 {
 	int			a;
@@ -58,7 +78,7 @@ int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 	light_dir = vec_norm(vec_sub(objs->dir_l->pos, point.hit_point));
 	if (vec_dot(normal, light_dir) < 0)
 		a = 0;
-	else if (in_shadow(objs, point.hit_point) == false)
+	else if (in_shadow(objs, point.hit_point) == true)
 		a = 0;
 	else
 		a = vec_dot(normal, light_dir) * 255.999;
@@ -69,7 +89,7 @@ int	init_shading(t_tval point, t_ray ray, t_objects *objs)
  * @brief  convertes rgb-values into a hex representation
  * @note   0xRRGGBBAA
  * @param  rgb: color struct from an object
- * @retval color in hex representation in int
+ * @retval color hex representation as an int
  */
 int	get_color(t_color rgb, t_amb_light *amb, t_dir_light *dir)
 {

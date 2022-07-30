@@ -30,6 +30,10 @@ static void	key_hook(mlx_key_data_t	key_data, void *mlx)
 		mlx_close_window((mlx_t *)mlx);
 }
 
+/**
+ * @brief  sets a second image as black background 
+ * @param  *screen: screen utils struct
+ */
 static void	set_background(t_screen *screen)
 {
 	mlx_image_t	*bg;
