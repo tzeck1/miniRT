@@ -38,6 +38,25 @@ static void	key_hook(mlx_key_data_t	key_data, void *mlx)
 		mlx_close_window((mlx_t *)mlx);
 }
 
+static void	loop_hook(void *param)
+{
+	t_data	*data;
+	int32_t	*x;
+	int32_t	*y;
+
+	data = param;
+	
+	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_UP))
+		data->objs->cam->pos.z += 1;
+	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_DOWN))
+		data->objs->cam->pos.z -= 1;
+	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_RIGHT))
+		data->objs->cam->pos.x += 0.1;
+	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_LEFT))
+		data->objs->cam->pos.x -= 0.1;
+	ray_tracing(data->screen, data->objs);
+}
+
 /**
  * @brief  calls mlx_init, key_hook and creates a new image
  * @param  *data: data sctruct, saves mlx pointer and image info
@@ -53,6 +72,7 @@ static void	init_mlx(t_data *data)
 	if (screen->mlx == NULL)
 		ft_exit(EXIT_FAILURE);
 	mlx_key_hook(screen->mlx, &key_hook, screen->mlx);
+	mlx_loop_hook(screen->mlx, &loop_hook, data);
 	screen->img = mlx_new_image(screen->mlx, screen->width, screen->height);
 	if (screen->img == NULL)
 		ft_exit(EXIT_FAILURE);
