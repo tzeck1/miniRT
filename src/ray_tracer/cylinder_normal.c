@@ -19,6 +19,18 @@ static t_vector	get_J_hit_point(t_dir_light light, t_cy_list cylinder, t_tval t)
 	return (J);
 }
 
+static int	get_factor(t_vector light_dir)
+{
+	int i = 3;
+	if (light_dir.x == 0)
+		i--;
+	if (light_dir.y == 0)
+		i--;
+	if (light_dir.z == 0)
+		i--;
+	return (i);
+}
+
 static t_vector	scale_normal(t_vector normal, float scale_ratio, t_dir_light light, t_tval t)
 {
 	t_vector	light_dir;
@@ -28,10 +40,16 @@ static t_vector	scale_normal(t_vector normal, float scale_ratio, t_dir_light lig
 	light_dir = vec_norm(vec_sub(light.pos, t.hit_point));
 	ratio = vec_dot(normal, light_dir);
 	ratio *= scale_ratio;
-	factor
-	normal.x = ratio / 3 / light_dir.x;
-	normal.y = ratio / 3 / light_dir.y;
-	normal.z = ratio / 3 / light_dir.z;
+	factor = get_factor(light_dir);
+	normal.x = ratio / factor / light_dir.x;
+	normal.y = ratio / factor / light_dir.y;
+	normal.z = ratio / factor / light_dir.z;
+	if (normal.x == 1.0 / 0.0)
+		normal.x = 0;
+	if (normal.y == 1.0 / 0.0)
+		normal.y = 0;
+	if (normal.z == 1.0 / 0.0)
+		normal.z = 0;
 	return (normal);
 }
 
@@ -97,6 +115,5 @@ t_vector	get_cylinder_normal(t_objects *objs, t_cy_list cy_node, t_tval tval, t_
 		normal = vec_sub(tval.hit_point, vec_add(l, vec_scale(axis, m)));
 		normal = vec_norm(normal);
 	}
-	// debug_print_vector(normal);
 	return (normal);
 }
