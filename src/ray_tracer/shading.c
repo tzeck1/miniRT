@@ -54,7 +54,7 @@ static t_vector	calc_normal(t_tval point, t_objects *objs, t_ray ray)
 		cylinder = *objs->cy_head;
 		while (cylinder.i != point.obj_i)
 			cylinder = *cylinder.next;
-		return (get_cylinder_normal(cylinder, point, ray));
+		return (get_cylinder_normal(objs, cylinder, point, ray));
 	}
 }
 

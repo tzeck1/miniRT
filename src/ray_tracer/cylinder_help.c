@@ -1,39 +1,6 @@
 #include "ray_tracer.h"
 
 /**
- * @brief  gets the normal of an intersection point on a cylinder
- * @param  *cy_node: the cylinder object to get the normal from
- * @param  tval: struct with information on ray-cylinder intersection
- * @param  ray: ray to get the intersection point
- * @retval the normal vector of the cylinder from intersection point
- */
-t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray)
-{
-	t_vector	normal;
-	float		m;
-	t_vector	h;
-	t_vector	l;
-	t_vector	axis;
-
-	h = vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2));
-	h = vec_add(cy_node.center, h);
-	l = vec_scale(vec_norm(cy_node.dir), (cy_node.height / 2));
-	l = vec_sub(cy_node.center, l);
-	axis = vec_norm(vec_sub(h, l));
-	m = vec_dot(vec_sub(vec_add(ray.og, vec_scale(ray.dir, tval.t)), l), axis);
-	if (vec_len(vec_sub(tval.hit_point, h)) < cy_node.radius)
-		normal = cy_node.dir;
-	else if (vec_len(vec_sub(tval.hit_point, l)) < cy_node.radius)
-		normal = vec_scale(cy_node.dir, -1.0);
-	else
-	{
-		normal = vec_sub(tval.hit_point, vec_add(l, vec_scale(axis, m)));
-		normal = vec_norm(normal);
-	}
-	return (normal);
-}
-
-/**
  * @brief  calls plane_check and compares distance to cy radius
  * @param  ray: current ray
  * @param  radius: current radius

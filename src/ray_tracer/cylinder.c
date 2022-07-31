@@ -61,7 +61,7 @@ static float	cy_hit(t_cy cy, t_ray ray, t_cy_list *cylinder)
  * @param  *cylinder: current cylinder
  * @retval filled cy struct
  */
-static t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
+t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
 {
 	t_cy	cy;
 

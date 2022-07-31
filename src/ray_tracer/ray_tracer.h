@@ -47,7 +47,8 @@ t_tval		cylinder_loop(t_ray ray, t_objects *objs);
 bool		mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector axis);
 float		caps_check(t_ray ray, t_cy_list *cylinder);
 float		caps_hit(t_ray ray, float rad, t_pl_list *h_cap, t_pl_list *c_cap);
-t_vector	get_cylinder_normal(t_cy_list cy_node, t_tval tval, t_ray ray);
+t_vector	get_cylinder_normal(t_objects *objs, t_cy_list cy_node, t_tval tval, t_ray ray);
+t_cy		cy_calc(t_ray ray, t_cy_list *cylinder);
 
 /*	UTILS	*/
 

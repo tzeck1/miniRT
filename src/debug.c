@@ -152,20 +152,20 @@ void	debug_print_plane_node(t_pl_list *node)
 
 /*	stuff we maybe need later */
 
-/**
- * @brief  tracks and prints out program runtime
- */
-void	track_time(void)
-{
-	/*	RUNTIME DISPLAY	*/
-	clock_t begin = clock();
-	/*	RUNTIME DISPLAY	*/
+// /**
+//  * @brief  tracks and prints out program runtime
+//  */
+// void	track_time(void)
+// {
+// 	/*	RUNTIME DISPLAY	*/
+// 	clock_t begin = clock();
+// 	/*	RUNTIME DISPLAY	*/
 
-	/*	RUNTIME DISPLAY	*/
-	clock_t end = clock();
-	printf(BLUE"\nRUNTIME: %.4f sec\n\n"RESET, (double)(end - begin) / CLOCKS_PER_SEC);
-	/*	RUNTIME DISPLAY	*/
-}
+// 	/*	RUNTIME DISPLAY	*/
+// 	clock_t end = clock();
+// 	printf(BLUE"\nRUNTIME: %.4f sec\n\n"RESET, (double)(end - begin) / CLOCKS_PER_SEC);
+// 	/*	RUNTIME DISPLAY	*/
+// }
 
 /**
  * @brief  converts float to raw fixed point value (int)

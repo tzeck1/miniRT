@@ -1,0 +1,3 @@
+x: 375, y: 375
+[32mexited with exit status: 0
+[0m

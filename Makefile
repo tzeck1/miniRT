@@ -35,7 +35,7 @@ SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
 		$(PARS_PATH)check_caps_line.c	$(PARS_PATH)element_check.c	$(PARS_PATH)element_check2.c\
 		$(RT_PATH)ray_tracer.c			$(RT_PATH)sphere.c			$(RT_PATH)plane.c\
 		$(RT_PATH)cylinder.c			$(RT_PATH)cylinder_help.c	$(RT_PATH)utils.c\
-		$(RT_PATH)shading.c
+		$(RT_PATH)shading.c				$(RT_PATH)cylinder_normal.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
