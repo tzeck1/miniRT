@@ -78,8 +78,6 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 		{
 			ray = create_ray(screen, objs->cam, x, y);
 			tval = intersection(ray, objs, true);
-			if (tval.rgb.a < 1)
-				printf("x: %d, y: %d\n", x, y);
 			if (tval.t != 1.0 / 0.0)
 			{
 				mlx_put_pixel(screen->img, x, y,

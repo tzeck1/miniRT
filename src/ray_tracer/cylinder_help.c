@@ -10,10 +10,10 @@
  */
 float	caps_hit(t_ray ray, float rad, t_pl_list *h_cap, t_pl_list *c_cap)
 {
-	float		t1;
-	float		t2;
-	t_vector	p1;
-	t_vector	p2;
+	float	t1;
+	float	t2;
+	t_vec	p1;
+	t_vec	p2;
 
 	t1 = ray_plane(ray, h_cap);
 	p1 = vec_add(ray.og, vec_scale(ray.dir, t1));
@@ -61,10 +61,10 @@ float	caps_check(t_ray ray, t_cy_list *cylinder)
  * @param  axis: cylinder axis orientation vector
  * @retval 
  */
-bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vector axis)
+bool	mcheck(float t, t_ray ray, t_cy_list *cylinder, t_vec axis)
 {
-	float		m;
-	t_vector	l;
+	float	m;
+	t_vec	l;
 
 	l = vec_sub(cylinder->center, vec_scale(vec_norm(cylinder->dir),
 				cylinder->height / 2));

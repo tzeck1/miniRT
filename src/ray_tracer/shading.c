@@ -6,7 +6,7 @@
  * @param  hit_point: current hit point / pixel
  * @retval true if light blocked / point in shadow
  */
-static bool	in_shadow(t_objects *objs, t_vector hit_point)
+static bool	in_shadow(t_objects *objs, t_vec hit_point)
 {
 	t_ray	ray;
 	t_tval	result;
@@ -29,7 +29,7 @@ static bool	in_shadow(t_objects *objs, t_vector hit_point)
  * @param  ray: ray from cam to current hit point
  * @retval surface normal of current hit point and object
  */
-static t_vector	calc_normal(t_tval point, t_objects *objs, t_ray ray)
+static t_vec	calc_normal(t_tval point, t_objects *objs, t_ray ray)
 {
 	t_sp_list	sphere;
 	t_pl_list	plane;
@@ -54,7 +54,7 @@ static t_vector	calc_normal(t_tval point, t_objects *objs, t_ray ray)
 		cylinder = *objs->cy_head;
 		while (cylinder.i != point.obj_i)
 			cylinder = *cylinder.next;
-		return (get_cylinder_normal(objs, cylinder, point, ray));
+		return (get_cy_norm(objs, cylinder, point, ray));
 	}
 }
 
@@ -67,9 +67,9 @@ static t_vector	calc_normal(t_tval point, t_objects *objs, t_ray ray)
  */
 int	init_shading(t_tval point, t_ray ray, t_objects *objs)
 {
-	int			a;
-	t_vector	normal;
-	t_vector	light_dir;
+	int		a;
+	t_vec	normal;
+	t_vec	light_dir;
 
 	if (objs->dir_l == NULL)
 		return (0);

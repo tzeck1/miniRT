@@ -55,12 +55,12 @@ typedef enum e_identifier
 }	t_identifier;
 
 /*  STRUCTS */
-typedef struct s_vector
+typedef struct s_vec
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_vector;
+}	t_vec;
 
 typedef struct s_color
 {
@@ -72,10 +72,10 @@ typedef struct s_color
 
 typedef struct s_ray
 {
-	t_vector	og;
-	t_vector	dir;
-	float		t_min;
-	float		t_max;
+	t_vec	og;
+	t_vec	dir;
+	float	t_min;
+	float	t_max;
 }	t_ray;
 
 /**
@@ -89,8 +89,8 @@ typedef struct s_pl_list
 {
 	int					id;
 	int					i;
-	t_vector			center;
-	t_vector			dir;
+	t_vec				center;
+	t_vec				dir;
 	t_color				rgb;
 	struct s_pl_list	*next;
 	struct s_pl_list	*prev;
@@ -107,7 +107,7 @@ typedef struct s_sp_list
 {
 	int					id;
 	int					i;
-	t_vector			center;
+	t_vec				center;
 	float				radius;
 	t_color				rgb;
 	struct s_sp_list	*next;
@@ -127,8 +127,8 @@ typedef struct s_cy_list
 {
 	int					id;
 	int					i;
-	t_vector			center;
-	t_vector			dir;
+	t_vec				center;
+	t_vec				dir;
 	float				radius;
 	float				height;
 	t_color				rgb;
@@ -144,10 +144,10 @@ typedef struct s_cy_list
  */
 typedef struct s_camera
 {
-	int			id;
-	t_vector	pos;
-	t_vector	dir;
-	float		fov;
+	int		id;
+	t_vec	pos;
+	t_vec	dir;
+	float	fov;
 }	t_camera;
 
 /**
@@ -158,10 +158,10 @@ typedef struct s_camera
  */
 typedef struct s_dir_light
 {
-	int			id;
-	t_vector	pos;
-	float		ratio;
-	t_color		rgb;
+	int		id;
+	t_vec	pos;
+	float	ratio;
+	t_color	rgb;
 }	t_dir_light;
 
 /**
@@ -171,9 +171,9 @@ typedef struct s_dir_light
  */
 typedef struct s_amb_light
 {
-	int			id;
-	float		ratio;
-	t_color		rgb;
+	int		id;
+	float	ratio;
+	t_color	rgb;
 }	t_amb_light;
 
 typedef struct s_objects
@@ -223,16 +223,16 @@ void		free_objects(t_objects *objs);
 
 /*	VECTOR MANAGEMENT	*/
 
-t_vector	vec_new(float x, float y, float z);
-t_vector	vec_from_str(char *x, char *y, char *z);
-t_vector	vec_change(t_vector vec, float x, float y, float z);
-t_vector	vec_copy(t_vector vec_src);
-t_vector	vec_add(t_vector vec_a, t_vector vec_b);
-t_vector	vec_sub(t_vector vec_a, t_vector vec_b);
-t_vector	vec_scale(t_vector vec, float n);
-float		vec_dot(t_vector vec_a, t_vector vec_b);
-float		vec_len(t_vector vec);
-t_vector	vec_norm(t_vector vec);
+t_vec		vec_new(float x, float y, float z);
+t_vec		vec_from_str(char *x, char *y, char *z);
+t_vec		vec_change(t_vec vec, float x, float y, float z);
+t_vec		vec_copy(t_vec vec_src);
+t_vec		vec_add(t_vec vec_a, t_vec vec_b);
+t_vec		vec_sub(t_vec vec_a, t_vec vec_b);
+t_vec		vec_scale(t_vec vec, float n);
+float		vec_dot(t_vec vec_a, t_vec vec_b);
+float		vec_len(t_vec vec);
+t_vec		vec_norm(t_vec vec);
 
 /*	UTILS	*/
 
@@ -244,7 +244,7 @@ void		replace_commas(char *line);
 
 /*	DEBUG	*/
 
-void		debug_print_vector(t_vector vec);
+void		debug_print_vector(t_vec vec);
 void		debug_print_rgb(t_color rgb);
 void		debug_print_cylinder_list(t_cy_list *head);
 void		debug_print_cylinder_node(t_cy_list *node);

@@ -15,7 +15,7 @@ char	*get_type(int type)
 	return (NULL);
 }
 
-void	debug_print_vector(t_vector vec)
+void	debug_print_vector(t_vec vec)
 {
 	printf("x[%f]\n", vec.x);
 	// printf("x-float:\t\t%f\n", fix_to_float(vec->x));

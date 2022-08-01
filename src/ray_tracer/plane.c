@@ -6,9 +6,9 @@
  * @param  ray: ray to get normal
  * @retval the normal vector of the plane
  */
-t_vector	get_plane_normal(t_pl_list pl_node, t_ray ray)
+t_vec	get_plane_normal(t_pl_list pl_node, t_ray ray)
 {
-	t_vector	normal;
+	t_vec	normal;
 
 	if (0.0 > vec_dot(pl_node.dir, ray.dir))
 		normal = pl_node.dir;
