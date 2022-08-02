@@ -20,7 +20,7 @@ t_vec	j_hit(t_dir_light light, t_cy_list cylinder, t_tval t)
 	cy = cy_calc(ray, &cylinder);
 	t1 = (-cy.b + sqrtf(cy.dist)) / (2.0 * cy.a);
 	t2 = (-cy.b - sqrtf(cy.dist)) / (2.0 * cy.a);
-	if (t2 < t1)
+	if (t1 < t2)
 		t1 = t2;
 	j = vec_add(ray.og, vec_scale(ray.dir, t1));
 	return (j);
