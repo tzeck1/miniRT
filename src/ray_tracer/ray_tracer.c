@@ -15,8 +15,10 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 
 	fov = tanf((cam->fov * M_PI / 180.0) / 2.0);
 	ray.og = vec_copy(cam->pos);
-	ray.dir.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
-	ray.dir.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
+	ray.dir.x = cam->dir.x;
+	ray.dir.x += x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
+	ray.dir.y = cam->dir.y;
+	ray.dir.y += fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
 	ray.dir.z = cam->dir.z;
 	ray.dir = vec_norm(ray.dir);
 	ray.t_min = 0.1;

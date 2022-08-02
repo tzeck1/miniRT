@@ -1,13 +1,12 @@
 #include "ray_tracer.h"
 
 /**
- * @brief  
- * @note   
- * @param  norm: 
- * @param  scale: 
- * @param  light: 
- * @param  t: 
- * @retval 
+ * @brief  scales the norm of a cyinder cap to produce fitting shading
+ * @param  norm: the unscaled cylinder cap normal
+ * @param  scale: float value to scale the normal with
+ * @param  light: information on direct light
+ * @param  t: information on the ray-cylinder intersection
+ * @retval the scaled normal
  */
 static t_vec	scale_norm(t_vec norm, float scale, t_dir_light light, t_tval t)
 {

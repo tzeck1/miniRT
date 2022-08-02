@@ -1,12 +1,11 @@
 #include "ray_tracer.h"
 
 /**
- * @brief  
- * @note   
- * @param  light: 
- * @param  cylinder: 
- * @param  t: 
- * @retval 
+ * @brief  calculates special point J necessary for cylinder cap shading
+ * @param  light: information on direct light
+ * @param  cylinder: information on the current cyinder node
+ * @param  t: information on ray-cyinder intersection
+ * @retval the point J
  */
 t_vec	j_hit(t_dir_light light, t_cy_list cylinder, t_tval t)
 {
