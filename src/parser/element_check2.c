@@ -19,6 +19,8 @@ bool	normalized_check(char *x_value, char *y_value, char *z_value)
 		|| y < NO_VEC_MIN || y > NO_VEC_MAX
 		|| z < NO_VEC_MIN || z > NO_VEC_MAX)
 		return (false);
+	if (x == 0 && y == 0 && z == 0)
+		return (false);
 	else
 		return (true);
 }

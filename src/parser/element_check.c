@@ -27,7 +27,7 @@ bool	rgb_range_check(char *value)
  */
 bool	diameter_height_check(char *diameter, t_parser_utils *parser_utils)
 {
-	if (float_check(diameter) == false)
+	if (float_check(diameter) == false || ft_atof(diameter) < 0)
 	{
 		ft_parse_error(NO_FLOAT, parser_utils->line);
 		parser_utils->line_error = true;

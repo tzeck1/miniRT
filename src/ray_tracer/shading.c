@@ -102,7 +102,10 @@ int	get_color(t_color rgb, t_amb_light *amb, t_dir_light *dir)
 	red = min(rgb.red + (amb->rgb.red * amb->ratio), 255) << 24;
 	green = min(rgb.green + (amb->rgb.green * amb->ratio), 255) << 16;
 	blue = min(rgb.blue + (amb->rgb.blue * amb->ratio), 255) << 8;
-	a = min((rgb.a * dir->ratio) + (255 * amb->ratio), 255);
+	if (dir == NULL)
+		a = min(rgb.a + (255 * amb->ratio), 255);
+	else
+		a = min((rgb.a * dir->ratio) + (255 * amb->ratio), 255);
 	res = red | green | blue | a;
 	return (res);
 }
