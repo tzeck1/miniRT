@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_basics.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:29:21 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:29:22 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 /**
  * @brief  creates new vector
  * @retval new vector
  */
-t_vector	vec_new(float x, float y, float z)
+t_vec	vec_new(float x, float y, float z)
 {
-	t_vector	vec;
+	t_vec	vec;
 
 	vec.x = x;
 	vec.y = y;
@@ -19,9 +31,9 @@ t_vector	vec_new(float x, float y, float z)
  * @note   only for input reading
  * @retval new vector
  */
-t_vector	vec_from_str(char *x, char *y, char *z)
+t_vec	vec_from_str(char *x, char *y, char *z)
 {
-	t_vector	vec;
+	t_vec	vec;
 
 	vec.x = ft_atof(x);
 	vec.y = ft_atof(y);
@@ -37,7 +49,7 @@ t_vector	vec_from_str(char *x, char *y, char *z)
  * @param  z: new z value
  * @retval vector with new values
  */
-t_vector	vec_change(t_vector vec, float x, float y, float z)
+t_vec	vec_change(t_vec vec, float x, float y, float z)
 {
 	vec.x = x;
 	vec.y = y;
@@ -50,9 +62,9 @@ t_vector	vec_change(t_vector vec, float x, float y, float z)
  * @param  *vec_src: values to be copied
  * @retval new vector with values from vec_src
  */
-t_vector	vec_copy(t_vector vec_src)
+t_vec	vec_copy(t_vec vec_src)
 {
-	t_vector	vec;
+	t_vec	vec;
 
 	vec.x = vec_src.x;
 	vec.y = vec_src.y;

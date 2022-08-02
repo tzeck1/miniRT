@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:29:24 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:29:25 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 /**
@@ -5,7 +17,7 @@
  * @param  vec: vector
  * @retval length of vector
  */
-float	vec_len(t_vector vec)
+float	vec_len(t_vec vec)
 {
 	return (sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
@@ -15,9 +27,9 @@ float	vec_len(t_vector vec)
  * @param  n: scaler
  * @retval product of vec multiplied with n
  */
-t_vector	vec_scale(t_vector vec, float n)
+t_vec	vec_scale(t_vec vec, float n)
 {
-	t_vector	vec_scaled;
+	t_vec	vec_scaled;
 
 	vec_scaled.x = vec.x * n;
 	vec_scaled.y = vec.y * n;
@@ -30,7 +42,7 @@ t_vector	vec_scale(t_vector vec, float n)
  * @param  vec: vector
  * @retval normalized vector
  */
-t_vector	vec_norm(t_vector vec)
+t_vec	vec_norm(t_vec vec)
 {
 	float	length;
 	float	inv_length;

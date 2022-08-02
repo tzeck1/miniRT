@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:28:19 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:28:20 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ray_tracer.h"
 
 /**
@@ -61,7 +73,7 @@ static float	cy_hit(t_cy cy, t_ray ray, t_cy_list *cylinder)
  * @param  *cylinder: current cylinder
  * @retval filled cy struct
  */
-static t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
+t_cy	cy_calc(t_ray ray, t_cy_list *cylinder)
 {
 	t_cy	cy;
 
@@ -119,9 +131,11 @@ t_tval	cylinder_loop(t_ray ray, t_objects *objs)
 	while (i != cy_last_i)
 	{
 		t = ray_cylinder(ray, objs->cy_head);
-		if (t < tval.t && t > T_MIN && t < T_MAX)
+		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
+			tval.obj_i = objs->cy_head->i;
+			tval.obj_type = CYLINDER;
 			tval.rgb = objs->cy_head->rgb;
 		}
 		objs->cy_head = objs->cy_head->next;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:26:55 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:26:56 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 /**
@@ -9,6 +21,7 @@ int	pl_counter(char *rt_file_path)
 {
 	int		count;
 	int		fd;
+	int		j;
 	char	*line;
 
 	count = 0;
@@ -16,7 +29,10 @@ int	pl_counter(char *rt_file_path)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (ft_strncmp(line, PLANE_ID, ft_strlen(PLANE_ID)) == 0)
+		j = 0;
+		while (line[j] == ' ')
+			j++;
+		if (ft_strncmp(&line[j], PLANE_ID, ft_strlen(PLANE_ID)) == 0)
 			count++;
 		free(line);
 		line = get_next_line(fd);

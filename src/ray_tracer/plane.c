@@ -1,4 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:28:22 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:28:23 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ray_tracer.h"
+
+/**
+ * @brief  gets the normal of a plane
+ * @param  *pl_node: the plane object to get the normal from
+ * @param  ray: ray to get normal
+ * @retval the normal vector of the plane
+ */
+t_vec	get_plane_normal(t_pl_list pl_node, t_ray ray)
+{
+	t_vec	normal;
+
+	if (0.0 > vec_dot(pl_node.dir, ray.dir))
+		normal = pl_node.dir;
+	else
+		normal = vec_scale(pl_node.dir, -1);
+	return (normal);
+}
 
 /**
  * @brief  counts the number of nodes in the plane linked list
@@ -61,9 +90,11 @@ t_tval	plane_loop(t_ray ray, t_objects *objs)
 	while (i != pl_last_i)
 	{
 		t = ray_plane(ray, objs->pl_head);
-		if (t < tval.t && t > T_MIN && t < T_MAX)
+		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
+			tval.obj_i = objs->pl_head->i;
+			tval.obj_type = PLANE;
 			tval.rgb = objs->pl_head->rgb;
 		}
 		objs->pl_head = objs->pl_head->next;

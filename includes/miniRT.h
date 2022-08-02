@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:50:29 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:50:30 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -14,7 +26,6 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <float.h>
-# include <time.h> //for runtime tests -!- DELETE BEFORE SUBMIT -!-
 
 /*	COLORS	*/
 # define RED		"\033[31m"
@@ -23,9 +34,6 @@
 # define BLUE		"\033[34m"
 # define YELLOW		"\033[33m"
 # define RESET		"\033[0m"
-
-/*	DEBUG	*/
-# define PRINT_HERE(){printf(YELLOW"In File: %s\nIn Line: %d\n"RESET, __FILE__, __LINE__);}
 
 /*	MACROS	*/
 # define LIGHT_ID		"L"
@@ -43,8 +51,6 @@
 # define LIGHT_MAX	1.0
 # define FOV_MIN	0		// field of view degree
 # define FOV_MAX	180
-# define T_MIN		1.1
-# define T_MAX		1000
 
 /*	ENUMERATIONS	*/
 typedef enum e_identifier
@@ -58,27 +64,28 @@ typedef enum e_identifier
 }	t_identifier;
 
 /*  STRUCTS */
-typedef struct s_vector
+typedef struct s_vec
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_vector;
+}	t_vec;
 
 typedef struct s_color
 {
 	int	red;
 	int	green;
 	int	blue;
+	int	a;
 }	t_color;
 
 typedef struct s_ray
 {
-	t_vector	og;
-	t_vector	dir;
-	float		t_min;
-	float		t_max;
-} t_ray;
+	t_vec	og;
+	t_vec	dir;
+	float	t_min;
+	float	t_max;
+}	t_ray;
 
 /**
  * @param id: pl in rt file
@@ -91,8 +98,8 @@ typedef struct s_pl_list
 {
 	int					id;
 	int					i;
-	t_vector			center;
-	t_vector			dir;
+	t_vec				center;
+	t_vec				dir;
 	t_color				rgb;
 	struct s_pl_list	*next;
 	struct s_pl_list	*prev;
@@ -109,7 +116,7 @@ typedef struct s_sp_list
 {
 	int					id;
 	int					i;
-	t_vector			center;
+	t_vec				center;
 	float				radius;
 	t_color				rgb;
 	struct s_sp_list	*next;
@@ -129,8 +136,8 @@ typedef struct s_cy_list
 {
 	int					id;
 	int					i;
-	t_vector			center;
-	t_vector			dir;
+	t_vec				center;
+	t_vec				dir;
 	float				radius;
 	float				height;
 	t_color				rgb;
@@ -146,10 +153,10 @@ typedef struct s_cy_list
  */
 typedef struct s_camera
 {
-	int			id;
-	t_vector	pos;
-	t_vector	dir;
-	float		fov;
+	int		id;
+	t_vec	pos;
+	t_vec	dir;
+	float	fov;
 }	t_camera;
 
 /**
@@ -160,10 +167,10 @@ typedef struct s_camera
  */
 typedef struct s_dir_light
 {
-	int			id;
-	t_vector	pos;
-	float		ratio;
-	t_color		rgb;
+	int		id;
+	t_vec	pos;
+	float	ratio;
+	t_color	rgb;
 }	t_dir_light;
 
 /**
@@ -173,9 +180,9 @@ typedef struct s_dir_light
  */
 typedef struct s_amb_light
 {
-	int			id;
-	float		ratio;
-	t_color		rgb;
+	int		id;
+	float	ratio;
+	t_color	rgb;
 }	t_amb_light;
 
 typedef struct s_objects
@@ -202,9 +209,11 @@ typedef struct s_data
 	struct s_screen		*screen;
 }	t_data;
 
+void		init_mlx(t_data *data);
+
 /*	PARSER	*/
 
-bool	parser(int argc, char **argv);
+bool		parser(int argc, char **argv);
 
 /*  DATA INITIALIZATION */
 
@@ -215,7 +224,7 @@ t_camera	*get_camera_data(char *rt_file_path);
 
 /*	RAY TRACER	*/
 
-void	ray_tracing(t_screen *screen, t_objects *objs);
+void		ray_tracing(t_screen *screen, t_objects *objs);
 
 /*	DATA FREE	*/
 
@@ -223,16 +232,16 @@ void		free_objects(t_objects *objs);
 
 /*	VECTOR MANAGEMENT	*/
 
-t_vector	vec_new(float x, float y, float z);
-t_vector	vec_from_str(char *x, char *y, char *z);
-t_vector	vec_change(t_vector vec, float x, float y, float z);
-t_vector	vec_copy(t_vector vec_src);
-t_vector	vec_add(t_vector vec_a, t_vector vec_b);
-t_vector	vec_sub(t_vector vec_a, t_vector vec_b);
-t_vector	vec_scale(t_vector vec, float n);
-float		vec_dot(t_vector vec_a, t_vector vec_b);
-float		vec_len(t_vector vec);
-t_vector	vec_norm(t_vector vec);
+t_vec		vec_new(float x, float y, float z);
+t_vec		vec_from_str(char *x, char *y, char *z);
+t_vec		vec_change(t_vec vec, float x, float y, float z);
+t_vec		vec_copy(t_vec vec_src);
+t_vec		vec_add(t_vec vec_a, t_vec vec_b);
+t_vec		vec_sub(t_vec vec_a, t_vec vec_b);
+t_vec		vec_scale(t_vec vec, float n);
+float		vec_dot(t_vec vec_a, t_vec vec_b);
+float		vec_len(t_vec vec);
+t_vec		vec_norm(t_vec vec);
 
 /*	UTILS	*/
 
@@ -244,7 +253,7 @@ void		replace_commas(char *line);
 
 /*	DEBUG	*/
 
-void		debug_print_vector(t_vector vec);
+void		debug_print_vector(t_vec vec);
 void		debug_print_rgb(t_color rgb);
 void		debug_print_cylinder_list(t_cy_list *head);
 void		debug_print_cylinder_node(t_cy_list *node);

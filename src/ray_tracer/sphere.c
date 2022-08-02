@@ -1,4 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:28:36 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:28:37 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ray_tracer.h"
+
+/**
+ * @brief  gets the normal of an intersection point of a sphere
+ * @param  *sp_node: the sphere object to get the normal from
+ * @param  tval: struct with information on ray-sphere intersection
+ * @param  ray: ray to get intersection point
+ * @retval the normal vector of the sphere from intersection point
+ */
+t_vec	get_sphere_normal(t_sp_list sp_node, t_tval tval, t_ray ray)
+{
+	t_vec	normal;
+	t_vec	hit_point;
+
+	hit_point = vec_add(ray.og, vec_scale(ray.dir, tval.t));
+	normal = vec_sub(hit_point, sp_node.center);
+	normal = vec_norm(normal);
+	return (normal);
+}
 
 /**
  * @brief  counts the number of nodes in the sphere linked list
@@ -73,9 +103,11 @@ t_tval	sphere_loop(t_ray ray, t_objects *objs)
 	while (i != sp_last_i)
 	{
 		t = ray_sphere(ray, objs->sp_head);
-		if (t < tval.t && t > T_MIN && t < T_MAX)
+		if (t < tval.t && t > ray.t_min && t < ray.t_max)
 		{
 			tval.t = t;
+			tval.obj_i = objs->sp_head->i;
+			tval.obj_type = SPHERE;
 			tval.rgb = objs->sp_head->rgb;
 		}
 		objs->sp_head = objs->sp_head->next;

@@ -1,24 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_tracer.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:28:24 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:28:25 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ray_tracer.h"
-
-/**
- * @brief  convertes rgb-values into a hex representation
- * @note   0xRRGGBBAA
- * @param  rgb: color struct from an object
- * @retval color in hex representation in int
- */
-static int	get_color(t_color rgb)
-{
-	int				red;
-	int				green;
-	int				blue;
-	uint32_t		res;
-
-	red = rgb.red << 24;
-	green = rgb.green << 16;
-	blue = rgb.blue << 8;
-	res = red | green | blue | 0xFF;
-	return (res);
-}
 
 /**
  * @brief  creates a ray corresponding to x and y screen position of pixel
@@ -34,24 +26,15 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
 	float	fov;
 
 	fov = tanf((cam->fov * M_PI / 180.0) / 2.0);
-  
-	/*--------------	ORTHOGONAL	--------------*/
-	// ray.og.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
-	// ray.og.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
-	// ray.og.z = cam->dir.z;
-	// ray.dir = vec_copy(cam->dir);
-
-	/*--------------	PINEHOLE	--------------*/
-	x += 0.5;
-	y += 0.5;
 	ray.og = vec_copy(cam->pos);
-	ray.dir.x = x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
-	ray.dir.y = fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
+	ray.dir.x = cam->dir.x;
+	ray.dir.x += x * (2.0 * fov / (float)screen->width) + cam->pos.x - fov;
+	ray.dir.y = cam->dir.y;
+	ray.dir.y += fov - y * (2.0 * fov / (float)screen->height) + cam->pos.y;
 	ray.dir.z = cam->dir.z;
 	ray.dir = vec_norm(ray.dir);
-
-	ray.t_min = T_MIN;
-	ray.t_max = T_MAX;
+	ray.t_min = 0.1;
+	ray.t_max = 1000.0;
 	return (ray);
 }
 
@@ -61,7 +44,7 @@ static t_ray	create_ray(t_screen *screen, t_camera *cam, float x, float y)
  * @param  *objs: objects data struct
  * @retval informations to the object closest to screen
  */
-static t_tval	intersection(t_ray ray, t_objects *objs)
+t_tval	intersection(t_ray ray, t_objects *objs, bool flag)
 {
 	t_tval	sp_tval;
 	t_tval	pl_tval;
@@ -84,6 +67,8 @@ static t_tval	intersection(t_ray ray, t_objects *objs)
 		cy_tval = cylinder_loop(ray, objs);
 	if (cy_tval.t < result.t)
 		result = cy_tval;
+	if (result.t != 1.0 / 0.0 && flag == true)
+		result.rgb.a = init_shading(result, ray, objs);
 	return (result);
 }
 
@@ -106,9 +91,12 @@ void	ray_tracing(t_screen *screen, t_objects *objs)
 		while (x < screen->width)
 		{
 			ray = create_ray(screen, objs->cam, x, y);
-			tval = intersection(ray, objs);
+			tval = intersection(ray, objs, true);
 			if (tval.t != 1.0 / 0.0)
-				mlx_put_pixel(screen->img, x, y, get_color(tval.rgb));
+			{
+				mlx_put_pixel(screen->img, x, y,
+					get_color(tval.rgb, objs->amb_l, objs->dir_l));
+			}
 			else
 				mlx_put_pixel(screen->img, x, y, 0x000000FF);
 			x++;

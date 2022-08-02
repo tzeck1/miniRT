@@ -3,7 +3,7 @@ NAME = ./miniRT
 
 # FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -g #-Werror
+CFLAGS = -Wall -Wextra -Werror #-g
 
 # COLORS
 Y = "\033[33m"
@@ -26,7 +26,7 @@ GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
 SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
-		$(INIT_PATH)init_objects.c		$(INIT_PATH)utils.c\
+		$(SRC_PATH)mlx_init.c			$(INIT_PATH)init_objects.c		$(INIT_PATH)utils.c\
 		$(INIT_PATH)init_amb_l.c		$(INIT_PATH)init_cam.c		$(INIT_PATH)init_dir_l.c\
 		$(INIT_PATH)cylinder_list.c		$(INIT_PATH)sphere_list.c	$(INIT_PATH)plane_list.c\
 		$(VEC_PATH)vector_arithmetics.c	$(VEC_PATH)vector_basics.c	$(VEC_PATH)vector_utils.c\
@@ -34,7 +34,8 @@ SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
 		$(PARS_PATH)check_file.c		$(PARS_PATH)check_line_id.c	$(PARS_PATH)check_obj_line.c\
 		$(PARS_PATH)check_caps_line.c	$(PARS_PATH)element_check.c	$(PARS_PATH)element_check2.c\
 		$(RT_PATH)ray_tracer.c			$(RT_PATH)sphere.c			$(RT_PATH)plane.c\
-		$(RT_PATH)cylinder.c			$(RT_PATH)cylinder_help.c
+		$(RT_PATH)cylinder.c			$(RT_PATH)cylinder_help.c	$(RT_PATH)utils.c\
+		$(RT_PATH)shading.c				$(RT_PATH)cylinder_normal.c	$(RT_PATH)cylinder_normal_help.c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
@@ -60,11 +61,11 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 $(NAME): $(OBJ)
 	@make -C MLX42
 	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -L $(GLFW_PATH) libft/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_PATH)libmlx42.a -lglfw -lm -L $(GLFW_PATH) libft/libft.a -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
-	# @make clean -C MLX42
+	@make clean -C MLX42
 	@make clean -C libft
 	@if [ -d "$(OBJ_PATH)" ]; then \
 			rm -f -r $(OBJ_PATH); \
@@ -73,7 +74,7 @@ clean:
 	fi;
 
 fclean: clean
-	# @make fclean -C MLX42
+	@make fclean -C MLX42
 	@make fclean -C libft
 	@if [ -f "$(NAME)" ]; then \
 			rm -f $(NAME); \

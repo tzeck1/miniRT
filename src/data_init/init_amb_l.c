@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_amb_l.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:26:44 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:26:45 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/miniRT.h"
 
 /**
@@ -38,8 +50,11 @@ t_amb_light	*get_amb_light_data(char *rt_file_path)
 	line = get_obj_line(rt_file_path, AMB_LIGHT_ID, obj_index);
 	if (line == NULL)
 	{
-		free(amb_l);
-		amb_l = NULL;
+		amb_l->id = AMBIENT;
+		amb_l->ratio = 0;
+		amb_l->rgb.red = 0;
+		amb_l->rgb.green = 0;
+		amb_l->rgb.blue = 0;
 	}
 	else
 	{
