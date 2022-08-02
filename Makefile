@@ -3,7 +3,7 @@ NAME = ./miniRT
 
 # FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -g #-Werror
+CFLAGS = -Wall -Wextra -Werror #-g
 
 # COLORS
 Y = "\033[33m"
