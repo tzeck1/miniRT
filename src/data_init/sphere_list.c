@@ -9,6 +9,7 @@ int	sp_counter(char *rt_file_path)
 {
 	int		count;
 	int		fd;
+	int		j;
 	char	*line;
 
 	count = 0;
@@ -16,7 +17,10 @@ int	sp_counter(char *rt_file_path)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (ft_strncmp(line, SPHERE_ID, ft_strlen(SPHERE_ID)) == 0)
+		j = 0;
+		while (line[j] == ' ')
+			j++;
+		if (ft_strncmp(&line[j], SPHERE_ID, ft_strlen(SPHERE_ID)) == 0)
 			count++;
 		free(line);
 		line = get_next_line(fd);

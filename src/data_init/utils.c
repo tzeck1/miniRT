@@ -30,6 +30,7 @@ char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index)
 {
 	char	*line;
 	int		i;
+	int		j;
 	int		fd;
 
 	fd = open(rt_file_path, O_RDONLY);
@@ -37,7 +38,10 @@ char	*get_obj_line(char *rt_file_path, char *obj_id, int obj_index)
 	i = 0;
 	while (line != NULL)
 	{
-		if (ft_strncmp(line, obj_id, ft_strlen(obj_id)) == 0)
+		j = 0;
+		while (line[j] == ' ')
+			j++;
+		if (ft_strncmp(&line[j], obj_id, ft_strlen(obj_id)) == 0)
 		{
 			if (i == obj_index)
 				return (line);
