@@ -1,5 +1,14 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  
+ * @note   
+ * @param  norm: 
+ * @param  scale: 
+ * @param  light: 
+ * @param  t: 
+ * @retval 
+ */
 static t_vec	scale_norm(t_vec norm, float scale, t_dir_light light, t_tval t)
 {
 	t_vec		light_dir;
@@ -22,7 +31,15 @@ static t_vec	scale_norm(t_vec norm, float scale, t_dir_light light, t_tval t)
 	return (norm);
 }
 
-static t_vec	h_cap_norm(t_objects *objs, t_cy_list cy, t_tval t, float m)
+/**
+ * @brief  calc normal of cap and move it to generate gradiant
+ * @param  *dir_l: light source
+ * @param  cy: current cylinder we want to shade
+ * @param  t: distance from hitpoint to origin
+ * @param  m: distcance from l_cap to hitpoint on axis
+ * @retval cylinder (cap) normal
+ */
+static t_vec	h_cap_norm(t_dir_light *dir_l, t_cy_list cy, t_tval t, float m)
 {
 	float	j_p;
 	float	i_j;
@@ -30,15 +47,23 @@ static t_vec	h_cap_norm(t_objects *objs, t_cy_list cy, t_tval t, float m)
 	float	scale_ratio;
 
 	j_p = m - cy.height;
-	i_j = vec_len(vec_sub(j_hit(*objs->dir_l, cy, t), t.hit_point));
+	i_j = vec_len(vec_sub(j_hit(*dir_l, cy, t), t.hit_point));
 	i_p = sqrtf(powf(i_j, 2.0) - powf(j_p, 2.0));
 	scale_ratio = i_p / (4.0 * cy.radius) + 0.2;
 	if (scale_ratio > 1.0)
 		scale_ratio = 1.0;
-	return (scale_norm(cy.dir, scale_ratio, *objs->dir_l, t));
+	return (scale_norm(cy.dir, scale_ratio, *dir_l, t));
 }
 
-static t_vec	l_cap_norm(t_objects *objs, t_cy_list cy, t_tval t, float m)
+/**
+ * @brief  calc normal of cap and move it to generate gradiant
+ * @param  *dir_l: light source
+ * @param  cy: current cylinder we want to shade
+ * @param  t: distance from hitpoint to origin
+ * @param  m: distcance from l_cap to hitpoint on axis
+ * @retval cylinder (cap) normal
+ */
+static t_vec	l_cap_norm(t_dir_light *dir_l, t_cy_list cy, t_tval t, float m)
 {
 	float	j_p;
 	float	i_j;
@@ -46,12 +71,12 @@ static t_vec	l_cap_norm(t_objects *objs, t_cy_list cy, t_tval t, float m)
 	float	scale_ratio;
 
 	j_p = m * -1.0;
-	i_j = vec_len(vec_sub(j_hit(*objs->dir_l, cy, t), t.hit_point));
+	i_j = vec_len(vec_sub(j_hit(*dir_l, cy, t), t.hit_point));
 	i_p = sqrtf(powf(i_j, 2.0) - powf(j_p, 2.0));
 	scale_ratio = i_p / (4.0 * cy.radius) + 0.2;
 	if (scale_ratio > 1.0)
 		scale_ratio = 1.0;
-	return (scale_norm(vec_scale(cy.dir, -1.0), scale_ratio, *objs->dir_l, t));
+	return (scale_norm(vec_scale(cy.dir, -1.0), scale_ratio, *dir_l, t));
 }
 
 /**
@@ -76,9 +101,9 @@ t_vec	get_cy_norm(t_objects *objs, t_cy_list cy, t_tval tval, t_ray ray)
 	axis = vec_norm(vec_sub(h, l));
 	m = vec_dot(vec_sub(vec_add(ray.og, vec_scale(ray.dir, tval.t)), l), axis);
 	if (vec_len(vec_sub(tval.hit_point, h)) < cy.radius)
-		norm = h_cap_norm(objs, cy, tval, m);
+		norm = h_cap_norm(objs->dir_l, cy, tval, m);
 	else if (vec_len(vec_sub(tval.hit_point, l)) < cy.radius)
-		norm = l_cap_norm(objs, cy, tval, m);
+		norm = l_cap_norm(objs->dir_l, cy, tval, m);
 	else
 	{
 		norm = vec_sub(tval.hit_point, vec_add(l, vec_scale(axis, m)));

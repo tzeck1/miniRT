@@ -1,5 +1,13 @@
 #include "ray_tracer.h"
 
+/**
+ * @brief  
+ * @note   
+ * @param  light: 
+ * @param  cylinder: 
+ * @param  t: 
+ * @retval 
+ */
 t_vec	j_hit(t_dir_light light, t_cy_list cylinder, t_tval t)
 {
 	t_ray		ray;
@@ -19,6 +27,11 @@ t_vec	j_hit(t_dir_light light, t_cy_list cylinder, t_tval t)
 	return (j);
 }
 
+/**
+ * @brief  if one value is 0 it's ignored from the division thus i--
+ * @param  light_dir: direction from light origin to hit point
+ * @retval factor (0, 1, 2 or 3)
+ */
 int	get_factor(t_vec light_dir)
 {
 	int	i;
