@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 16:50:29 by rsiebert          #+#    #+#             */
+/*   Updated: 2022/08/02 16:50:30 by rsiebert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -22,9 +34,6 @@
 # define BLUE		"\033[34m"
 # define YELLOW		"\033[33m"
 # define RESET		"\033[0m"
-
-/*	DEBUG	*/
-# define PRINT_HERE(){printf(YELLOW"In File: %s\nIn Line: %d\n"RESET, __FILE__, __LINE__);}
 
 /*	MACROS	*/
 # define LIGHT_ID		"L"
