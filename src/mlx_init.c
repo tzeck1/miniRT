@@ -6,30 +6,11 @@
 /*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:29:31 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/08/02 16:29:32 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:44:17 by rsiebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
-
-// static void	loop_hook(void *param)
-// {
-// 	t_data	*data;
-// 	int32_t	*x;
-// 	int32_t	*y;
-
-// 	data = param;
-
-// 	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_UP))
-// 		data->objs->cam->pos.z += 1;
-// 	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_DOWN))
-// 		data->objs->cam->pos.z -= 1;
-// 	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_RIGHT))
-// 		data->objs->cam->pos.x += 0.1;
-// 	if (mlx_is_key_down(data->screen->mlx, MLX_KEY_LEFT))
-// 		data->objs->cam->pos.x -= 0.1;
-// 	ray_tracing(data->screen, data->objs);
-// }
 
 /**
  * @brief  checks if esc key is pressed
@@ -84,7 +65,6 @@ void	init_mlx(t_data *data)
 	if (screen->mlx == NULL)
 		ft_exit(EXIT_FAILURE);
 	mlx_key_hook(screen->mlx, &key_hook, screen->mlx);
-	// mlx_loop_hook(screen->mlx, &loop_hook, data);
 	screen->img = mlx_new_image(screen->mlx, screen->width, screen->height);
 	if (screen->img == NULL)
 		ft_exit(EXIT_FAILURE);

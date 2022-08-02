@@ -6,7 +6,7 @@
 /*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:29:28 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/08/02 16:29:29 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:44:05 by rsiebert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	free_data(t_data *data)
  */
 void	ft_exit(int status)
 {
-	// system("leaks miniRT");
 	if (status == 0)
 		printf(GREEN"exited with exit status: %d\n"RESET, status);
 	else
