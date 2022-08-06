@@ -25,8 +25,8 @@ MLX_PATH = ./MLX42/
 GLFW_PATH = ~/.brew/opt/glfw/lib/
 
 # SOURCES
-SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c			$(SRC_PATH)debug.c\
-		$(SRC_PATH)mlx_init.c			$(INIT_PATH)init_objects.c		$(INIT_PATH)utils.c\
+SRC =	$(SRC_PATH)main.c				$(SRC_PATH)free.c\
+		$(SRC_PATH)mlx_init.c			$(INIT_PATH)init_objects.c	$(INIT_PATH)utils.c\
 		$(INIT_PATH)init_amb_l.c		$(INIT_PATH)init_cam.c		$(INIT_PATH)init_dir_l.c\
 		$(INIT_PATH)cylinder_list.c		$(INIT_PATH)sphere_list.c	$(INIT_PATH)plane_list.c\
 		$(VEC_PATH)vector_arithmetics.c	$(VEC_PATH)vector_basics.c	$(VEC_PATH)vector_utils.c\

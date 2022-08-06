@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   element_check2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsiebert <rsiebert@student.42HN.de>        +#+  +:+       +#+        */
+/*   By: tzeck <@student.42heilbronn.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:27:34 by rsiebert          #+#    #+#             */
-/*   Updated: 2022/08/02 16:27:35 by rsiebert         ###   ########.fr       */
+/*   Updated: 2022/08/06 12:57:56 by tzeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	fov_check(char *line, t_parser_utils *parser_utils)
 	float	fov;
 
 	fov = ft_atof(line);
-	if (fov < FOV_MIN || fov > FOV_MAX)
+	if (float_check(line) == false || fov < FOV_MIN || fov > FOV_MAX)
 	{
 		ft_parse_error(BAD_ARG, parser_utils->line);
 		parser_utils->line_error = true;
