@@ -1,4 +1,5 @@
-# miniRT [group project with [@rsiebert](https://github.com/cptbboy)]
+# miniRT
+[group project with [@rsiebert](https://github.com/cptbboy)] <br> <br>
 This project is an introduction to the beautiful world of Raytracing.
 Once completed you will be able to render simple Computer-Generated-Images and you
 will never be afraid of implementing mathematical formulas again. <br>
